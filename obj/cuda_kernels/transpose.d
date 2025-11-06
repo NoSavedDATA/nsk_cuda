@@ -21,6 +21,8 @@ obj/cuda_kernels/transpose.o: src/cuda_kernels/transpose.cu \
   src/../../../src/compiler_frontend/logging_v.h \
   src/../../../src/compiler_frontend/global_vars.h \
   src/../../../src/data_types/codegen_notes.h \
+  src/../../../src/data_types/float_vec.h \
+  src/../../../src/data_types/../mangler/scope_struct.h \
   src/../../../src/data_types/nsk_vector.h \
   src/../../../src/math/include.h src/../../../src/math/functions.h \
   src/../../../src/mangler/include.h \
@@ -58,12 +60,15 @@ obj/cuda_kernels/transpose.o: src/cuda_kernels/transpose.cu \
   src/cuda_kernels/../nsk_cuda/structs/fp16_wmma_frags.h \
   src/cuda_kernels/../nsk_cuda/structs/i8_wmma_frags.h \
   src/cuda_kernels/../nsk_cuda/structs/smem_cpasync_loader.h \
+  src/cuda_kernels/../nsk_cuda/structs/smem_loader.h \
   src/cuda_kernels/../nsk_cuda/structs/wmma_indexes.h \
   src/cuda_kernels/../nsk_cuda/quantize/include.h \
   src/cuda_kernels/../nsk_cuda/quantize/call.h \
   src/cuda_kernels/../nsk_cuda/quantize/../minimal_tensor.h \
+  src/cuda_kernels/../nsk_cuda/quantize/../../../../../src/nsk_cpp.h \
   src/cuda_kernels/../nsk_cuda/quantize/../pool/include.h \
   src/cuda_kernels/../nsk_cuda/quantize/../pool/pool_i8.h \
+  src/cuda_kernels/../nsk_cuda/quantize/../pool/../../../../../src/nsk_cpp.h \
   src/cuda_kernels/../nsk_cuda/quantize/../pool/pool_i32.h \
   src/cuda_kernels/../nsk_cuda/quantize/../pool/pool.h \
   src/cuda_kernels/../nsk_cuda/quantize/quantize_f32_i4.h \
@@ -136,6 +141,8 @@ src/../../../src/compiler_frontend/logging_execution.h:
 src/../../../src/compiler_frontend/logging_v.h:
 src/../../../src/compiler_frontend/global_vars.h:
 src/../../../src/data_types/codegen_notes.h:
+src/../../../src/data_types/float_vec.h:
+src/../../../src/data_types/../mangler/scope_struct.h:
 src/../../../src/data_types/nsk_vector.h:
 src/../../../src/math/include.h:
 src/../../../src/math/functions.h:
@@ -177,12 +184,15 @@ src/cuda_kernels/../nsk_cuda/structs/smem_stores/i8mma.h:
 src/cuda_kernels/../nsk_cuda/structs/fp16_wmma_frags.h:
 src/cuda_kernels/../nsk_cuda/structs/i8_wmma_frags.h:
 src/cuda_kernels/../nsk_cuda/structs/smem_cpasync_loader.h:
+src/cuda_kernels/../nsk_cuda/structs/smem_loader.h:
 src/cuda_kernels/../nsk_cuda/structs/wmma_indexes.h:
 src/cuda_kernels/../nsk_cuda/quantize/include.h:
 src/cuda_kernels/../nsk_cuda/quantize/call.h:
 src/cuda_kernels/../nsk_cuda/quantize/../minimal_tensor.h:
+src/cuda_kernels/../nsk_cuda/quantize/../../../../../src/nsk_cpp.h:
 src/cuda_kernels/../nsk_cuda/quantize/../pool/include.h:
 src/cuda_kernels/../nsk_cuda/quantize/../pool/pool_i8.h:
+src/cuda_kernels/../nsk_cuda/quantize/../pool/../../../../../src/nsk_cpp.h:
 src/cuda_kernels/../nsk_cuda/quantize/../pool/pool_i32.h:
 src/cuda_kernels/../nsk_cuda/quantize/../pool/pool.h:
 src/cuda_kernels/../nsk_cuda/quantize/quantize_f32_i4.h:

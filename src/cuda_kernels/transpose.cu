@@ -13,7 +13,7 @@ extern "C" float tensor_transpose(Scope_Struct *scope_struct, DT_tensor *x)
 
     
     
-    float *x_T = get_from_pool(scope_struct->thread_id, x->dims_prod, "transpose");
+    float *x_T = get_from_pool(scope_struct, scope_struct->thread_id, x->dims_prod, "transpose");
     
     int dims_size = x->dims.size();
     int C = x->dims[dims_size-1];

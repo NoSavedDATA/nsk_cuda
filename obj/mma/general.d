@@ -25,6 +25,8 @@ obj/mma/general.o: src/mma/general.cu src/mma/../common/cu_commons.h \
   src/mma/../tensor/../../../../src/compiler_frontend/logging_v.h \
   src/mma/../tensor/../../../../src/compiler_frontend/global_vars.h \
   src/mma/../tensor/../../../../src/data_types/codegen_notes.h \
+  src/mma/../tensor/../../../../src/data_types/float_vec.h \
+  src/mma/../tensor/../../../../src/data_types/../mangler/scope_struct.h \
   src/mma/../tensor/../../../../src/data_types/nsk_vector.h \
   src/mma/../tensor/../../../../src/math/include.h \
   src/mma/../tensor/../../../../src/math/functions.h \
@@ -44,8 +46,10 @@ obj/mma/general.o: src/mma/general.cu src/mma/../common/cu_commons.h \
   src/mma/../tensor/print.h src/mma/../tensor/tensor_struct.h \
   src/mma/../tensor/../cuda_threads/include.h \
   src/mma/../tensor/../nsk_cuda/minimal_tensor.h \
+  src/mma/../tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/mma/../tensor/../nsk_cuda/pool/include.h \
   src/mma/../tensor/../nsk_cuda/pool/pool_i8.h \
+  src/mma/../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/mma/../tensor/../nsk_cuda/pool/pool_i32.h \
   src/mma/../tensor/../nsk_cuda/pool/pool.h \
   src/mma/../tensor/tensor_dim_functions.h src/mma/utils.h \
@@ -74,6 +78,7 @@ obj/mma/general.o: src/mma/general.cu src/mma/../common/cu_commons.h \
   src/mma/../nsk_cuda/structs/fp16_wmma_frags.h \
   src/mma/../nsk_cuda/structs/i8_wmma_frags.h \
   src/mma/../nsk_cuda/structs/smem_cpasync_loader.h \
+  src/mma/../nsk_cuda/structs/smem_loader.h \
   src/mma/../nsk_cuda/structs/wmma_indexes.h \
   src/mma/../nsk_cuda/quantize/include.h \
   src/mma/../nsk_cuda/quantize/call.h \
@@ -143,6 +148,8 @@ src/mma/../tensor/../../../../src/compiler_frontend/logging_execution.h:
 src/mma/../tensor/../../../../src/compiler_frontend/logging_v.h:
 src/mma/../tensor/../../../../src/compiler_frontend/global_vars.h:
 src/mma/../tensor/../../../../src/data_types/codegen_notes.h:
+src/mma/../tensor/../../../../src/data_types/float_vec.h:
+src/mma/../tensor/../../../../src/data_types/../mangler/scope_struct.h:
 src/mma/../tensor/../../../../src/data_types/nsk_vector.h:
 src/mma/../tensor/../../../../src/math/include.h:
 src/mma/../tensor/../../../../src/math/functions.h:
@@ -163,8 +170,10 @@ src/mma/../tensor/print.h:
 src/mma/../tensor/tensor_struct.h:
 src/mma/../tensor/../cuda_threads/include.h:
 src/mma/../tensor/../nsk_cuda/minimal_tensor.h:
+src/mma/../tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/mma/../tensor/../nsk_cuda/pool/include.h:
 src/mma/../tensor/../nsk_cuda/pool/pool_i8.h:
+src/mma/../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/mma/../tensor/../nsk_cuda/pool/pool_i32.h:
 src/mma/../tensor/../nsk_cuda/pool/pool.h:
 src/mma/../tensor/tensor_dim_functions.h:
@@ -196,6 +205,7 @@ src/mma/../nsk_cuda/structs/smem_stores/i8mma.h:
 src/mma/../nsk_cuda/structs/fp16_wmma_frags.h:
 src/mma/../nsk_cuda/structs/i8_wmma_frags.h:
 src/mma/../nsk_cuda/structs/smem_cpasync_loader.h:
+src/mma/../nsk_cuda/structs/smem_loader.h:
 src/mma/../nsk_cuda/structs/wmma_indexes.h:
 src/mma/../nsk_cuda/quantize/include.h:
 src/mma/../nsk_cuda/quantize/call.h:

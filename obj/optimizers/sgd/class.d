@@ -23,6 +23,8 @@ obj/optimizers/sgd/class.o: src/optimizers/sgd/class.cu \
   src/optimizers/sgd/../../../../../src/compiler_frontend/logging_v.h \
   src/optimizers/sgd/../../../../../src/compiler_frontend/global_vars.h \
   src/optimizers/sgd/../../../../../src/data_types/codegen_notes.h \
+  src/optimizers/sgd/../../../../../src/data_types/float_vec.h \
+  src/optimizers/sgd/../../../../../src/data_types/../mangler/scope_struct.h \
   src/optimizers/sgd/../../../../../src/data_types/nsk_vector.h \
   src/optimizers/sgd/../../../../../src/math/include.h \
   src/optimizers/sgd/../../../../../src/math/functions.h \
@@ -43,6 +45,7 @@ obj/optimizers/sgd/class.o: src/optimizers/sgd/class.cu \
   src/optimizers/sgd/../../cuda_kernels/calculate_grids.h \
   src/optimizers/sgd/../../nsk_cuda/pool/include.h \
   src/optimizers/sgd/../../nsk_cuda/pool/pool_i8.h \
+  src/optimizers/sgd/../../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/optimizers/sgd/../../nsk_cuda/pool/pool_i32.h \
   src/optimizers/sgd/../../nsk_cuda/pool/pool.h \
   src/optimizers/sgd/../../tensor/tensor_dim_functions.h \
@@ -53,6 +56,7 @@ obj/optimizers/sgd/class.o: src/optimizers/sgd/class.cu \
   src/optimizers/sgd/../../tensor/../cuda_threads/include.h \
   src/optimizers/sgd/../../tensor/../cuda_threads/threads.h \
   src/optimizers/sgd/../../tensor/../nsk_cuda/minimal_tensor.h \
+  src/optimizers/sgd/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/optimizers/sgd/../../tensor/../nsk_cuda/pool/include.h \
   src/optimizers/sgd/../common.h src/optimizers/sgd/../interface.h \
   src/optimizers/sgd/class.h src/optimizers/sgd/kernels.h
@@ -80,6 +84,8 @@ src/optimizers/sgd/../../../../../src/compiler_frontend/logging_execution.h:
 src/optimizers/sgd/../../../../../src/compiler_frontend/logging_v.h:
 src/optimizers/sgd/../../../../../src/compiler_frontend/global_vars.h:
 src/optimizers/sgd/../../../../../src/data_types/codegen_notes.h:
+src/optimizers/sgd/../../../../../src/data_types/float_vec.h:
+src/optimizers/sgd/../../../../../src/data_types/../mangler/scope_struct.h:
 src/optimizers/sgd/../../../../../src/data_types/nsk_vector.h:
 src/optimizers/sgd/../../../../../src/math/include.h:
 src/optimizers/sgd/../../../../../src/math/functions.h:
@@ -100,6 +106,7 @@ src/optimizers/sgd/../../common/cu_commons.h:
 src/optimizers/sgd/../../cuda_kernels/calculate_grids.h:
 src/optimizers/sgd/../../nsk_cuda/pool/include.h:
 src/optimizers/sgd/../../nsk_cuda/pool/pool_i8.h:
+src/optimizers/sgd/../../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/optimizers/sgd/../../nsk_cuda/pool/pool_i32.h:
 src/optimizers/sgd/../../nsk_cuda/pool/pool.h:
 src/optimizers/sgd/../../tensor/tensor_dim_functions.h:
@@ -110,6 +117,7 @@ src/optimizers/sgd/../../tensor/tensor_struct.h:
 src/optimizers/sgd/../../tensor/../cuda_threads/include.h:
 src/optimizers/sgd/../../tensor/../cuda_threads/threads.h:
 src/optimizers/sgd/../../tensor/../nsk_cuda/minimal_tensor.h:
+src/optimizers/sgd/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/optimizers/sgd/../../tensor/../nsk_cuda/pool/include.h:
 src/optimizers/sgd/../common.h:
 src/optimizers/sgd/../interface.h:

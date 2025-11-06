@@ -41,6 +41,8 @@ obj/processing/images/store.o: src/processing/images/store.cpp \
   src/processing/images/../../../../../src/compiler_frontend/logging_v.h \
   src/processing/images/../../../../../src/compiler_frontend/global_vars.h \
   src/processing/images/../../../../../src/data_types/codegen_notes.h \
+  src/processing/images/../../../../../src/data_types/float_vec.h \
+  src/processing/images/../../../../../src/data_types/../mangler/scope_struct.h \
   src/processing/images/../../../../../src/data_types/nsk_vector.h \
   src/processing/images/../../../../../src/math/include.h \
   src/processing/images/../../../../../src/math/functions.h \
@@ -81,8 +83,10 @@ obj/processing/images/store.o: src/processing/images/store.cpp \
   src/processing/images/../../tensor/../cuda_threads/include.h \
   src/processing/images/../../tensor/../cuda_threads/threads.h \
   src/processing/images/../../tensor/../nsk_cuda/minimal_tensor.h \
+  src/processing/images/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/processing/images/../../tensor/../nsk_cuda/pool/include.h \
   src/processing/images/../../tensor/../nsk_cuda/pool/pool_i8.h \
+  src/processing/images/../../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/processing/images/../../tensor/../nsk_cuda/pool/pool_i32.h \
   src/processing/images/../../tensor/../nsk_cuda/pool/pool.h \
   src/processing/images/../../tensor/tensor_dim_functions.h
@@ -128,6 +132,8 @@ src/processing/images/../../../../../src/compiler_frontend/logging_execution.h:
 src/processing/images/../../../../../src/compiler_frontend/logging_v.h:
 src/processing/images/../../../../../src/compiler_frontend/global_vars.h:
 src/processing/images/../../../../../src/data_types/codegen_notes.h:
+src/processing/images/../../../../../src/data_types/float_vec.h:
+src/processing/images/../../../../../src/data_types/../mangler/scope_struct.h:
 src/processing/images/../../../../../src/data_types/nsk_vector.h:
 src/processing/images/../../../../../src/math/include.h:
 src/processing/images/../../../../../src/math/functions.h:
@@ -168,8 +174,10 @@ src/processing/images/../../tensor/tensor_struct.h:
 src/processing/images/../../tensor/../cuda_threads/include.h:
 src/processing/images/../../tensor/../cuda_threads/threads.h:
 src/processing/images/../../tensor/../nsk_cuda/minimal_tensor.h:
+src/processing/images/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/processing/images/../../tensor/../nsk_cuda/pool/include.h:
 src/processing/images/../../tensor/../nsk_cuda/pool/pool_i8.h:
+src/processing/images/../../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/processing/images/../../tensor/../nsk_cuda/pool/pool_i32.h:
 src/processing/images/../../tensor/../nsk_cuda/pool/pool.h:
 src/processing/images/../../tensor/tensor_dim_functions.h:

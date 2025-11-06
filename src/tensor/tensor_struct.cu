@@ -189,17 +189,18 @@ void DT_tensor::Sync()
 
 DT_tensor *createTensor(Scope_Struct *scope_struct, float* tensor_ptr, const std::vector<int>& dims, int kDataLen,
                      bool is_leaf, std::string name, cudaStream_t cuda_stream, Loader *_loader) {
-    DT_tensor *new_tensor = newT<DT_tensor>(scope_struct, "tensor");
-    
+    DT_tensor *new_tensor = newT<DT_tensor>(scope_struct, "tensor");  
     new_tensor->NewTensor(tensor_ptr, dims, kDataLen, is_leaf, name, cuda_stream, _loader);
+
     return new_tensor;
 }
 
+
 DT_tensor *createWeightTensor(Scope_Struct *scope_struct, float* tensor_ptr, const std::vector<int>& dims, int kDataLen,
                      bool is_leaf, std::string name, cudaStream_t cuda_stream, Loader *_loader) {
-    DT_tensor *new_tensor = new DT_tensor();
-    
+    DT_tensor *new_tensor = new DT_tensor();    
     new_tensor->NewTensor(tensor_ptr, dims, kDataLen, is_leaf, name, cuda_stream, _loader);
+    
     new_tensor->SetIsWeight();
 
     return new_tensor;
@@ -219,7 +220,7 @@ DT_tensor *createCudaTensor(Scope_Struct *scope_struct, int thread_id, std::stri
     else
       cuda_dims = {1, dims[0]};
 
-    CudaTensor *cuda_tensor = new CudaTensor(thread_id, cuda_dims[0], cuda_dims[1], type);
+    CudaTensor *cuda_tensor = new CudaTensor(scope_struct, thread_id, cuda_dims[0], cuda_dims[1], type);
     
     std::vector<int> new_dims = RemoveLastDim(dims);
     new_dims.push_back(cuda_tensor->aN);
@@ -243,7 +244,7 @@ DT_tensor *createCudaWeightTensor(Scope_Struct *scope_struct, int thread_id, std
     else
       cuda_dims = {1, dims[0]};
 
-    CudaTensor *cuda_tensor = new CudaTensor(thread_id, cuda_dims[0], cuda_dims[1], type);
+    CudaTensor *cuda_tensor = new CudaTensor(scope_struct, thread_id, cuda_dims[0], cuda_dims[1], type);
     
     std::vector<int> new_dims = RemoveLastDim(dims);
     new_dims.push_back(cuda_tensor->aN);
@@ -265,19 +266,19 @@ DT_tensor *createTensorHalf(Scope_Struct *scope_struct, half* tensor_ptr, const 
     return new_tensor;
 }
 DT_tensor *customOpTensor(Scope_Struct *scope_struct, float* tensor_ptr, const std::vector<int>& dims, int kDataLen,
-                     std::string operation, void *network_module, DT_tensor *LTensor, bool has_grad, cudaStream_t cuda_stream, Loader *_loader) {
-    // DT_tensor *new_tensor = new DT_tensor();
-    DT_tensor *new_tensor = newT<DT_tensor>(scope_struct, "tensor");
+                     std::string operation, void *network_module, DT_tensor *LTensor, bool has_grad, cudaStream_t cuda_stream, Loader *_loader)
+{
+  DT_tensor *new_tensor = newT<DT_tensor>(scope_struct, "tensor");
 
-    new_tensor->NewTensor(tensor_ptr, dims, kDataLen, false, "", cuda_stream, _loader);
-    // new_tensor->scopeless_name = module_name;
-    new_tensor->network_module = network_module;
-    new_tensor->operation = operation;
-    new_tensor->AttrLNode(LTensor, custom_op);
-    new_tensor->is_grad_candidate = has_grad;
-    LTensor->parent_is_grad_candidate = has_grad;
+  new_tensor->NewTensor(tensor_ptr, dims, kDataLen, false, "", cuda_stream, _loader);
+  
+  new_tensor->network_module = network_module;
+  new_tensor->operation = operation;
+  new_tensor->AttrLNode(LTensor, custom_op);
+  new_tensor->is_grad_candidate = has_grad;
+  LTensor->parent_is_grad_candidate = has_grad;
 
-    return new_tensor;
+  return new_tensor;
 }
 
 DT_tensor *createPinned(Scope_Struct *scope_struct, float* tensor_ptr, float *tensor_cpu, const std::vector<int>& dims, int kDataLen,

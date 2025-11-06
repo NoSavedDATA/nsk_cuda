@@ -8,12 +8,12 @@
 std::vector<DT_tensor *> todo_backward_tensors;
 std::unordered_map<DT_tensor *, float *> NamedParamGrads;
 
-std::map<std::string, std::function<void(float *, int, float *, float *, float *, void *, DT_tensor *)>> backward_functions;
+std::map<std::string, std::function<void(Scope_Struct *, float *, int, float *, float *, float *, void *, DT_tensor *)>> backward_functions;
 
 
 
 
-inline void HandleLeafGradient(DT_tensor *back_node, float *device_dy, std::string tensor_name, bool from_custom) {
+inline void HandleLeafGradient(Scope_Struct *scope_struct, DT_tensor *back_node, float *device_dy, std::string tensor_name, bool from_custom) {
   float dims_prod = back_node->dims_prod;
   if (!from_custom)
   {
@@ -32,14 +32,17 @@ inline void HandleLeafGradient(DT_tensor *back_node, float *device_dy, std::stri
   
   to_pool(dims_prod, back_node->tensor_ptr, "leaf tensor"); 
   // std::cout << "Adding " << tensor_name << ".\n";
-  if (!back_node->is_last_version)
+  
+  // if (!back_node->is_last_version && (back_node->is_grad_candidate)) {
+
+  if (!back_node->is_last_version && (back_node->is_grad_candidate||back_node->parent_is_grad_candidate))
     to_free_tensor(back_node);
 }
 
 
 
 
-inline void Acquire_Simple_Derivative(float *&d_ptr, int size, int op, bool from_custom, std::string parent) {
+inline void Acquire_Simple_Derivative(Scope_Struct *scope_struct, float *&d_ptr, int size, int op, bool from_custom, std::string parent) {
   if (op==add_op)
     return;
   // std::string from = "dx of "+ std::to_string(op);
@@ -49,13 +52,13 @@ inline void Acquire_Simple_Derivative(float *&d_ptr, int size, int op, bool from
   int grid_size, block_size; 
   CalculateGridAndBlockSizes(size, grid_size, block_size);
 
-  d_ptr = get_from_pool(0, size, from);
+  d_ptr = get_from_pool(scope_struct, 0, size, from);
   //TODO: remove this set to zero to improve performance (then, adjust gather op dx to be set to zero)
   set_to_zero_kernel<<<grid_size, block_size, 0, main_stream>>>(d_ptr, size);
 }
 
 
-inline void Acquire_Weight_Gradient(float *&d_ptr, int size, DT_tensor *tensor_data, int op, bool from_custom) {
+inline void Acquire_Weight_Gradient(Scope_Struct *scope_struct, float *&d_ptr, int size, DT_tensor *tensor_data, int op, bool from_custom) {
   if (op==hadamard_op||op==add_op)
     return;
 
@@ -66,7 +69,7 @@ inline void Acquire_Weight_Gradient(float *&d_ptr, int size, DT_tensor *tensor_d
   {
     float *new_grad_ptr;
     
-    new_grad_ptr = get_from_pool(0, size, "weight grad pointer");
+    new_grad_ptr = get_from_pool(scope_struct, 0, size, "weight grad pointer");
     set_to_zero_kernel<<<grid_size, block_size, 0, main_stream>>>(new_grad_ptr, size);
     NamedParamGrads[tensor_data] = new_grad_ptr;
   }
@@ -75,7 +78,7 @@ inline void Acquire_Weight_Gradient(float *&d_ptr, int size, DT_tensor *tensor_d
 
 
 
-inline void Alloc_Child_Nodes_Derivatives(DT_tensor* back_node, float*& d_lhs, float*& d_rhs, size_t lhs_size, size_t rhs_size, int op, bool from_custom) {
+inline void Alloc_Child_Nodes_Derivatives(Scope_Struct *scope_struct, DT_tensor* back_node, float*& d_lhs, float*& d_rhs, size_t lhs_size, size_t rhs_size, int op, bool from_custom) {
 
   if (back_node->L_Node)
   {
@@ -84,11 +87,11 @@ inline void Alloc_Child_Nodes_Derivatives(DT_tensor* back_node, float*& d_lhs, f
       if(op!=add_op && op!=scalar_add_op && !from_custom && op!=broadcast_lastdim_add_op && back_node->L_Node->op != detach_op)
       {
         std::string parent = back_node->scopeless_name;
-        Acquire_Simple_Derivative(d_lhs, lhs_size, op, from_custom, parent);
+        Acquire_Simple_Derivative(scope_struct, d_lhs, lhs_size, op, from_custom, parent);
       }
     }
     else
-      Acquire_Weight_Gradient(d_lhs, lhs_size, back_node->L_Node, op, from_custom);
+      Acquire_Weight_Gradient(scope_struct ,d_lhs, lhs_size, back_node->L_Node, op, from_custom);
   }
 
 
@@ -97,20 +100,23 @@ inline void Alloc_Child_Nodes_Derivatives(DT_tensor* back_node, float*& d_lhs, f
     if (!back_node->R_Node->weight)
     {
       if(!in_int(op, weightless_ops) && !from_custom && back_node->R_Node->op != detach_op && op!=add_op)
-        Acquire_Simple_Derivative(d_rhs, rhs_size, op, from_custom, "rhs");
+        Acquire_Simple_Derivative(scope_struct, d_rhs, rhs_size, op, from_custom, "rhs");
     }
     else  
-      Acquire_Weight_Gradient(d_rhs, rhs_size, back_node->R_Node, op, from_custom);
+      Acquire_Weight_Gradient(scope_struct, d_rhs, rhs_size, back_node->R_Node, op, from_custom);
   }
 }
 
 
 
 
-void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, int parent_op)
+void TraversePreOrder(Scope_Struct *scope_struct, DT_tensor *back_node, float *device_dy, bool from_custom, int parent_op)
 {
   if(back_node==nullptr)
     return;
+  // if(!back_node->is_grad_candidate)
+  //   return;
+
 
   int op=back_node->op;
   std::string tensor_name, param_name, bias_name;
@@ -125,6 +131,7 @@ void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, 
   //     to_pool(dims_prod, device_dy, "dy from no grad candidate");
   //   return;
   // }
+
   
 
   if(!in_int(op, gradless_ops))
@@ -146,7 +153,7 @@ void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, 
     tensor_name = back_node->scopeless_name;
     if (back_node->leaf)
     {
-      HandleLeafGradient(back_node, device_dy, tensor_name, from_custom);
+      HandleLeafGradient(scope_struct, back_node, device_dy, tensor_name, from_custom);
       return;
     }
 
@@ -178,7 +185,7 @@ void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, 
 
  
     
-    Alloc_Child_Nodes_Derivatives(back_node, d_lhs, d_rhs, lhs_size, rhs_size, op, from_custom);
+    Alloc_Child_Nodes_Derivatives(scope_struct, back_node, d_lhs, d_rhs, lhs_size, rhs_size, op, from_custom);
   
 
 
@@ -191,7 +198,7 @@ void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, 
         d_lhs = device_dy;
         break;
       // case scalar_mult_op:
-      //   scalarmult_backward(d_lhs, device_dy, back_node->scalar, lhs_size); //todo: This one may be wrong
+      //   scalarmult_backward(Scope_Struct *scope_struct, d_lhs, device_dy, back_node->scalar, lhs_size); //todo: This one may be wrong
       //   break;
       case mult_op:
         matmul_backward2(back_node->L_Node, back_node->R_Node, d_lhs, d_rhs, device_dy);
@@ -204,11 +211,11 @@ void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, 
         hadamard_backward2(lhs, rhs, d_lhs, d_rhs, device_dy, lhs_size);
         break;
       // case dropout_op:
-      //   dropout_backward(d_lhs, rhs, device_dy, lhs_size);
+      //   dropout_backward(Scope_Struct *scope_struct, d_lhs, rhs, device_dy, lhs_size);
       //   d_rhs = device_dy;
       //   break;
       case gather_last_dim_op:
-        gather_last_dim_backward(lhs, lhs_size, out, d_lhs, device_dy, back_node->network_module, back_node);
+        gather_last_dim_backward(scope_struct, lhs, lhs_size, out, d_lhs, device_dy, back_node->network_module, back_node);
         d_rhs = device_dy;
         break;
       case broadcast_lastdim_add_op:
@@ -216,16 +223,16 @@ void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, 
         broadcast_lastdim_add_backward2(d_rhs, device_dy, rhs_size, lhs_size);
         break;
       // case mean_over_semilast_dim_op:
-      //   mean_over_semilast_dim_backward(d_lhs, device_dy, back_node);
+      //   mean_over_semilast_dim_backward(Scope_Struct *scope_struct, d_lhs, device_dy, back_node);
       //   break;
       
 
       // Loss Ops
       case cross_entropy_op:
-        CrossEntropyBackward(back_node->L_Node, back_node->R_Node, d_lhs, back_node->scalar);
+        CrossEntropyBackward(scope_struct, back_node->L_Node, back_node->R_Node, d_lhs, back_node->scalar);
         break;
       case cross_entropy_idx_op:
-        CrossEntropyIdxBackward(back_node->L_Node, back_node->R_Node, d_lhs, back_node->scalar);
+        CrossEntropyIdxBackward(scope_struct, back_node->L_Node, back_node->R_Node, d_lhs, back_node->scalar);
         break;
       case mse_op:
         MSEBackward(lhs, rhs, back_node->L_Node->dims_prod, d_lhs, back_node->scalar);
@@ -235,8 +242,7 @@ void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, 
         break;
 
       case custom_op:
-        // std::cout << "custom backward: " << back_node->operation << ".\n";
-        backward_functions[back_node->operation](lhs, lhs_size, out, d_lhs, device_dy, back_node->network_module, back_node);
+        backward_functions[back_node->operation](scope_struct, lhs, lhs_size, out, d_lhs, device_dy, back_node->network_module, back_node);
         break;
 
       default:
@@ -247,13 +253,14 @@ void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, 
   
   } else
   {
-    //std::cout << "\n\nFROM A GRADLESS OP" << "\n\n\n";
+    // std::cout << "\n\nFROM A GRADLESS OP" << "\n\n\n";
     CleanTree_Backprop(back_node);
   }
 
 
-  TraversePreOrder(back_node->L_Node, d_lhs, from_custom, op);
-  TraversePreOrder(back_node->R_Node, d_rhs, from_custom, op);
+  
+  TraversePreOrder(scope_struct, back_node->L_Node, d_lhs, from_custom, op);
+  TraversePreOrder(scope_struct, back_node->R_Node, d_rhs, from_custom, op);
 
   
   // Garbage Collector
@@ -267,8 +274,10 @@ void TraversePreOrder(DT_tensor *back_node, float *device_dy, bool from_custom, 
   if(device_dy!=nullptr)
     to_pool(dims_prod, device_dy, _op);
 
-  if (!back_node->weight)
+  if (!back_node->weight) {
+    // std::cout << "" << back_node->is_grad_candidate << "/" << back_node->parent_is_grad_candidate << ".\n";
     to_free_tensor(back_node);
+  }
 }
 
 
@@ -301,7 +310,7 @@ extern "C" float backprop(Scope_Struct *scope_struct)
       back_node = back_node->R_Node;
     }
   
-    TraversePreOrder(back_node, device_dy, false, op);
+    TraversePreOrder(scope_struct, back_node, device_dy, false, op);
   }
 
 
@@ -325,8 +334,25 @@ extern "C" float backprop(Scope_Struct *scope_struct)
   }
 
 
-  for(DT_tensor *tensor : backprop_Tensors_to_free)
+  for(DT_tensor *tensor : backprop_Tensors_to_free) {
+    // std::cout << "Delete tensor " << tensor->scopeless_name << ".\n";
+    for (auto it = scope_struct->gc.pointer_nodes.begin(); it != scope_struct->gc.pointer_nodes.end(); ) {
+      if (it->ptr == tensor)
+          it = scope_struct->gc.pointer_nodes.erase(it);
+      else
+          ++it;
+    }
+
+    Scope_Struct *inner_most = get_inner_most_scope(scope_struct);
+    
+    for (auto it = inner_most->gc.pointer_nodes.begin(); it != inner_most->gc.pointer_nodes.end(); ) {
+      if (it->ptr == tensor)
+          it = inner_most->gc.pointer_nodes.erase(it);
+      else
+          ++it;
+    }
     delete tensor;
+  }
 
   for(std::tuple<int, float *, std::string> pair : backprop_tensors_to_pool)
   {

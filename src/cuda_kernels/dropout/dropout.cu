@@ -19,8 +19,8 @@
 //     grid_size = grid_block_mem_sizes[0];
 //     block_size = grid_block_mem_sizes[1];
 
-//     float *dropout_ptr = get_from_pool(thread_id, dims_prod, "dropout forward");
-//     float *device_y = get_from_pool(thread_id, dims_prod, "dropout forward output");
+//     float *dropout_ptr = get_from_pool(scope_struct, thread_id, dims_prod, "dropout forward");
+//     float *device_y = get_from_pool(scope_struct, thread_id, dims_prod, "dropout forward output");
 
 //     float scale = 1 / (1-rate);
     
@@ -39,7 +39,7 @@
 // }
 
 
-// void dropout_backward(float *dx, float *mask, float *dy, float dims_prod)
+// void dropout_backward(Scope_Struct *scope_struct, float *dx, float *mask, float *dy, float dims_prod)
 // {
 //   int grid_size, block_size;
 //   std::vector<int> grid_block_mem_sizes = CalculateGridAndBlockSizes(dims_prod);

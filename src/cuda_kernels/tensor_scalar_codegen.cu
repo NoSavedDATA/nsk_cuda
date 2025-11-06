@@ -15,7 +15,7 @@ extern "C" DT_tensor *tensor_float_mult(Scope_Struct *scope_struct, DT_tensor *t
   int kDataLen = tensor->dims_prod;
 
   
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar mult");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar mult");
   
 
   int grid_size, block_size;
@@ -42,7 +42,7 @@ extern "C" DT_tensor *float_tensor_mult(Scope_Struct *scope_struct, float R, DT_
   int kDataLen = tensor->dims_prod;
 
   
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar mult");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar mult");
   
 
   int grid_size, block_size;
@@ -70,7 +70,7 @@ extern "C" DT_tensor *tensor_float_div(Scope_Struct *scope_struct, DT_tensor ten
 
 
   
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar div");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar div");
 
 
   int grid_size, block_size;
@@ -94,7 +94,7 @@ extern "C" DT_tensor *tensor_float_div(Scope_Struct *scope_struct, DT_tensor ten
 
 
   
-//   float* device_y = get_from_pool(thread_id, kDataLen, "reverse scalar div");
+//   float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "reverse scalar div");
 
 
 //   int grid_size, block_size;
@@ -116,7 +116,7 @@ extern "C" DT_tensor *tensor_float_add(Scope_Struct *scope_struct, DT_tensor *te
   int dims_prod = tensor->dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, dims_prod, "scalar add");
+  float* device_y = get_from_pool(scope_struct, thread_id, dims_prod, "scalar add");
   
   
   int grid_size, block_size;
@@ -139,7 +139,7 @@ extern "C" DT_tensor *tensor_float_sub(Scope_Struct *scope_struct, DT_tensor *te
   int kDataLen = tensor->dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar sub");
 
 
   int grid_size, block_size;
@@ -162,7 +162,7 @@ extern "C" DT_tensor *tensor_float_equal(Scope_Struct *scope_struct, DT_tensor t
   int kDataLen = tensor.dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar sub");
 
 
   int grid_size, block_size;
@@ -184,7 +184,7 @@ extern "C" DT_tensor *tensor_float_diff(Scope_Struct *scope_struct, DT_tensor te
   int kDataLen = tensor.dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar sub");
 
 
   int grid_size, block_size;
@@ -206,7 +206,7 @@ extern "C" DT_tensor *tensor_float_minor(Scope_Struct *scope_struct, DT_tensor t
   int kDataLen = tensor.dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar sub");
 
 
   int grid_size, block_size;
@@ -228,7 +228,7 @@ extern "C" DT_tensor *tensor_float_minor_eq(Scope_Struct *scope_struct, DT_tenso
   int kDataLen = tensor.dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar sub");
 
 
   int grid_size, block_size;
@@ -250,7 +250,7 @@ extern "C" DT_tensor *tensor_float_higher(Scope_Struct *scope_struct, DT_tensor 
   int kDataLen = tensor.dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar sub");
 
 
   int grid_size, block_size;
@@ -272,7 +272,7 @@ extern "C" DT_tensor *tensor_float_higher_eq(Scope_Struct *scope_struct, DT_tens
   int kDataLen = tensor.dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar sub");
 
 
   int grid_size, block_size;
@@ -289,7 +289,7 @@ extern "C" DT_tensor *tensor_float_higher_eq(Scope_Struct *scope_struct, DT_tens
 }
 
 
-void scalarmult_backward(float *inp, int dims_prod, float *out,
+void scalarmult_backward(Scope_Struct *scope_struct, float *inp, int dims_prod, float *out,
                      float *dinp, float *dout,
                      void *network_module, DT_tensor *node)
 {

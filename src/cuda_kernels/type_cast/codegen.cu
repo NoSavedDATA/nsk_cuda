@@ -33,7 +33,7 @@ inline half *float_to_half(float *tensor, int thread_id, int dims_prod, cudaStre
 inline DT_tensor *half_to_float(Scope_Struct *scope_struct, DT_tensor *tensor, int thread_id, cudaStream_t stream)
 {
 
-  float *tensor_ptr = get_from_pool(thread_id, tensor->dims_prod, "half to float");
+  float *tensor_ptr = get_from_pool(scope_struct, thread_id, tensor->dims_prod, "half to float");
   
 
 
@@ -44,10 +44,10 @@ inline DT_tensor *half_to_float(Scope_Struct *scope_struct, DT_tensor *tensor, i
   return float_tensor;
 }
 
-inline float *half_to_float(half *tensor, int thread_id, int dims_prod, cudaStream_t stream)
+inline float *half_to_float(Scope_Struct *scope_struct, half *tensor, int thread_id, int dims_prod, cudaStream_t stream)
 {
 
-  float *tensor_ptr = get_from_pool(thread_id, dims_prod, "half to float");
+  float *tensor_ptr = get_from_pool(scope_struct, thread_id, dims_prod, "half to float");
   
 
   half_to_float_kernel<<<std::ceil(dims_prod/(float)THREADS_PER_BLOCK), THREADS_PER_BLOCK, 0, stream>>>(tensor, tensor_ptr, dims_prod);

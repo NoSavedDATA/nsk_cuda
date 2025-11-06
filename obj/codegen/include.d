@@ -23,6 +23,8 @@ obj/codegen/include.o: src/codegen/include.cpp \
   src/codegen/../../../../src/compiler_frontend/logging_v.h \
   src/codegen/../../../../src/compiler_frontend/global_vars.h \
   src/codegen/../../../../src/data_types/codegen_notes.h \
+  src/codegen/../../../../src/data_types/float_vec.h \
+  src/codegen/../../../../src/data_types/../mangler/scope_struct.h \
   src/codegen/../../../../src/data_types/nsk_vector.h \
   src/codegen/../../../../src/math/include.h \
   src/codegen/../../../../src/math/functions.h \
@@ -73,8 +75,10 @@ obj/codegen/include.o: src/codegen/include.cpp \
   src/codegen/../backprop/../tensor/../cuda_threads/include.h \
   src/codegen/../backprop/../tensor/../cuda_threads/threads.h \
   src/codegen/../backprop/../tensor/../nsk_cuda/minimal_tensor.h \
+  src/codegen/../backprop/../tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/codegen/../backprop/../tensor/../nsk_cuda/pool/include.h \
   src/codegen/../backprop/../tensor/../nsk_cuda/pool/pool_i8.h \
+  src/codegen/../backprop/../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/codegen/../backprop/../tensor/../nsk_cuda/pool/pool_i32.h \
   src/codegen/../backprop/../tensor/../nsk_cuda/pool/pool.h
 src/codegen/../../../../src/nsk_cpp.h:
@@ -101,6 +105,8 @@ src/codegen/../../../../src/compiler_frontend/logging_execution.h:
 src/codegen/../../../../src/compiler_frontend/logging_v.h:
 src/codegen/../../../../src/compiler_frontend/global_vars.h:
 src/codegen/../../../../src/data_types/codegen_notes.h:
+src/codegen/../../../../src/data_types/float_vec.h:
+src/codegen/../../../../src/data_types/../mangler/scope_struct.h:
 src/codegen/../../../../src/data_types/nsk_vector.h:
 src/codegen/../../../../src/math/include.h:
 src/codegen/../../../../src/math/functions.h:
@@ -151,7 +157,9 @@ src/codegen/../backprop/../tensor/../../../../src/nsk_cpp.h:
 src/codegen/../backprop/../tensor/../cuda_threads/include.h:
 src/codegen/../backprop/../tensor/../cuda_threads/threads.h:
 src/codegen/../backprop/../tensor/../nsk_cuda/minimal_tensor.h:
+src/codegen/../backprop/../tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/codegen/../backprop/../tensor/../nsk_cuda/pool/include.h:
 src/codegen/../backprop/../tensor/../nsk_cuda/pool/pool_i8.h:
+src/codegen/../backprop/../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/codegen/../backprop/../tensor/../nsk_cuda/pool/pool_i32.h:
 src/codegen/../backprop/../tensor/../nsk_cuda/pool/pool.h:

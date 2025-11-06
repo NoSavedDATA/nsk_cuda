@@ -41,7 +41,7 @@ std::map<int, std::map<int, std::vector<int8_t *>>> TensorPool_i8;
 
 
 
-int8_t *get_i8pool(int thread_id, int dims_prod, std::string from)
+int8_t *get_i8pool(Scope_Struct *scope_struct, int thread_id, int dims_prod, std::string from)
 {
 
   if (dims_prod==0)
@@ -50,7 +50,7 @@ int8_t *get_i8pool(int thread_id, int dims_prod, std::string from)
   dims_prod = std::ceil(dims_prod/4.0f);
 
 
-  return (int8_t*)get_from_pool(thread_id, dims_prod, from);
+  return (int8_t*)get_from_pool(scope_struct, thread_id, dims_prod, from);
 
   // float *tensor_ptr;
 

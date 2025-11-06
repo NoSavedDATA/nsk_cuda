@@ -7,6 +7,8 @@
 #include <vector>
 #include <map>
 
+#include "../../../../../src/nsk_cpp.h"
+
 extern std::map<int, std::map<int, std::vector<float *>>> TensorPool;
 extern std::map<int, std::map<int, std::vector<half *>>> TensorHalfPool;
 
@@ -14,7 +16,7 @@ extern std::map<int, std::map<int, std::vector<half *>>> TensorHalfPool;
 
 int round_to_nearest_pow2(int x); 
 
-float *get_from_pool(int thread_id, int dims_prod, std::string from, bool is_new=false);
+float *get_from_pool(Scope_Struct *scope_struct, int thread_id, int dims_prod, std::string from, bool is_new=false);
 
 
 void move_to_pool(int thread_id, int dims_prod, float *tensor_ptr, std::string from);

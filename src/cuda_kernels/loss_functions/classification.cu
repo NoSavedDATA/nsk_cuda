@@ -13,7 +13,7 @@
 #include "classification_kernels.h"
 
 
-void CrossEntropyBackward(DT_tensor *L_tensor, DT_tensor *R_tensor,
+void CrossEntropyBackward(Scope_Struct *scope_struct, DT_tensor *L_tensor, DT_tensor *R_tensor,
                           float *dloss,
                           float scale)
 {
@@ -30,7 +30,7 @@ void CrossEntropyBackward(DT_tensor *L_tensor, DT_tensor *R_tensor,
   float B  = BC[0];
   float C  = BC[1];
 
-  float *probs = get_from_pool(0, B*C,"ce probs");
+  float *probs = get_from_pool(scope_struct, 0, B*C,"ce probs");
 
   //int grid_size, block_size;
   //size_t shared_mem_size;
@@ -82,7 +82,7 @@ extern "C" float cross_entropy(Scope_Struct *scope_struct, DT_tensor *y_hat, DT_
 }
 
 
-void CrossEntropyIdxBackward(DT_tensor *L_tensor, DT_tensor *R_tensor, 
+void CrossEntropyIdxBackward(Scope_Struct *scope_struct, DT_tensor *L_tensor, DT_tensor *R_tensor, 
                           float *dloss,
                           float scale)
 {
@@ -92,7 +92,7 @@ void CrossEntropyIdxBackward(DT_tensor *L_tensor, DT_tensor *R_tensor,
   float B  = BC[0];
   float C  = BC[1];
   
-  float *probs = get_from_pool(0, B*C,"cross_entropy_idx probs");
+  float *probs = get_from_pool(scope_struct, 0, B*C,"cross_entropy_idx probs");
 
   int grid_size, block_size, shared_mem_size;
   std::vector<int> grid_block_mem_sizes = CalculateGridAndBlockSizes(B*C);

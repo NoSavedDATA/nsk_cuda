@@ -175,6 +175,7 @@ struct DT_tensor {
 DT_tensor *createTensor(Scope_Struct *, float* tensor_ptr, const std::vector<int>& dims, int kDataLen,
                      bool is_leaf, std::string name, cudaStream_t cuda_stream=nullptr, Loader *_loader=nullptr);
 
+
 DT_tensor *createWeightTensor(Scope_Struct *, float* tensor_ptr, const std::vector<int>& dims, int kDataLen,
                      bool is_leaf, std::string name, cudaStream_t cuda_stream=nullptr, Loader *_loader=nullptr);
 

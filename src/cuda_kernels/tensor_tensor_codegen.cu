@@ -29,7 +29,7 @@ extern "C" DT_tensor *tensor_tensor_mma(Scope_Struct *scope_struct, DT_tensor *t
   int resultingDimsProd = resultingDimsProdOnMult(linear_layer_dims, Rdims);
 
 
-  float* device_y = get_from_pool(thread_id, resultingDimsProd, "cuda mult");
+  float* device_y = get_from_pool(scope_struct, thread_id, resultingDimsProd, "cuda mult");
     
 
   if (Ldims.size()<2)
@@ -74,7 +74,7 @@ extern "C" DT_tensor *tensor_tensor_add(Scope_Struct *scope_struct, DT_tensor *t
   float dims_prod = tensor_x->dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, dims_prod, "add");
+  float* device_y = get_from_pool(scope_struct, thread_id, dims_prod, "add");
 
 
   tensor_x->Sync();
@@ -146,7 +146,7 @@ extern "C" DT_tensor *tensor_tensor_sub(Scope_Struct *scope_struct, DT_tensor *t
 
 
 
-  float* device_y = get_from_pool(thread_id, dims_prod,"sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, dims_prod,"sub");
 
 
 
@@ -180,7 +180,7 @@ extern "C" DT_tensor *tensor_tensor_equal(Scope_Struct *scope_struct, DT_tensor 
   float dims_prod = tensor_x->dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, dims_prod, "equal op");
+  float* device_y = get_from_pool(scope_struct, thread_id, dims_prod, "equal op");
 
 
   int grid_size, block_size; 
@@ -268,7 +268,7 @@ extern "C" DT_tensor *tensor_tensor_mult(Scope_Struct *scope_struct, DT_tensor *
   }
 
 
-  float *device_y = get_from_pool(thread_id, dims_prod, "hadamard");
+  float *device_y = get_from_pool(scope_struct, thread_id, dims_prod, "hadamard");
 
 
   int grid_size, block_size;
@@ -365,7 +365,7 @@ extern "C" DT_tensor *tensor_tensor_div(Scope_Struct *scope_struct, DT_tensor *t
   //  LogErrorC(scope_struct->code_line, "Tensors division has tensors of different dimensions.");
 
 
-  float* device_y = get_from_pool(thread_id, dims_prod,"div");
+  float* device_y = get_from_pool(scope_struct, thread_id, dims_prod,"div");
   
 
 

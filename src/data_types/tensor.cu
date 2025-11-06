@@ -18,6 +18,25 @@
 
 
 
+extern "C" DT_tensor *float_vec_to_tensor(Scope_Struct *scope_struct, DT_float_vec *vec) {
+  int tid = scope_struct->thread_id;
+
+  DT_tensor *tensor;
+  float dims_prod = vec->size;
+
+  float *tensor_ptr = get_from_pool(scope_struct, tid, dims_prod, "from float_vec");
+  cudaMemcpy(tensor_ptr, vec->vec, dims_prod*sizeof(float), cudaMemcpyHostToDevice);
+
+
+  tensor = createTensor(scope_struct, tensor_ptr, {(int)dims_prod}, dims_prod, true, "from_float_vec");
+  tensor->scopeless_name = "from_float_vec";
+  tensor->op = create_tensor_op;
+
+  return tensor;
+}
+
+
+
 extern "C" DT_tensor *tensor_Create(Scope_Struct *scope_struct, char *tensor_name, char *scopeless_name, DT_tensor *init_val, DT_list *notes_vector)
 {
   
@@ -95,7 +114,7 @@ extern "C" DT_tensor *tensor_Create(Scope_Struct *scope_struct, char *tensor_nam
         cudaCheck(cudaGetLastError());
         std::string _name = "create tensor ";
         _name = _name + tensor_name;
-        tensor_ptr = get_from_pool(thread_id, product, _name);
+        tensor_ptr = get_from_pool(scope_struct, thread_id, product, _name);
         //std::cout << "cpy of: " << tensor_name << "\n";
 
         cudaStream_t stream = ThreadsStream[thread_id];
@@ -160,7 +179,7 @@ extern "C" DT_tensor *tensor_Copy(Scope_Struct *scope_struct, DT_tensor *tensor)
 
   std::string where_from = "tensor copy of ";
   where_from = where_from + tensor_name;
-  arg_tensor = get_from_pool(thread_id, dims_prod, where_from);
+  arg_tensor = get_from_pool(scope_struct, thread_id, dims_prod, where_from);
   
   
   if (dims_prod!=0)
@@ -192,9 +211,8 @@ extern "C" DT_tensor *tensor_Copy(Scope_Struct *scope_struct, DT_tensor *tensor)
 
 
 
-inline void create_backward_tensor(Scope_Struct *scope_struct, std::string scopeless_name, DT_tensor *tensor, int thread_id, bool is_grad_candidate) {
-  if(is_grad_candidate&&thread_id==0)
-    todo_backward_tensors.push_back( createBackward(scope_struct, scopeless_name, tensor) );
+inline void create_backward_tensor(Scope_Struct *scope_struct, std::string scopeless_name, DT_tensor *tensor) {
+  todo_backward_tensors.push_back( createBackward(scope_struct, scopeless_name, tensor) );
 }
 
 
@@ -221,9 +239,9 @@ extern "C" void *tensor_StoreTrigger(char *tensor_name, DT_tensor *stored_tensor
   }
   else
   {
-    //todo: handle residual/copy tensor backprop cut
-    create_backward_tensor(scope_struct, scopeless_name, tensor, thread_id, is_grad_candidate);
+    //todo: handle residual/copy tensor backprop cut    
     if(is_grad_candidate&&thread_id==0) {
+      create_backward_tensor(scope_struct, scopeless_name, tensor);
       tensor = createTensor(scope_struct, tensor->tensor_ptr, tensor->dims, tensor->dims_prod, true, tensor_name, stored_tensor->cuda_stream, stored_tensor->loader);
       tensor->is_grad_candidate = is_grad_candidate;
     }
@@ -254,10 +272,14 @@ extern "C" void tensor_Clean_Up(void *data_ptr) {
   // if(tensor->is_grad_candidate)
   //   PrintDims(tensor->dims);
 
+  // if (!(tensor->is_grad_candidate))
   if (!(tensor->is_grad_candidate||tensor->parent_is_grad_candidate))
   {
-    // std::cout << "clean up of: " << tensor->scopeless_name << "/" << tensor << ".\n";
-    // PrintDims(tensor->dims);
+    // if (tensor->scopeless_name=="y") {
+    //   std::cout << "clean up of: " << tensor->scopeless_name << "/" << tensor << ".\n";
+    //   PrintDims(tensor->dims);
+    // }
+
     if(tensor->op!=view_op)
       move_to_pool(tensor->thread_id, tensor->dims_prod, tensor->tensor_ptr, "tensor_Clean_Up");
     free(tensor);
@@ -281,9 +303,9 @@ extern "C" DT_tensor *gpu(Scope_Struct *scope_struct, DT_tensor *tensor, DT_tens
   // if (tensor->dims_prod==dims_prod)
   //   tensor_ptr = tensor->tensor_ptr;
   // else
-  //   tensor_ptr = get_from_pool(thread_id, dims_prod, "gpu");
+  //   tensor_ptr = get_from_pool(scope_struct, thread_id, dims_prod, "gpu");
   
-  // //tensor_ptr = get_from_pool(dims_prod, "gpu");
+  // //tensor_ptr = get_from_pool(scope_struct, dims_prod, "gpu");
   
   // Loader *loader=nullptr;
   // cudaStream_t cuda_stream = createCudaStream();
@@ -319,7 +341,7 @@ extern "C" DT_tensor *tensor_gpuw(Scope_Struct *scope_struct, DT_tensor *tensor,
     move_to_pool(thread_id, tensor->dims_prod, tensor->tensor_ptr, "gpuw");
 
   
-  tensor_ptr = get_from_pool(thread_id, batchless_dims_prod, "gpuw");
+  tensor_ptr = get_from_pool(scope_struct, thread_id, batchless_dims_prod, "gpuw");
 
   Loader *loader=nullptr;
   cudaStream_t cuda_stream = nullptr;
@@ -553,7 +575,7 @@ extern "C" DT_tensor *zeros_like(Scope_Struct *scope_struct, DT_tensor *tensor) 
   int grid_size, block_size; 
   CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
 
-  float *y = get_from_pool(thread_id, dims_prod, "relu");
+  float *y = get_from_pool(scope_struct, thread_id, dims_prod, "relu");
 
 
   tensor->Sync();
@@ -576,7 +598,7 @@ extern "C" void *tensor_CopyArg(Scope_Struct *scope_struct, DT_tensor *tensor, c
   std::vector<int> dims = tensor->dims;
   int dims_prod = tensor->dims_prod;
     
-  float *tensor_ptr = get_from_pool(thread_id, dims_prod, "copy_arg");
+  float *tensor_ptr = get_from_pool(scope_struct, thread_id, dims_prod, "copy_arg");
   if (dims_prod!=0)
   {
     int grid_size, block_size;
@@ -587,6 +609,7 @@ extern "C" void *tensor_CopyArg(Scope_Struct *scope_struct, DT_tensor *tensor, c
     cudaStream_t stream = ThreadsStream[thread_id];
     copy_tensor_kernel<<<grid_size,block_size,0,stream>>>(tensor_ptr, tensor->tensor_ptr, dims_prod);
   }
+  
 
   DT_tensor *new_tensor = createTensor(scope_struct, tensor_ptr, dims, dims_prod, true, tensor->name, tensor->cuda_stream, tensor->loader);
   new_tensor->is_grad_candidate = tensor->is_grad_candidate;

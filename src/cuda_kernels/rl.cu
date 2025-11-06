@@ -34,7 +34,7 @@ extern "C" DT_tensor *rl_discounted_return(Scope_Struct *scope_struct, DT_tensor
   CalculateGridAndBlockSizes(B, grid_size, block_size);
   
 
-  float *G = get_from_pool(thread_id, B, "rl_discounted_return");
+  float *G = get_from_pool(scope_struct, thread_id, B, "rl_discounted_return");
 
   reward->Sync();
   terminated->Sync();

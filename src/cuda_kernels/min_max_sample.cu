@@ -41,7 +41,7 @@ extern "C" DT_tensor *tensor_onehot(Scope_Struct *scope_struct, DT_tensor *tenso
 
   tensor->Sync();
 
-  float *probs = get_from_pool(thread_id, B*C, "onehot probs");
+  float *probs = get_from_pool(scope_struct, thread_id, B*C, "onehot probs");
 
   cudaStream_t stream = ThreadsStream[thread_id];
   set_to_zero_kernel<<<grid_size, block_size, 0, stream>>>(probs, B*C);
@@ -53,17 +53,21 @@ extern "C" DT_tensor *tensor_onehot(Scope_Struct *scope_struct, DT_tensor *tenso
 
   DT_tensor *new_tensor = createTensor(scope_struct, probs, new_dims, DimsProd(new_dims), false, "");
   new_tensor->AttrLNode(tensor, onehot_op);
+
+  // DT_tensor *new_tensor = customOpTensor(scope_struct, probs, new_dims, DimsProd(new_dims), "",
+  //                                        nullptr, tensor, false);
   return new_tensor;
 }
 
 
-extern "C" float priority_sample(int thread_id, DT_tensor *tensor, int max_idx, int seed)
+extern "C" float priority_sample(Scope_Struct *scope_struct, DT_tensor *tensor, int max_idx, int seed)
 {
+  int thread_id = scope_struct->thread_id;
   
   float *probs, *sampled, *probs_cpu;
   float ret;
-  probs = get_from_pool(thread_id, max_idx, "priority sample");
-  sampled = get_from_pool(thread_id, 1, "priority sample");
+  probs = get_from_pool(scope_struct, thread_id, max_idx, "priority sample");
+  sampled = get_from_pool(scope_struct, thread_id, 1, "priority sample");
   probs_cpu = new float[1];
 
 
@@ -97,12 +101,14 @@ extern "C" float priority_sample(int thread_id, DT_tensor *tensor, int max_idx, 
   return ret;
 }
 
-extern "C" float priority_sample_val(int thread_id, DT_tensor *tensor, int max_idx, int seed)
+extern "C" float priority_sample_val(Scope_Struct *scope_struct, DT_tensor *tensor, int max_idx, int seed)
 {  
+  int thread_id = scope_struct->thread_id;
+
   float *probs, *sampled, *probs_cpu;
   float ret;
-  probs = get_from_pool(thread_id, max_idx, "priority sample");
-  sampled = get_from_pool(thread_id, 1, "priority sample");
+  probs = get_from_pool(scope_struct, thread_id, max_idx, "priority sample");
+  sampled = get_from_pool(scope_struct, thread_id, 1, "priority sample");
   probs_cpu = new float[1];
 
 
@@ -137,13 +143,14 @@ extern "C" float priority_sample_val(int thread_id, DT_tensor *tensor, int max_i
 }
 
 
-extern "C" float importance_sample_idx(int thread_id, DT_tensor *tensor, float max_idx, float alpha, float beta, float seed)
+extern "C" float importance_sample_idx(Scope_Struct *scope_struct, DT_tensor *tensor, float max_idx, float alpha, float beta, float seed)
 {  
+  int thread_id = scope_struct->thread_id;
   
   float *probs, *sampled, *probs_cpu;
   float ret;
-  probs = get_from_pool(thread_id, tensor->dims_prod, "priority sample probs");
-  sampled = get_from_pool(thread_id, 1, "priority sample sampled");
+  probs = get_from_pool(scope_struct, thread_id, tensor->dims_prod, "priority sample probs");
+  sampled = get_from_pool(scope_struct, thread_id, 1, "priority sample sampled");
   probs_cpu = new float[1];
 
 
@@ -177,13 +184,14 @@ extern "C" float importance_sample_idx(int thread_id, DT_tensor *tensor, float m
 
 
 
-extern "C" float importance_sample_weight(int thread_id, DT_tensor *tensor, float max_idx, float alpha, float beta, float seed)
+extern "C" float importance_sample_weight(Scope_Struct *scope_struct, DT_tensor *tensor, float max_idx, float alpha, float beta, float seed)
 {  
+  int thread_id = scope_struct->thread_id;
   float *probs, *sampled, *is_w_cpu, *is_w;
   float ret;
-  probs = get_from_pool(thread_id, tensor->dims_prod, "importance_sample_weight probs");
-  sampled = get_from_pool(thread_id, 1, "importance_sample_weight sampled");
-  is_w = get_from_pool(thread_id, 1, "importance_sample_weight is_w");
+  probs = get_from_pool(scope_struct, thread_id, tensor->dims_prod, "importance_sample_weight probs");
+  sampled = get_from_pool(scope_struct, thread_id, 1, "importance_sample_weight sampled");
+  is_w = get_from_pool(scope_struct, thread_id, 1, "importance_sample_weight is_w");
   is_w_cpu = new float[1];
 
 
@@ -240,7 +248,7 @@ extern "C" DT_tensor *tmax(Scope_Struct *scope_struct, DT_tensor *tensor, float 
     // va_end(args);
     // int dims_prod = DimsProd(dims);
 
-    // summed = get_from_pool(thread_id, dims_prod, "tmax all dims");
+    // summed = get_from_pool(scope_struct, thread_id, dims_prod, "tmax all dims");
     // cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream);
     
     // float tensor_sum=0;
@@ -298,7 +306,7 @@ extern "C" DT_tensor *tmax(Scope_Struct *scope_struct, DT_tensor *tensor, float 
   int new_dims_prod = DimsProd(new_dims);
 
   
-  summed = get_from_pool(thread_id, new_dims_prod, "tmax");
+  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "tmax");
   cudaMemset(summed, 0, new_dims_prod * sizeof(float));
 
 
@@ -397,8 +405,8 @@ extern "C" DT_tensor *tensor_argmax(Scope_Struct *scope_struct, DT_tensor *tenso
   
 
   tensor->Sync();
-  maxed = get_from_pool(thread_id, new_dims_prod, "argmax maxed");
-  argmaxed = get_from_pool(thread_id, new_dims_prod, "argmax");
+  maxed = get_from_pool(scope_struct, thread_id, new_dims_prod, "argmax maxed");
+  argmaxed = get_from_pool(scope_struct, thread_id, new_dims_prod, "argmax");
 
   cudaStream_t stream = ThreadsStream[thread_id];
   set_to_zero_kernel<<<grid_size, block_size, 0, stream>>>(maxed, new_dims_prod);
@@ -431,8 +439,9 @@ extern "C" DT_tensor *tensor_argmax(Scope_Struct *scope_struct, DT_tensor *tenso
 }
 
 
-extern "C" DT_tensor *topk(Scope_Struct *scope_struct, int thread_id, DT_tensor tensor, int k) 
+extern "C" DT_tensor *topk(Scope_Struct *scope_struct, DT_tensor tensor, int k) 
 {
+  int thread_id = scope_struct->thread_id;
   std::cout << "TOPK OF " << tensor.name << "\n";
 
   float *tensor_ptr = tensor.tensor_ptr;

@@ -24,6 +24,8 @@ obj/backprop/backprop.o: src/backprop/backprop.cu \
   src/backprop/../cuda_kernels/../../../../src/compiler_frontend/logging_v.h \
   src/backprop/../cuda_kernels/../../../../src/compiler_frontend/global_vars.h \
   src/backprop/../cuda_kernels/../../../../src/data_types/codegen_notes.h \
+  src/backprop/../cuda_kernels/../../../../src/data_types/float_vec.h \
+  src/backprop/../cuda_kernels/../../../../src/data_types/../mangler/scope_struct.h \
   src/backprop/../cuda_kernels/../../../../src/data_types/nsk_vector.h \
   src/backprop/../cuda_kernels/../../../../src/math/include.h \
   src/backprop/../cuda_kernels/../../../../src/math/functions.h \
@@ -47,8 +49,10 @@ obj/backprop/backprop.o: src/backprop/backprop.cu \
   src/backprop/../cuda_kernels/activation_functions/../../tensor/../cuda_threads/include.h \
   src/backprop/../cuda_kernels/activation_functions/../../tensor/../cuda_threads/threads.h \
   src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/minimal_tensor.h \
+  src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/include.h \
   src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/pool_i8.h \
+  src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/pool_i32.h \
   src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/pool.h \
   src/backprop/../cuda_kernels/activation_functions/activation_codegen.h \
@@ -120,6 +124,7 @@ obj/backprop/backprop.o: src/backprop/backprop.cu \
   src/backprop/../mma/../nsk_cuda/structs/fp16_wmma_frags.h \
   src/backprop/../mma/../nsk_cuda/structs/i8_wmma_frags.h \
   src/backprop/../mma/../nsk_cuda/structs/smem_cpasync_loader.h \
+  src/backprop/../mma/../nsk_cuda/structs/smem_loader.h \
   src/backprop/../mma/../nsk_cuda/structs/wmma_indexes.h \
   src/backprop/../mma/../nsk_cuda/quantize/include.h \
   src/backprop/../mma/../nsk_cuda/quantize/call.h \
@@ -194,6 +199,8 @@ src/backprop/../cuda_kernels/../../../../src/compiler_frontend/logging_execution
 src/backprop/../cuda_kernels/../../../../src/compiler_frontend/logging_v.h:
 src/backprop/../cuda_kernels/../../../../src/compiler_frontend/global_vars.h:
 src/backprop/../cuda_kernels/../../../../src/data_types/codegen_notes.h:
+src/backprop/../cuda_kernels/../../../../src/data_types/float_vec.h:
+src/backprop/../cuda_kernels/../../../../src/data_types/../mangler/scope_struct.h:
 src/backprop/../cuda_kernels/../../../../src/data_types/nsk_vector.h:
 src/backprop/../cuda_kernels/../../../../src/math/include.h:
 src/backprop/../cuda_kernels/../../../../src/math/functions.h:
@@ -217,8 +224,10 @@ src/backprop/../cuda_kernels/activation_functions/../../tensor/../../../../src/n
 src/backprop/../cuda_kernels/activation_functions/../../tensor/../cuda_threads/include.h:
 src/backprop/../cuda_kernels/activation_functions/../../tensor/../cuda_threads/threads.h:
 src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/minimal_tensor.h:
+src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/include.h:
 src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/pool_i8.h:
+src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/pool_i32.h:
 src/backprop/../cuda_kernels/activation_functions/../../tensor/../nsk_cuda/pool/pool.h:
 src/backprop/../cuda_kernels/activation_functions/activation_codegen.h:
@@ -291,6 +300,7 @@ src/backprop/../mma/../nsk_cuda/structs/smem_stores/i8mma.h:
 src/backprop/../mma/../nsk_cuda/structs/fp16_wmma_frags.h:
 src/backprop/../mma/../nsk_cuda/structs/i8_wmma_frags.h:
 src/backprop/../mma/../nsk_cuda/structs/smem_cpasync_loader.h:
+src/backprop/../mma/../nsk_cuda/structs/smem_loader.h:
 src/backprop/../mma/../nsk_cuda/structs/wmma_indexes.h:
 src/backprop/../mma/../nsk_cuda/quantize/include.h:
 src/backprop/../mma/../nsk_cuda/quantize/call.h:

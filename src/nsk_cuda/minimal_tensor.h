@@ -5,6 +5,7 @@
 #include <type_traits>
 
 
+#include "../../../../src/nsk_cpp.h"
 #include "pool/include.h"
 
 
@@ -22,5 +23,5 @@ struct CudaTensor {
 
     void *tensor;
 
-    CudaTensor(int, int, int, std::string type="float"); 
+    CudaTensor(Scope_Struct *, int, int, int, std::string type="float"); 
 };

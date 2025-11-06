@@ -13,8 +13,8 @@
 
 
 
-extern "C" float save_img(Scope_Struct *scope_struct,int thread_id, DT_tensor *tensor, char *img_name)
-{
+extern "C" float tensor_save_img(Scope_Struct *scope_struct, DT_tensor *tensor, char *img_name) {
+  
   
   int c, h, w;
 
@@ -44,17 +44,16 @@ extern "C" float save_img(Scope_Struct *scope_struct,int thread_id, DT_tensor *t
     }
   }
 
-  std::string img = "/home/nosaveddata/imgs/";
-  img = img + img_name;
-  img = img + RandomString(4);
-  img = img + ".png";
-
-  std::cout << "writing image: " << img << "\n";
+  // std::string img = "/home/nosaveddata/imgs/";
+  // img = img + img_name;
+  // img = img + RandomString(4);
+  // img = img + ".png";
+  // std::cout << "writing image: " << img << "\n";
 
   // Write the image using stb_image_write
-  if (!stbi_write_png(img.c_str(), w, h, c, imageData.data(), w * c)) {
+  if (!stbi_write_png(img_name, w, h, c, imageData.data(), w * c))
     std::cerr << "Failed to write image to " << img_name << std::endl;
-  }
+  
 
   delete[] tensor_cpu;
 

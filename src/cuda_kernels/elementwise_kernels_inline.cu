@@ -16,6 +16,7 @@ __global__ __forceinline__ void set_to_zero_kernel(float *y, int dims_prod) {
     if (i < dims_prod)
         y[i] = 0;
 }
+
 __global__ __forceinline__ void set_to_one_kernel(float *y, int dims_prod) {
 
     int i = blockIdx.x * blockDim.x + threadIdx.x;

@@ -75,7 +75,7 @@ extern "C" DT_tensor *mse_with_priorities(Scope_Struct * scope_struct, int threa
   int C = dims[1];
 
 
-  float *msed = get_from_pool(0, B, "mse with priorities");
+  float *msed = get_from_pool(scope_struct, 0, B, "mse with priorities");
 
   int grid_size, block_size;
   std::vector<int> grid_block_mem_sizes = CalculateSimpleWarpGridAndBlockSizes(B);

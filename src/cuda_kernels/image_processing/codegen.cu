@@ -28,7 +28,7 @@ extern "C" DT_tensor *RandomCrop(Scope_Struct *scope_struct, DT_tensor *tensor, 
   H = dims[dims.size()-2];
   W = dims[dims.size()-1];
 
-  cropped = get_from_pool(thread_id, dims_prod, "cropping");
+  cropped = get_from_pool(scope_struct, thread_id, dims_prod, "cropping");
 
 
   int block_size = deviceProp.maxThreadsPerMultiProcessor == 1536 ? 768 : 1024;
@@ -78,7 +78,7 @@ extern "C" DT_tensor *RandomHorizontalFlip(Scope_Struct *scope_struct, DT_tensor
   H = dims[dims.size()-2];
   W = dims[dims.size()-1];
 
-  flipped = get_from_pool(thread_id, dims_prod, "horizontal_flipping");
+  flipped = get_from_pool(scope_struct, thread_id, dims_prod, "horizontal_flipping");
 
 
   int block_size = deviceProp.maxThreadsPerMultiProcessor == 1536 ? 768 : 1024;
@@ -130,7 +130,7 @@ extern "C" DT_tensor *NormalizeImg(Scope_Struct *scope_struct, DT_tensor *tensor
     return nullptr;
   }
 
-  normalized = get_from_pool(thread_id, dims_prod, "normalize img");
+  normalized = get_from_pool(scope_struct, thread_id, dims_prod, "normalize img");
 
 
 
@@ -170,7 +170,7 @@ extern "C" DT_tensor *Jitter(Scope_Struct *scope_struct, DT_tensor *tensor, floa
   block_size = grid_block_mem_sizes[1];
 
 
-  float *jittered = get_from_pool(thread_id, dims_prod, "jitter img");
+  float *jittered = get_from_pool(scope_struct, thread_id, dims_prod, "jitter img");
   unsigned long long seed = get_int_seed();
   jitter_kernel<<<grid_size, block_size, 0, tensor->cuda_stream>>>(jittered, tensor->tensor_ptr, factor, dims_prod, seed);
 

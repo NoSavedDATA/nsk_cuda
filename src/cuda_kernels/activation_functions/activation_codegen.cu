@@ -28,7 +28,7 @@ extern "C" DT_tensor *relu(Scope_Struct *scope_struct, DT_tensor *tensor)
   CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
   
 
-  float *y = get_from_pool(thread_id, dims_prod, "relu");
+  float *y = get_from_pool(scope_struct, thread_id, dims_prod, "relu");
 
   tensor->Sync();
   cudaStream_t stream = ThreadsStream[thread_id];
@@ -40,7 +40,7 @@ extern "C" DT_tensor *relu(Scope_Struct *scope_struct, DT_tensor *tensor)
 }
 
 
-void relu_backward(float *inp, int dims_prod, float *out,
+void relu_backward(Scope_Struct *scope_struct, float *inp, int dims_prod, float *out,
                      float *dinp, float *dout,
                      void *network_module, DT_tensor *node) {
   int grid_size, block_size;
@@ -49,8 +49,8 @@ void relu_backward(float *inp, int dims_prod, float *out,
 }
 
 
-// void gelu_backward(const float* inp, float dims_prod, float* dinp, const float* dout) {
-void gelu_backward(float *inp, int dims_prod, float *out,
+// void gelu_backward(Scope_Struct *scope_struct, const float* inp, float dims_prod, float* dinp, const float* dout) {
+void gelu_backward(Scope_Struct *scope_struct, float *inp, int dims_prod, float *out,
                      float *dinp, float *dout,
                      void *network_module, DT_tensor *node) {  
   int grid_size, block_size; 
@@ -73,7 +73,7 @@ extern "C" DT_tensor *gelu(Scope_Struct *scope_struct, DT_tensor *tensor)
   CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
 
   
-  float *y = get_from_pool(thread_id, dims_prod,"gelu");
+  float *y = get_from_pool(scope_struct, thread_id, dims_prod,"gelu");
 
   tensor->Sync();
   cudaStream_t stream = ThreadsStream[thread_id];
@@ -88,7 +88,7 @@ extern "C" DT_tensor *gelu(Scope_Struct *scope_struct, DT_tensor *tensor)
 
 
 
-void sigmoid_backward(float *inp, int dims_prod, float *out,
+void sigmoid_backward(Scope_Struct *scope_struct, float *inp, int dims_prod, float *out,
                      float *dinp, float *dout,
                      void *network_module, DT_tensor *node) {  
   
@@ -112,7 +112,7 @@ extern "C" DT_tensor *sigmoid(Scope_Struct *scope_struct, DT_tensor *tensor)
   CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
 
   
-  float *y = get_from_pool(thread_id, dims_prod, "sigmoid");  
+  float *y = get_from_pool(scope_struct, thread_id, dims_prod, "sigmoid");  
   
   tensor->Sync();
   cudaStream_t stream = ThreadsStream[thread_id];
@@ -127,7 +127,7 @@ extern "C" DT_tensor *sigmoid(Scope_Struct *scope_struct, DT_tensor *tensor)
 }
 
 
-void tanh_backward(float *inp, int dims_prod, float *out,
+void tanh_backward(Scope_Struct *scope_struct, float *inp, int dims_prod, float *out,
                      float *dinp, float *dout,
                      void *network_module, DT_tensor *node) {  
   
@@ -154,7 +154,7 @@ extern "C" DT_tensor *_tanh(Scope_Struct *scope_struct, DT_tensor *tensor)
   CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
 
   
-  float *y = get_from_pool(thread_id, dims_prod, "tanh");
+  float *y = get_from_pool(scope_struct, thread_id, dims_prod, "tanh");
 
   tensor->Sync();
   cudaStream_t stream = ThreadsStream[thread_id];
@@ -187,7 +187,7 @@ extern "C" DT_tensor *softmax(Scope_Struct *scope_struct, DT_tensor *tensor)
 
 
   tensor->Sync();
-  float *probs = get_from_pool(thread_id, B*C, "softmax");
+  float *probs = get_from_pool(scope_struct, thread_id, B*C, "softmax");
   cudaStream_t stream = ThreadsStream[thread_id];
   set_to_zero_kernel<<<grid_size, block_size, 0, stream>>>(probs, B*C);
 

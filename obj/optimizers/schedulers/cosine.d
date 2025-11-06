@@ -23,6 +23,8 @@ obj/optimizers/schedulers/cosine.o: src/optimizers/schedulers/cosine.cpp \
   src/optimizers/schedulers/../../../../../src/compiler_frontend/logging_v.h \
   src/optimizers/schedulers/../../../../../src/compiler_frontend/global_vars.h \
   src/optimizers/schedulers/../../../../../src/data_types/codegen_notes.h \
+  src/optimizers/schedulers/../../../../../src/data_types/float_vec.h \
+  src/optimizers/schedulers/../../../../../src/data_types/../mangler/scope_struct.h \
   src/optimizers/schedulers/../../../../../src/data_types/nsk_vector.h \
   src/optimizers/schedulers/../../../../../src/math/include.h \
   src/optimizers/schedulers/../../../../../src/math/functions.h \
@@ -63,6 +65,8 @@ src/optimizers/schedulers/../../../../../src/compiler_frontend/logging_execution
 src/optimizers/schedulers/../../../../../src/compiler_frontend/logging_v.h:
 src/optimizers/schedulers/../../../../../src/compiler_frontend/global_vars.h:
 src/optimizers/schedulers/../../../../../src/data_types/codegen_notes.h:
+src/optimizers/schedulers/../../../../../src/data_types/float_vec.h:
+src/optimizers/schedulers/../../../../../src/data_types/../mangler/scope_struct.h:
 src/optimizers/schedulers/../../../../../src/data_types/nsk_vector.h:
 src/optimizers/schedulers/../../../../../src/math/include.h:
 src/optimizers/schedulers/../../../../../src/math/functions.h:

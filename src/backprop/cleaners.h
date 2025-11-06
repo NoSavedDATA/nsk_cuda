@@ -29,36 +29,11 @@ using backward_tuple = std::tuple<int, int, int, int, int, float *, float *, flo
 
 
 void to_free_tensor(DT_tensor *tensor_ptr);
-
 void to_pool(int dims_prod, float *tensor_ptr, std::string from);
-
 void save_from_pool(DT_tensor *tensor_ptr);
 
 
-
-
-void to_pool_forward(int dims_prod, float *tensor_ptr, std::string scope, std::string from);
-
-
-
-void to_free_tensor_threaded(DT_tensor *tensor_ptr, std::string scope, int thread_id);
-
-void to_pool_threaded(int dims_prod, float *tensor_ptr, std::string scope, int thread_id, std::string from);
-
-
-void ForwardCleanupToPool(DT_tensor *back_node, std::string scope);
-int DoesTreeContainWeight(DT_tensor *back_node);
 void CleanScopeTensors(std::string scope);
-
-
-void ThreadedCleanupToPool(DT_tensor *back_node, std::string scope, int thread_id);
-void CleanThreadTensors(std::string scope, int thread_id);
-
-
 void CleanScopeTensors(std::string scope);
-
-
-
-
 void CleanTree_Backprop(DT_tensor *back_node);
 

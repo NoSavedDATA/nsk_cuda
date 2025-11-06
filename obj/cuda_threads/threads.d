@@ -23,6 +23,8 @@ obj/cuda_threads/threads.o: src/cuda_threads/threads.cpp \
   src/cuda_threads/../../../../src/compiler_frontend/logging_v.h \
   src/cuda_threads/../../../../src/compiler_frontend/global_vars.h \
   src/cuda_threads/../../../../src/data_types/codegen_notes.h \
+  src/cuda_threads/../../../../src/data_types/float_vec.h \
+  src/cuda_threads/../../../../src/data_types/../mangler/scope_struct.h \
   src/cuda_threads/../../../../src/data_types/nsk_vector.h \
   src/cuda_threads/../../../../src/math/include.h \
   src/cuda_threads/../../../../src/math/functions.h \
@@ -80,6 +82,8 @@ src/cuda_threads/../../../../src/compiler_frontend/logging_execution.h:
 src/cuda_threads/../../../../src/compiler_frontend/logging_v.h:
 src/cuda_threads/../../../../src/compiler_frontend/global_vars.h:
 src/cuda_threads/../../../../src/data_types/codegen_notes.h:
+src/cuda_threads/../../../../src/data_types/float_vec.h:
+src/cuda_threads/../../../../src/data_types/../mangler/scope_struct.h:
 src/cuda_threads/../../../../src/data_types/nsk_vector.h:
 src/cuda_threads/../../../../src/math/include.h:
 src/cuda_threads/../../../../src/math/functions.h:

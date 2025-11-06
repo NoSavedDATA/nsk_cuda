@@ -24,6 +24,8 @@ obj/processing/tokenizer/tokenizer.o: \
   src/processing/tokenizer/../../../../../src/compiler_frontend/logging_v.h \
   src/processing/tokenizer/../../../../../src/compiler_frontend/global_vars.h \
   src/processing/tokenizer/../../../../../src/data_types/codegen_notes.h \
+  src/processing/tokenizer/../../../../../src/data_types/float_vec.h \
+  src/processing/tokenizer/../../../../../src/data_types/../mangler/scope_struct.h \
   src/processing/tokenizer/../../../../../src/data_types/nsk_vector.h \
   src/processing/tokenizer/../../../../../src/math/include.h \
   src/processing/tokenizer/../../../../../src/math/functions.h \
@@ -71,8 +73,10 @@ obj/processing/tokenizer/tokenizer.o: \
   src/processing/tokenizer/../../tensor/../cuda_threads/include.h \
   src/processing/tokenizer/../../tensor/../cuda_threads/threads.h \
   src/processing/tokenizer/../../tensor/../nsk_cuda/minimal_tensor.h \
+  src/processing/tokenizer/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/processing/tokenizer/../../tensor/../nsk_cuda/pool/include.h \
   src/processing/tokenizer/../../tensor/../nsk_cuda/pool/pool_i8.h \
+  src/processing/tokenizer/../../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/processing/tokenizer/../../tensor/../nsk_cuda/pool/pool_i32.h \
   src/processing/tokenizer/../../tensor/../nsk_cuda/pool/pool.h
 src/processing/tokenizer/../../../../../src/nsk_cpp.h:
@@ -99,6 +103,8 @@ src/processing/tokenizer/../../../../../src/compiler_frontend/logging_execution.
 src/processing/tokenizer/../../../../../src/compiler_frontend/logging_v.h:
 src/processing/tokenizer/../../../../../src/compiler_frontend/global_vars.h:
 src/processing/tokenizer/../../../../../src/data_types/codegen_notes.h:
+src/processing/tokenizer/../../../../../src/data_types/float_vec.h:
+src/processing/tokenizer/../../../../../src/data_types/../mangler/scope_struct.h:
 src/processing/tokenizer/../../../../../src/data_types/nsk_vector.h:
 src/processing/tokenizer/../../../../../src/math/include.h:
 src/processing/tokenizer/../../../../../src/math/functions.h:
@@ -146,7 +152,9 @@ src/processing/tokenizer/../../tensor/tensor_struct.h:
 src/processing/tokenizer/../../tensor/../cuda_threads/include.h:
 src/processing/tokenizer/../../tensor/../cuda_threads/threads.h:
 src/processing/tokenizer/../../tensor/../nsk_cuda/minimal_tensor.h:
+src/processing/tokenizer/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/processing/tokenizer/../../tensor/../nsk_cuda/pool/include.h:
 src/processing/tokenizer/../../tensor/../nsk_cuda/pool/pool_i8.h:
+src/processing/tokenizer/../../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/processing/tokenizer/../../tensor/../nsk_cuda/pool/pool_i32.h:
 src/processing/tokenizer/../../tensor/../nsk_cuda/pool/pool.h:

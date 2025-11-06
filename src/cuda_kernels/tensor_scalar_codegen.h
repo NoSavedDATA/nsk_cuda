@@ -7,6 +7,6 @@
 
 
 
-void scalarmult_backward(float *inp, int dims_prod, float *out,
+void scalarmult_backward(Scope_Struct *, float *inp, int dims_prod, float *out,
                      float *dinp, float *dout,
                      void *, DT_tensor *node);

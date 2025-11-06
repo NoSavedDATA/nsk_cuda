@@ -13,6 +13,7 @@
 #include "../tensor/include.h"
 #include "calculate_grids.h"
 #include "dim_kernels.h"
+#include "elementwise_kernels_inline.cu"
 #include "handles.h"
 #include "template_dim_kernels.h"
 
@@ -38,7 +39,7 @@ extern "C" DT_tensor *repeat_interleave(Scope_Struct *scope_struct, DT_tensor te
 
   float *probs;
 
-  probs = get_from_pool(thread_id, B*C, "repeat_interleave");
+  probs = get_from_pool(scope_struct, thread_id, B*C, "repeat_interleave");
   cudaMemset(probs, 0, B*C*sizeof(float));
   
 
@@ -153,7 +154,7 @@ extern "C" DT_tensor *mean_tensor(Scope_Struct *scope_struct, DT_tensor *tensor,
   int new_dims_prod = DimsProd(new_dims);
 
   
-  summed = get_from_pool(thread_id, new_dims_prod, "mean");
+  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "mean");
   cudaMemset(summed, 0, new_dims_prod * sizeof(float));
 
 
@@ -291,7 +292,7 @@ extern "C" DT_tensor *tensor_mean(Scope_Struct *scope_struct, DT_tensor *tensor,
   int new_dims_prod = DimsProd(new_dims);
 
   
-  summed = get_from_pool(thread_id, new_dims_prod, "mean");
+  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "mean");
   cudaMemset(summed, 0, new_dims_prod * sizeof(float));
 
 
@@ -334,7 +335,7 @@ extern "C" DT_tensor *tensor_mean(Scope_Struct *scope_struct, DT_tensor *tensor,
 }
 
 
-void mean_over_semilast_dim_backward(float *inp, int size, float *out,
+void mean_over_semilast_dim_backward(Scope_Struct *scope_struct, float *inp, int size, float *out,
                      float *dinp, float *dout,
                      void *network_module, DT_tensor *node)
 {
@@ -434,7 +435,7 @@ extern "C" DT_tensor *sum(Scope_Struct *scope_struct, DT_tensor tensor, int firs
   int new_dims_prod = DimsProd(new_dims);
 
   
-  summed = get_from_pool(thread_id, new_dims_prod, "summed");
+  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "summed");
   cudaMemset(summed, 0, new_dims_prod * sizeof(float));
 
   //std::cout << "\n\nDims prod: " << dims_prod << "\nNew dims prod: " << new_dims_prod << "\nSummed dim size: " << summed_dim << "\n\n";
@@ -483,7 +484,7 @@ extern "C" DT_tensor *prod(Scope_Struct *scope_struct, DT_tensor tensor, int fir
     // va_end(args);
     // int dims_prod = DimsProd(dims);
 
-    // summed = get_from_pool(thread_id, dims_prod, "prod all dims");
+    // summed = get_from_pool(scope_struct, thread_id, dims_prod, "prod all dims");
     // cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream);
     
     // float tensor_sum=0;
@@ -544,7 +545,7 @@ extern "C" DT_tensor *prod(Scope_Struct *scope_struct, DT_tensor tensor, int fir
   float *init_prod = new float[new_dims_prod];
   init_prod = make_ones_float(new_dims_prod);
   
-  summed = get_from_pool(thread_id, new_dims_prod, "prod");
+  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "prod");
   cudaMemcpyAsync(summed, init_prod, new_dims_prod * sizeof(float), cudaMemcpyHostToDevice, stream);
   delete[] init_prod;
 
@@ -610,7 +611,7 @@ extern "C" DT_tensor *gather(Scope_Struct *scope_struct, DT_tensor *tensor, DT_t
     block_size = grid_block_mem_sizes[1];
     
 
-    float *y = get_from_pool(thread_id, new_dims_prod, "gather");
+    float *y = get_from_pool(scope_struct, thread_id, new_dims_prod, "gather");
     //float *y;
     
 
@@ -633,7 +634,7 @@ extern "C" DT_tensor *gather(Scope_Struct *scope_struct, DT_tensor *tensor, DT_t
 
 
 
-void gather_last_dim_backward(float *inp, int size, float *out,
+void gather_last_dim_backward(Scope_Struct *scope_struct, float *inp, int size, float *out,
                      float *dinp, float *dout,
                      void *network_module, DT_tensor *node)
 {
@@ -660,10 +661,10 @@ void gather_last_dim_backward(float *inp, int size, float *out,
 }
 
 
-inline void transpose(DT_tensor *tensor, int thread_id, cudaStream_t stream)
+inline void transpose(Scope_Struct *scope_struct, DT_tensor *tensor, int thread_id, cudaStream_t stream)
 {
 
-  float *transposed = get_from_pool(thread_id, tensor->dims_prod, "transpose");
+  float *transposed = get_from_pool(scope_struct, thread_id, tensor->dims_prod, "transpose");
 
 
   constexpr int tile_size{32}; // todo
@@ -675,4 +676,43 @@ inline void transpose(DT_tensor *tensor, int thread_id, cudaStream_t stream)
 
   // move_to_pool(thread_id, tensor->dims_prod, tensor->tensor_ptr, "transpose");
   tensor->tensor_ptr = transposed;
+}
+
+
+extern "C" DT_tensor *tensor_Idx(Scope_Struct *scope_struct, DT_tensor *tensor, int idx) {
+  int tid = scope_struct->thread_id;
+
+  std::vector<int> new_dims = BatchLessDims(tensor->dims);
+  int idx_size = DimsProd(new_dims);
+  
+  float *y = get_from_pool(scope_struct, tid, idx_size, "tensor Idx");
+  copy_tensor_kernel<<<ceilf(idx_size/1024.0f), 1024, 0, main_stream>>>(y, tensor->tensor_ptr+idx*idx_size, idx_size);
+
+  bool has_grad = tensor->is_grad_candidate;    
+  return customOpTensor(scope_struct, y, new_dims, idx_size, "relu_backward", nullptr, tensor, has_grad);
+}
+
+
+extern "C" int tensor_CalculateIdx(DT_tensor *tensor, int first_idx, ...) {
+  int idx = first_idx;
+  int idx_pre = idx;
+
+  //return
+  return first_idx;
+
+
+  va_list args;
+  va_start(args, first_idx);
+
+  while(idx!=TERMINATE_VARARG) {
+    idx_pre = idx;
+    idx = va_arg(args, int);
+  }
+
+  va_end(args);
+
+  if (idx_pre>tensor->dims_prod)
+    LogErrorC(-1, "Tensor index out of bounds");
+  std::cout << "Return index: " << idx_pre << ".\n";
+  return idx_pre;
 }

@@ -59,7 +59,7 @@ extern "C" DT_tensor *pinned_tensor_Create(Scope_Struct *scope_struct, char *ten
   int pool_product = DimsProd(pool_dims);
 
   std::cout << "get from pool" << ".\n";
-  pool_tensor = get_from_pool(0, pool_product, "create pinned");
+  pool_tensor = get_from_pool(scope_struct, 0, pool_product, "create pinned");
   move_to_pool(0, pool_product, pool_tensor, "create pinned");
   std::cout << "move to pool" << ".\n";
 

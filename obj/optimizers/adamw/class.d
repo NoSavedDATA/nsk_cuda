@@ -23,6 +23,8 @@ obj/optimizers/adamw/class.o: src/optimizers/adamw/class.cu \
   src/optimizers/adamw/../../../../../src/compiler_frontend/logging_v.h \
   src/optimizers/adamw/../../../../../src/compiler_frontend/global_vars.h \
   src/optimizers/adamw/../../../../../src/data_types/codegen_notes.h \
+  src/optimizers/adamw/../../../../../src/data_types/float_vec.h \
+  src/optimizers/adamw/../../../../../src/data_types/../mangler/scope_struct.h \
   src/optimizers/adamw/../../../../../src/data_types/nsk_vector.h \
   src/optimizers/adamw/../../../../../src/math/include.h \
   src/optimizers/adamw/../../../../../src/math/functions.h \
@@ -43,6 +45,7 @@ obj/optimizers/adamw/class.o: src/optimizers/adamw/class.cu \
   src/optimizers/adamw/../../cuda_kernels/calculate_grids.h \
   src/optimizers/adamw/../../nsk_cuda/pool/include.h \
   src/optimizers/adamw/../../nsk_cuda/pool/pool_i8.h \
+  src/optimizers/adamw/../../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/optimizers/adamw/../../nsk_cuda/pool/pool_i32.h \
   src/optimizers/adamw/../../nsk_cuda/pool/pool.h \
   src/optimizers/adamw/../../tensor/tensor_dim_functions.h \
@@ -53,6 +56,7 @@ obj/optimizers/adamw/class.o: src/optimizers/adamw/class.cu \
   src/optimizers/adamw/../../tensor/../cuda_threads/include.h \
   src/optimizers/adamw/../../tensor/../cuda_threads/threads.h \
   src/optimizers/adamw/../../tensor/../nsk_cuda/minimal_tensor.h \
+  src/optimizers/adamw/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/optimizers/adamw/../../tensor/../nsk_cuda/pool/include.h \
   src/optimizers/adamw/../common.h src/optimizers/adamw/../interface.h \
   src/optimizers/adamw/class.h src/optimizers/adamw/kernels.h
@@ -80,6 +84,8 @@ src/optimizers/adamw/../../../../../src/compiler_frontend/logging_execution.h:
 src/optimizers/adamw/../../../../../src/compiler_frontend/logging_v.h:
 src/optimizers/adamw/../../../../../src/compiler_frontend/global_vars.h:
 src/optimizers/adamw/../../../../../src/data_types/codegen_notes.h:
+src/optimizers/adamw/../../../../../src/data_types/float_vec.h:
+src/optimizers/adamw/../../../../../src/data_types/../mangler/scope_struct.h:
 src/optimizers/adamw/../../../../../src/data_types/nsk_vector.h:
 src/optimizers/adamw/../../../../../src/math/include.h:
 src/optimizers/adamw/../../../../../src/math/functions.h:
@@ -100,6 +106,7 @@ src/optimizers/adamw/../../common/cu_commons.h:
 src/optimizers/adamw/../../cuda_kernels/calculate_grids.h:
 src/optimizers/adamw/../../nsk_cuda/pool/include.h:
 src/optimizers/adamw/../../nsk_cuda/pool/pool_i8.h:
+src/optimizers/adamw/../../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/optimizers/adamw/../../nsk_cuda/pool/pool_i32.h:
 src/optimizers/adamw/../../nsk_cuda/pool/pool.h:
 src/optimizers/adamw/../../tensor/tensor_dim_functions.h:
@@ -110,6 +117,7 @@ src/optimizers/adamw/../../tensor/tensor_struct.h:
 src/optimizers/adamw/../../tensor/../cuda_threads/include.h:
 src/optimizers/adamw/../../tensor/../cuda_threads/threads.h:
 src/optimizers/adamw/../../tensor/../nsk_cuda/minimal_tensor.h:
+src/optimizers/adamw/../../tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/optimizers/adamw/../../tensor/../nsk_cuda/pool/include.h:
 src/optimizers/adamw/../common.h:
 src/optimizers/adamw/../interface.h:

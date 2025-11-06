@@ -17,7 +17,7 @@ extern "C" DT_tensor *logE(Scope_Struct *scope_struct, int thread_id, DT_tensor 
   int kDataLen = tensor.dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar sub");
 
 
   int grid_size, block_size;
@@ -39,7 +39,7 @@ extern "C" DT_tensor *logE2(Scope_Struct *scope_struct, int thread_id, DT_tensor
   int kDataLen = tensor.dims_prod;
 
 
-  float* device_y = get_from_pool(thread_id, kDataLen, "scalar sub");
+  float* device_y = get_from_pool(scope_struct, thread_id, kDataLen, "scalar sub");
 
 
   int grid_size, block_size;
@@ -61,7 +61,7 @@ extern "C" DT_tensor *clip(Scope_Struct *scope_struct, int thread_id, DT_tensor 
   
   int B = DimsProd(dims);
 
-  float* device_y = get_from_pool(thread_id, B,"clip");
+  float* device_y = get_from_pool(scope_struct, thread_id, B,"clip");
 
 
   int grid_size = B;

@@ -56,7 +56,7 @@ int round_to_nearest_pow2(int x) {
 
 
 
-float *get_from_pool(int thread_id, int dims_prod, std::string from, bool is_new)
+float *get_from_pool(Scope_Struct *scope_struct, int thread_id, int dims_prod, std::string from, bool is_new)
 {
 
   if (dims_prod==0)
@@ -64,9 +64,11 @@ float *get_from_pool(int thread_id, int dims_prod, std::string from, bool is_new
 
   dims_prod = round_to_nearest_pow2(dims_prod);
 
-  // if (dims_prod==64)
-  //   std::cout << "*************Get " << from << ".\n";
+  // if (dims_prod==8192)
+  //   std::cout << "*************Get " << dims_prod << " from " << from << ".\n";
 
+  if (scope_struct!=nullptr)
+    alloc_gc_vspace(scope_struct, dims_prod*sizeof(float));
 
   float *tensor_ptr;
 
@@ -83,12 +85,13 @@ float *get_from_pool(int thread_id, int dims_prod, std::string from, bool is_new
     }
   }
 
-  // if (dims_prod==8192||dims_prod==64||dims_prod==32||dims_prod==1)
-  // if (dims_prod==32768)
+  // if (dims_prod==8192)
   std::cout << "Thread " << thread_id << ".\t\tMalloc new space from " << from << " of size: " << dims_prod << ", at thread: " << thread_id << "\n";
+
   // std::cout << "Malloc new space from " << from << " of size: " << dims_prod << ", at thread: " << thread_id << "\n";
 
   cudaCheck(cudaMalloc(&tensor_ptr, dims_prod*sizeof(float)));
+
   return tensor_ptr;
 }
 
@@ -99,7 +102,7 @@ void move_to_pool(int thread_id, int dims_prod, float *tensor_ptr, std::string f
     return;
   dims_prod = round_to_nearest_pow2(dims_prod);
 
-  // if (dims_prod==32768)
+  // if (dims_prod==8192)
   //   std::cout << "Thread " << thread_id << ".\t\t\tMove to pool size " << dims_prod << " from " << from << ".\n";
   
 

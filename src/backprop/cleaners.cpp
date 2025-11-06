@@ -45,99 +45,6 @@ void save_from_pool(DT_tensor *tensor_ptr)
 
 
 
-void to_pool_forward(int dims_prod, float *tensor_ptr, std::string scope, std::string from)
-{
-  if (!in_float_ptr_vec(tensor_ptr, forward_tensors_sent_to_pool[scope]))
-  {
-    forward_tensors_to_pool[scope].push_back(std::make_tuple(dims_prod, tensor_ptr, from));
-    forward_tensors_sent_to_pool[scope].push_back(tensor_ptr);
-  }
-}
-
-
-void to_free_tensor_threaded(DT_tensor *tensor_ptr, std::string scope, int thread_id)
-{
-  if(!in_tensor_ptr_vec(tensor_ptr, threaded_Tensors_to_free[thread_id][scope]) && !in_tensor_ptr_vec(tensor_ptr, threaded_Tensors_to_save[thread_id][scope]))
-    threaded_Tensors_to_free[thread_id][scope].push_back(tensor_ptr);
-}
-void to_pool_threaded(int dims_prod, float *tensor_ptr, std::string scope, int thread_id, std::string from)
-{
-  if (!in_float_ptr_vec(tensor_ptr, threaded_tensors_sent_to_pool[thread_id][scope]) && !in_float_ptr_vec(tensor_ptr, threaded_tensors_to_save[thread_id][scope]))
-  {
-    threaded_tensors_to_pool[thread_id][scope].push_back(std::make_tuple(dims_prod, tensor_ptr, from));
-    threaded_tensors_sent_to_pool[thread_id][scope].push_back(tensor_ptr);
-  }
-}
-
-
-
-void ThreadedCleanupToPool(DT_tensor *back_node, std::string scope, int thread_id)
-{
-  if(back_node==nullptr||back_node->weight)
-    return;
-  //std::cout << "-----Clean threaeded " << back_node->name << "\n";
-  
-
-  
-
-  ThreadedCleanupToPool(back_node->L_Node, scope, thread_id);
-  ThreadedCleanupToPool(back_node->R_Node, scope, thread_id);
-
-  
-  to_pool_threaded(back_node->dims_prod, back_node->tensor_ptr, scope, thread_id, "");
-  to_free_tensor_threaded(back_node, scope, thread_id);
-}
-
-void CleanThreadTensors(std::string scope, int thread_id)
-{
-  for(DT_tensor *tensor : threaded_Tensors_to_free[thread_id][scope])
-    delete tensor;
-
-  std::vector<float*> scope_tensors_ptrs;
-  
-
-  for(std::tuple<int, float *, std::string> pair : threaded_tensors_to_pool[thread_id][scope])
-    move_to_pool(thread_id, std::get<0>(pair), std::get<1>(pair), std::get<2>(pair));
-
-
-  threaded_Tensors_to_free[thread_id][scope].clear();
-  threaded_tensors_to_pool[thread_id][scope].clear();
-  threaded_tensors_sent_to_pool[thread_id][scope].clear();
-
-  threaded_Tensors_to_free[thread_id].erase(scope);
-  threaded_tensors_to_pool[thread_id].erase(scope);
-  threaded_tensors_sent_to_pool[thread_id].erase(scope);
-}
-
-
-
-int DoesTreeContainWeight(DT_tensor *back_node)
-{
-  if(back_node==nullptr)
-    return 0;
-  
-  if(back_node->weight)
-    return 1;
-
-  //if(in_int(back_node->op, activation_ops))
-  //  return 1;
-  
-  return DoesTreeContainWeight(back_node->L_Node) + DoesTreeContainWeight(back_node->R_Node);
-}
-
-
-void ForwardCleanupToPool(DT_tensor *back_node, std::string scope)
-{
-  if(back_node==nullptr||back_node->weight)
-    return;
-  
-  ForwardCleanupToPool(back_node->L_Node, scope);
-  ForwardCleanupToPool(back_node->R_Node, scope);
-  
-  to_pool_forward(back_node->dims_prod, back_node->tensor_ptr, scope, "");
-}
-
-
 
 
 
@@ -147,6 +54,7 @@ void CleanTree_Backprop(DT_tensor *back_node) {
     return;
   // if(!back_node->is_grad_candidate)
   //   printf("--------------------------------------------\nAVOID BACKPROP TREE CLEAN CAUSE NOT GRAD\n");
+
   // if (back_node->weight||!back_node->is_grad_candidate)
   if (back_node->weight)
     return;
@@ -159,7 +67,7 @@ void CleanTree_Backprop(DT_tensor *back_node) {
   float dims_prod = back_node->dims_prod;
   to_pool(dims_prod, back_node->tensor_ptr, "CleanTree leaf tensor"); 
 
-  if (!back_node->is_last_version)
+  if (!back_node->is_last_version && (back_node->is_grad_candidate&&back_node->parent_is_grad_candidate))
     to_free_tensor(back_node);
 }
 

@@ -24,6 +24,8 @@ obj/initialize/initialize.o: src/initialize/initialize.cu \
   src/initialize/../backprop/../../../../src/compiler_frontend/logging_v.h \
   src/initialize/../backprop/../../../../src/compiler_frontend/global_vars.h \
   src/initialize/../backprop/../../../../src/data_types/codegen_notes.h \
+  src/initialize/../backprop/../../../../src/data_types/float_vec.h \
+  src/initialize/../backprop/../../../../src/data_types/../mangler/scope_struct.h \
   src/initialize/../backprop/../../../../src/data_types/nsk_vector.h \
   src/initialize/../backprop/../../../../src/math/include.h \
   src/initialize/../backprop/../../../../src/math/functions.h \
@@ -45,8 +47,10 @@ obj/initialize/initialize.o: src/initialize/initialize.cu \
   src/initialize/../backprop/../tensor/../cuda_threads/include.h \
   src/initialize/../backprop/../tensor/../cuda_threads/threads.h \
   src/initialize/../backprop/../tensor/../nsk_cuda/minimal_tensor.h \
+  src/initialize/../backprop/../tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/initialize/../backprop/../tensor/../nsk_cuda/pool/include.h \
   src/initialize/../backprop/../tensor/../nsk_cuda/pool/pool_i8.h \
+  src/initialize/../backprop/../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/initialize/../backprop/../tensor/../nsk_cuda/pool/pool_i32.h \
   src/initialize/../backprop/../tensor/../nsk_cuda/pool/pool.h \
   src/initialize/../cuda_kernels/include.h \
@@ -127,6 +131,8 @@ src/initialize/../backprop/../../../../src/compiler_frontend/logging_execution.h
 src/initialize/../backprop/../../../../src/compiler_frontend/logging_v.h:
 src/initialize/../backprop/../../../../src/compiler_frontend/global_vars.h:
 src/initialize/../backprop/../../../../src/data_types/codegen_notes.h:
+src/initialize/../backprop/../../../../src/data_types/float_vec.h:
+src/initialize/../backprop/../../../../src/data_types/../mangler/scope_struct.h:
 src/initialize/../backprop/../../../../src/data_types/nsk_vector.h:
 src/initialize/../backprop/../../../../src/math/include.h:
 src/initialize/../backprop/../../../../src/math/functions.h:
@@ -148,8 +154,10 @@ src/initialize/../backprop/../tensor/../../../../src/nsk_cpp.h:
 src/initialize/../backprop/../tensor/../cuda_threads/include.h:
 src/initialize/../backprop/../tensor/../cuda_threads/threads.h:
 src/initialize/../backprop/../tensor/../nsk_cuda/minimal_tensor.h:
+src/initialize/../backprop/../tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/initialize/../backprop/../tensor/../nsk_cuda/pool/include.h:
 src/initialize/../backprop/../tensor/../nsk_cuda/pool/pool_i8.h:
+src/initialize/../backprop/../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/initialize/../backprop/../tensor/../nsk_cuda/pool/pool_i32.h:
 src/initialize/../backprop/../tensor/../nsk_cuda/pool/pool.h:
 src/initialize/../cuda_kernels/include.h:

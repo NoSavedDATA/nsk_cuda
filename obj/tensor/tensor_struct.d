@@ -23,6 +23,8 @@ obj/tensor/tensor_struct.o: src/tensor/tensor_struct.cu \
   src/tensor/../../../../src/compiler_frontend/logging_v.h \
   src/tensor/../../../../src/compiler_frontend/global_vars.h \
   src/tensor/../../../../src/data_types/codegen_notes.h \
+  src/tensor/../../../../src/data_types/float_vec.h \
+  src/tensor/../../../../src/data_types/../mangler/scope_struct.h \
   src/tensor/../../../../src/data_types/nsk_vector.h \
   src/tensor/../../../../src/math/include.h \
   src/tensor/../../../../src/math/functions.h \
@@ -40,8 +42,10 @@ obj/tensor/tensor_struct.o: src/tensor/tensor_struct.cu \
   src/tensor/../../../../src/pool/pool.h \
   src/tensor/../../../../src/threads/include.h \
   src/tensor/../nsk_cuda/minimal_tensor.h \
+  src/tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/tensor/../nsk_cuda/pool/include.h \
   src/tensor/../nsk_cuda/pool/pool_i8.h \
+  src/tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/tensor/../nsk_cuda/pool/pool_i32.h \
   src/tensor/../nsk_cuda/pool/pool.h src/tensor/tensor_dim_functions.h \
   src/tensor/include.h src/tensor/print.h src/tensor/tensor_struct.h \
@@ -71,6 +75,8 @@ src/tensor/../../../../src/compiler_frontend/logging_execution.h:
 src/tensor/../../../../src/compiler_frontend/logging_v.h:
 src/tensor/../../../../src/compiler_frontend/global_vars.h:
 src/tensor/../../../../src/data_types/codegen_notes.h:
+src/tensor/../../../../src/data_types/float_vec.h:
+src/tensor/../../../../src/data_types/../mangler/scope_struct.h:
 src/tensor/../../../../src/data_types/nsk_vector.h:
 src/tensor/../../../../src/math/include.h:
 src/tensor/../../../../src/math/functions.h:
@@ -88,8 +94,10 @@ src/tensor/../../../../src/pool/../mark_sweep/include.h:
 src/tensor/../../../../src/pool/pool.h:
 src/tensor/../../../../src/threads/include.h:
 src/tensor/../nsk_cuda/minimal_tensor.h:
+src/tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/tensor/../nsk_cuda/pool/include.h:
 src/tensor/../nsk_cuda/pool/pool_i8.h:
+src/tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/tensor/../nsk_cuda/pool/pool_i32.h:
 src/tensor/../nsk_cuda/pool/pool.h:
 src/tensor/tensor_dim_functions.h:

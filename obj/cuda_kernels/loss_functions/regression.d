@@ -25,6 +25,8 @@ obj/cuda_kernels/loss_functions/regression.o: \
   src/cuda_kernels/loss_functions/../../backprop/../../../../src/compiler_frontend/logging_v.h \
   src/cuda_kernels/loss_functions/../../backprop/../../../../src/compiler_frontend/global_vars.h \
   src/cuda_kernels/loss_functions/../../backprop/../../../../src/data_types/codegen_notes.h \
+  src/cuda_kernels/loss_functions/../../backprop/../../../../src/data_types/float_vec.h \
+  src/cuda_kernels/loss_functions/../../backprop/../../../../src/data_types/../mangler/scope_struct.h \
   src/cuda_kernels/loss_functions/../../backprop/../../../../src/data_types/nsk_vector.h \
   src/cuda_kernels/loss_functions/../../backprop/../../../../src/math/include.h \
   src/cuda_kernels/loss_functions/../../backprop/../../../../src/math/functions.h \
@@ -48,8 +50,10 @@ obj/cuda_kernels/loss_functions/regression.o: \
   src/cuda_kernels/loss_functions/../../backprop/../tensor/../cuda_threads/include.h \
   src/cuda_kernels/loss_functions/../../backprop/../tensor/../cuda_threads/threads.h \
   src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/minimal_tensor.h \
+  src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/../../../../src/nsk_cpp.h \
   src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/include.h \
   src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/pool_i8.h \
+  src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/pool_i32.h \
   src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/pool.h \
   src/cuda_kernels/loss_functions/../../backprop/../tensor/tensor_dim_functions.h \
@@ -89,6 +93,8 @@ src/cuda_kernels/loss_functions/../../backprop/../../../../src/compiler_frontend
 src/cuda_kernels/loss_functions/../../backprop/../../../../src/compiler_frontend/logging_v.h:
 src/cuda_kernels/loss_functions/../../backprop/../../../../src/compiler_frontend/global_vars.h:
 src/cuda_kernels/loss_functions/../../backprop/../../../../src/data_types/codegen_notes.h:
+src/cuda_kernels/loss_functions/../../backprop/../../../../src/data_types/float_vec.h:
+src/cuda_kernels/loss_functions/../../backprop/../../../../src/data_types/../mangler/scope_struct.h:
 src/cuda_kernels/loss_functions/../../backprop/../../../../src/data_types/nsk_vector.h:
 src/cuda_kernels/loss_functions/../../backprop/../../../../src/math/include.h:
 src/cuda_kernels/loss_functions/../../backprop/../../../../src/math/functions.h:
@@ -112,8 +118,10 @@ src/cuda_kernels/loss_functions/../../backprop/../tensor/tensor_struct.h:
 src/cuda_kernels/loss_functions/../../backprop/../tensor/../cuda_threads/include.h:
 src/cuda_kernels/loss_functions/../../backprop/../tensor/../cuda_threads/threads.h:
 src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/minimal_tensor.h:
+src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/../../../../src/nsk_cpp.h:
 src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/include.h:
 src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/pool_i8.h:
+src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/pool_i32.h:
 src/cuda_kernels/loss_functions/../../backprop/../tensor/../nsk_cuda/pool/pool.h:
 src/cuda_kernels/loss_functions/../../backprop/../tensor/tensor_dim_functions.h:
