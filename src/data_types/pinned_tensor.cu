@@ -181,3 +181,11 @@ extern "C" int pinned_tensor_CalculateIdx(DT_tensor *tensor, int first_idx, ...)
 
 
 
+extern "C" void pinned_tensor_Clean_Up(void *ptr) {
+  DT_tensor *dptr = static_cast<DT_tensor *>(ptr);
+
+  cudaFree(dptr->tensor_ptr);
+  cudaFreeHost(dptr->cpu_tensor_ptr);
+
+  free(dptr);
+}

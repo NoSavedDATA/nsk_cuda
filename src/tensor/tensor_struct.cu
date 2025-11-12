@@ -92,7 +92,7 @@ void DT_tensor::NewTensor(half *new_tensor_ptr, std::vector<int> new_dims, int n
 
 void DT_tensor::NewPinned(float *new_tensor_ptr, float *new_cpu_tensor_ptr,
               std::vector<int> new_dims, int new_dims_prod,
-              bool new_is_leaf, std::string new_name){
+              bool new_is_leaf, std::string new_name) {
   tensor_ptr = new_tensor_ptr;
   cpu_tensor_ptr = new_cpu_tensor_ptr;
   dims = new_dims;

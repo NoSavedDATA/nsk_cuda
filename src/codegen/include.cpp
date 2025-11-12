@@ -97,7 +97,8 @@ void set_infer_worklist(Scope_Struct *scope_struct, void *obj_ptr, std::string o
 
 extern "C" float infer_mode(Scope_Struct *scope_struct, void *obj_ptr)
 {
-  for (const GC_Node &node : scope_struct->gc.pointer_nodes) {
+  Scope_Struct *inner_most = get_inner_most_scope(scope_struct);
+  for (const GC_Node &node : inner_most->gc.pointer_nodes) {
     if (node.ptr==obj_ptr) {
       for (int i=0; i<ClassPointers[node.type].size(); ++i) {
         std::string obj_type = ClassPointersType[node.type][i];

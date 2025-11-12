@@ -342,9 +342,7 @@ extern "C" float backprop(Scope_Struct *scope_struct)
       else
           ++it;
     }
-
-    Scope_Struct *inner_most = get_inner_most_scope(scope_struct);
-    
+    Scope_Struct *inner_most = get_inner_most_scope(scope_struct);    
     for (auto it = inner_most->gc.pointer_nodes.begin(); it != inner_most->gc.pointer_nodes.end(); ) {
       if (it->ptr == tensor)
           it = inner_most->gc.pointer_nodes.erase(it);
