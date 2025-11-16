@@ -11,6 +11,23 @@ obj/processing/binaries/load.o: src/processing/binaries/load.cpp \
   src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/include.h \
   src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/clean_up.h \
   src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/mark_sweep.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/include.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/allocation.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/pool.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/../mangler/scope_struct.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../include.h \
+  src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h \
   src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/codegen_notes.h \
   src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/nsk_vector.h \
   src/processing/binaries/../../../../../src/char_pool/../threads/lock.h \
@@ -37,6 +54,8 @@ obj/processing/binaries/load.o: src/processing/binaries/load.cpp \
   src/processing/binaries/../../../../../src/os/dir/include.h \
   src/processing/binaries/../../../../../src/os/dir/dir.h \
   src/processing/binaries/../../../../../src/pool/include.h \
+  src/processing/binaries/../../../../../src/pool/../compiler_frontend/global_vars.h \
+  src/processing/binaries/../../../../../src/pool/../compiler_frontend/logging_v.h \
   src/processing/binaries/../../../../../src/pool/../mangler/scope_struct.h \
   src/processing/binaries/../../../../../src/pool/../mark_sweep/include.h \
   src/processing/binaries/../../../../../src/pool/pool.h \
@@ -96,6 +115,23 @@ src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/..
 src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/include.h:
 src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/clean_up.h:
 src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/mark_sweep.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/include.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/allocation.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/pool.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/../mangler/scope_struct.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../include.h:
+src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h:
 src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/codegen_notes.h:
 src/processing/binaries/../../../../../src/char_pool/../threads/../data_types/nsk_vector.h:
 src/processing/binaries/../../../../../src/char_pool/../threads/lock.h:
@@ -122,6 +158,8 @@ src/processing/binaries/../../../../../src/os/include.h:
 src/processing/binaries/../../../../../src/os/dir/include.h:
 src/processing/binaries/../../../../../src/os/dir/dir.h:
 src/processing/binaries/../../../../../src/pool/include.h:
+src/processing/binaries/../../../../../src/pool/../compiler_frontend/global_vars.h:
+src/processing/binaries/../../../../../src/pool/../compiler_frontend/logging_v.h:
 src/processing/binaries/../../../../../src/pool/../mangler/scope_struct.h:
 src/processing/binaries/../../../../../src/pool/../mark_sweep/include.h:
 src/processing/binaries/../../../../../src/pool/pool.h:

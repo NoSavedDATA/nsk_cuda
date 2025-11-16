@@ -201,6 +201,8 @@ DT_tensor *wrapTensorWithDetached(Scope_Struct *, DT_tensor* tensor);
 
 bool in_tensor_ptr_vec(DT_tensor *value, const std::vector<DT_tensor *>& list);
 
+void set_grad_candidate(Scope_Struct *, DT_tensor *, bool);
+
 
 extern std::unordered_map<std::string, DT_tensor *> NamedTensorsT;
 extern std::map<std::string, std::vector<float>> NamedDims;

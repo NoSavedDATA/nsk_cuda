@@ -39,11 +39,8 @@ extern "C" DT_tensor *float_vec_to_tensor(Scope_Struct *scope_struct, DT_float_v
 
 extern "C" DT_tensor *tensor_Create(Scope_Struct *scope_struct, char *tensor_name, char *scopeless_name, DT_tensor *init_val, DT_list *notes_vector)
 {
-  
   // if (notes_vector->data->size()>0)
   // {
-
-  
     int thread_id = scope_struct->thread_id;
     // std::cout << "CREATING TENSOR " << tensor_name << " AT THREAD: " << thread_id << "\n";
 
@@ -196,7 +193,7 @@ extern "C" DT_tensor *tensor_Copy(Scope_Struct *scope_struct, DT_tensor *tensor)
 
   DT_tensor *new_tensor = createTensor(scope_struct, arg_tensor, dims, dims_prod, true, arg_tensor_name, tensor->cuda_stream, tensor->loader);
   new_tensor->scopeless_name = tensor->scopeless_name;
-  new_tensor->is_grad_candidate = tensor->is_grad_candidate;
+  set_grad_candidate(scope_struct, new_tensor, tensor->is_grad_candidate);
 
   
 
@@ -232,8 +229,7 @@ extern "C" void *tensor_StoreTrigger(char *tensor_name, DT_tensor *stored_tensor
   stored_tensor->is_last_version = false;
 
   // View op
-  if (tensor->view_of == tensor_name)
-  {
+  if (tensor->view_of == tensor_name) {
     stored_tensor->dims = tensor->dims;
     tensor = stored_tensor;
   }
@@ -243,7 +239,7 @@ extern "C" void *tensor_StoreTrigger(char *tensor_name, DT_tensor *stored_tensor
     if(is_grad_candidate&&thread_id==0) {
       create_backward_tensor(scope_struct, scopeless_name, tensor);
       tensor = createTensor(scope_struct, tensor->tensor_ptr, tensor->dims, tensor->dims_prod, true, tensor_name, stored_tensor->cuda_stream, stored_tensor->loader);
-      tensor->is_grad_candidate = is_grad_candidate;
+      set_grad_candidate(scope_struct, tensor, is_grad_candidate);
     }
   }
   tensor->scopeless_name = scopeless_name;
@@ -269,10 +265,7 @@ extern "C" void tensor_Clean_Up(void *data_ptr) {
   // if(tensor->thread_id!=0)
   //   printf("----------Cleaning tensor from thread %d\n", tensor->thread_id);
 
-  // if(tensor->is_grad_candidate)
-  //   PrintDims(tensor->dims);
 
-  // if (!(tensor->is_grad_candidate))
   if (!(tensor->is_grad_candidate||tensor->parent_is_grad_candidate))
   {
     // if (tensor->scopeless_name=="y") {
@@ -282,7 +275,6 @@ extern "C" void tensor_Clean_Up(void *data_ptr) {
 
     if(tensor->op!=view_op)
       move_to_pool(tensor->thread_id, tensor->dims_prod, tensor->tensor_ptr, "tensor_Clean_Up");
-    free(tensor);
   }
 }
 
@@ -612,7 +604,7 @@ extern "C" void *tensor_CopyArg(Scope_Struct *scope_struct, DT_tensor *tensor, c
   
 
   DT_tensor *new_tensor = createTensor(scope_struct, tensor_ptr, dims, dims_prod, true, tensor->name, tensor->cuda_stream, tensor->loader);
-  new_tensor->is_grad_candidate = tensor->is_grad_candidate;
+  set_grad_candidate(scope_struct, new_tensor, tensor->is_grad_candidate);
   new_tensor->scopeless_name = tensor->scopeless_name;
   return new_tensor;
 }

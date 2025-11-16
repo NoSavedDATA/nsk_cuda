@@ -33,7 +33,6 @@ inline void HandleLeafGradient(Scope_Struct *scope_struct, DT_tensor *back_node,
   to_pool(dims_prod, back_node->tensor_ptr, "leaf tensor"); 
   // std::cout << "Adding " << tensor_name << ".\n";
   
-  // if (!back_node->is_last_version && (back_node->is_grad_candidate)) {
 
   if (!back_node->is_last_version && (back_node->is_grad_candidate||back_node->parent_is_grad_candidate))
     to_free_tensor(back_node);
@@ -114,8 +113,6 @@ void TraversePreOrder(Scope_Struct *scope_struct, DT_tensor *back_node, float *d
 {
   if(back_node==nullptr)
     return;
-  // if(!back_node->is_grad_candidate)
-  //   return;
 
 
   int op=back_node->op;
@@ -125,12 +122,6 @@ void TraversePreOrder(Scope_Struct *scope_struct, DT_tensor *back_node, float *d
   d_rhs=nullptr;
   int dims_prod = back_node->dims_prod;
 
-  // if (!back_node->is_grad_candidate)
-  // {
-  //   if(device_dy!=nullptr)
-  //     to_pool(dims_prod, device_dy, "dy from no grad candidate");
-  //   return;
-  // }
 
   
 
@@ -275,7 +266,6 @@ void TraversePreOrder(Scope_Struct *scope_struct, DT_tensor *back_node, float *d
     to_pool(dims_prod, device_dy, _op);
 
   if (!back_node->weight) {
-    // std::cout << "" << back_node->is_grad_candidate << "/" << back_node->parent_is_grad_candidate << ".\n";
     to_free_tensor(back_node);
   }
 }
@@ -336,20 +326,23 @@ extern "C" float backprop(Scope_Struct *scope_struct)
 
   for(DT_tensor *tensor : backprop_Tensors_to_free) {
     // std::cout << "Delete tensor " << tensor->scopeless_name << ".\n";
-    for (auto it = scope_struct->gc.pointer_nodes.begin(); it != scope_struct->gc.pointer_nodes.end(); ) {
-      if (it->ptr == tensor)
-          it = scope_struct->gc.pointer_nodes.erase(it);
-      else
-          ++it;
-    }
-    Scope_Struct *inner_most = get_inner_most_scope(scope_struct);    
-    for (auto it = inner_most->gc.pointer_nodes.begin(); it != inner_most->gc.pointer_nodes.end(); ) {
-      if (it->ptr == tensor)
-          it = inner_most->gc.pointer_nodes.erase(it);
-      else
-          ++it;
-    }
-    delete tensor;
+    // for (auto it = scope_struct->gc.pointer_nodes.begin(); it != scope_struct->gc.pointer_nodes.end(); ) {
+    //   if (it->ptr == tensor)
+    //       it = scope_struct->gc.pointer_nodes.erase(it);
+    //   else
+    //       ++it;
+    // }
+    // Scope_Struct *inner_most = get_inner_most_scope(scope_struct);    
+    // for (auto it = inner_most->gc.pointer_nodes.begin(); it != inner_most->gc.pointer_nodes.end(); ) {
+    //   if (it->ptr == tensor)
+    //       it = inner_most->gc.pointer_nodes.erase(it);
+    //   else
+    //       ++it;
+    // }
+    // delete tensor;
+    if (!unprotect_pool_addr(scope_struct, tensor))
+      delete tensor;
+    
   }
 
   for(std::tuple<int, float *, std::string> pair : backprop_tensors_to_pool)

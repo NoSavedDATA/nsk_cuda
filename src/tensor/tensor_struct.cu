@@ -186,13 +186,19 @@ void DT_tensor::Sync()
 }
 
 
+void set_grad_candidate(Scope_Struct *scope_struct, DT_tensor *tensor, bool has_grad) {
+  tensor->is_grad_candidate = has_grad;
+  if (has_grad)
+    protect_pool_addr(scope_struct, tensor);
+}
 
 DT_tensor *createTensor(Scope_Struct *scope_struct, float* tensor_ptr, const std::vector<int>& dims, int kDataLen,
-                     bool is_leaf, std::string name, cudaStream_t cuda_stream, Loader *_loader) {
-    DT_tensor *new_tensor = newT<DT_tensor>(scope_struct, "tensor");  
-    new_tensor->NewTensor(tensor_ptr, dims, kDataLen, is_leaf, name, cuda_stream, _loader);
+                     bool is_leaf, std::string name, cudaStream_t cuda_stream, Loader *_loader)
+{
+  DT_tensor *new_tensor = newT<DT_tensor>(scope_struct, "tensor");  
+  new_tensor->NewTensor(tensor_ptr, dims, kDataLen, is_leaf, name, cuda_stream, _loader);
 
-    return new_tensor;
+  return new_tensor;
 }
 
 

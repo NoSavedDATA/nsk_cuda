@@ -186,6 +186,4 @@ extern "C" void pinned_tensor_Clean_Up(void *ptr) {
 
   cudaFree(dptr->tensor_ptr);
   cudaFreeHost(dptr->cpu_tensor_ptr);
-
-  free(dptr);
 }

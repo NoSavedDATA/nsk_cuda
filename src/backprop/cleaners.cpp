@@ -52,10 +52,6 @@ void CleanTree_Backprop(DT_tensor *back_node) {
   // Avoid calling CleanTree separatly. As this has the overhead of going throughout the tree multiple times.
   if (back_node==nullptr)
     return;
-  // if(!back_node->is_grad_candidate)
-  //   printf("--------------------------------------------\nAVOID BACKPROP TREE CLEAN CAUSE NOT GRAD\n");
-
-  // if (back_node->weight||!back_node->is_grad_candidate)
   if (back_node->weight)
     return;
   

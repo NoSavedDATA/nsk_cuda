@@ -59,6 +59,7 @@ int round_to_nearest_pow2(int x) {
 float *get_from_pool(Scope_Struct *scope_struct, int thread_id, int dims_prod, std::string from, bool is_new)
 {
 
+
   if (dims_prod==0)
     return nullptr;
 
@@ -67,6 +68,8 @@ float *get_from_pool(Scope_Struct *scope_struct, int thread_id, int dims_prod, s
   // if (dims_prod==8192)
   //   std::cout << "*************Get " << dims_prod << " from " << from << ".\n";
 
+  if (dims_prod<0)
+    std::cout << "-->Get tensor of size " << dims_prod << ".\n";
   if (scope_struct!=nullptr)
     alloc_gc_vspace(scope_struct, dims_prod*sizeof(float));
 

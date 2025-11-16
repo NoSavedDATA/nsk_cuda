@@ -16,6 +16,23 @@ obj/cuda_kernels/min_max_sample.o: src/cuda_kernels/min_max_sample.cu \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/include.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/clean_up.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/mark_sweep.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/include.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/allocation.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/pool.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/../mangler/scope_struct.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../include.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/codegen_notes.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/nsk_vector.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/lock.h \
@@ -42,6 +59,8 @@ obj/cuda_kernels/min_max_sample.o: src/cuda_kernels/min_max_sample.cu \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/os/dir/include.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/os/dir/dir.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/include.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/../compiler_frontend/global_vars.h \
+  src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/../compiler_frontend/logging_v.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/../mangler/scope_struct.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/../mark_sweep/include.h \
   src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/pool.h \
@@ -79,6 +98,23 @@ src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../dat
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/include.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/clean_up.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/mark_sweep.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/include.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/allocation.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/pool.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/../mangler/scope_struct.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../include.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/codegen_notes.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/nsk_vector.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/char_pool/../threads/lock.h:
@@ -105,6 +141,8 @@ src/cuda_kernels/../nsk_cuda/pool/../../../../../src/os/include.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/os/dir/include.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/os/dir/dir.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/include.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/../compiler_frontend/global_vars.h:
+src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/../compiler_frontend/logging_v.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/../mangler/scope_struct.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/../mark_sweep/include.h:
 src/cuda_kernels/../nsk_cuda/pool/../../../../../src/pool/pool.h:
