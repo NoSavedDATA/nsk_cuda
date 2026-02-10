@@ -1,11 +1,22 @@
 obj/backprop/cleaners.o: src/backprop/cleaners.cpp \
   src/backprop/../nsk_cuda/pool/include.h \
   src/backprop/../nsk_cuda/pool/pool_i8.h \
-  /usr/local/cuda-12.1/include/cuda_fp16.h \
-  /usr/local/cuda-12.1/include/cuda_fp16.hpp \
-  /usr/local/cuda-12.1/include/nv/target \
-  /usr/local/cuda-12.1/include/nv/detail/__target_macros \
-  /usr/local/cuda-12.1/include/nv/detail/__preprocessor \
+  /nsk/lib/cuda-12.2/include/cuda_fp16.h \
+  /nsk/lib/cuda-12.2/include/vector_types.h \
+  /nsk/lib/cuda-12.2/include/crt/host_defines.h \
+  /nsk/lib/cuda-12.2/include/vector_functions.h \
+  /nsk/lib/cuda-12.2/include/cuda_runtime_api.h \
+  /nsk/lib/cuda-12.2/include/builtin_types.h \
+  /nsk/lib/cuda-12.2/include/device_types.h \
+  /nsk/lib/cuda-12.2/include/driver_types.h \
+  /nsk/lib/cuda-12.2/include/surface_types.h \
+  /nsk/lib/cuda-12.2/include/texture_types.h \
+  /nsk/lib/cuda-12.2/include/cuda_device_runtime_api.h \
+  /nsk/lib/cuda-12.2/include/vector_functions.hpp \
+  /nsk/lib/cuda-12.2/include/cuda_fp16.hpp \
+  /nsk/lib/cuda-12.2/include/nv/target \
+  /nsk/lib/cuda-12.2/include/nv/detail/__target_macros \
+  /nsk/lib/cuda-12.2/include/nv/detail/__preprocessor \
   src/backprop/../nsk_cuda/pool/../../../../../src/nsk_cpp.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/include.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/char_pool.h \
@@ -23,11 +34,6 @@ obj/backprop/cleaners.o: src/backprop/cleaners.cpp \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h \
-  src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h \
-  src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h \
-  src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h \
-  src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h \
-  src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h \
@@ -37,6 +43,7 @@ obj/backprop/cleaners.o: src/backprop/cleaners.cpp \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/codegen_notes.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/nsk_vector.h \
+  src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/int_vec.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/lock.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/utils.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/clean_up/include.h \
@@ -47,8 +54,11 @@ obj/backprop/cleaners.o: src/backprop/cleaners.cpp \
   src/backprop/../nsk_cuda/pool/../../../../../src/compiler_frontend/logging_v.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/compiler_frontend/global_vars.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/data_types/codegen_notes.h \
+  src/backprop/../nsk_cuda/pool/../../../../../src/data_types/array.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/data_types/float_vec.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/data_types/../mangler/scope_struct.h \
+  src/backprop/../nsk_cuda/pool/../../../../../src/data_types/map.h \
+  src/backprop/../nsk_cuda/pool/../../../../../src/data_types/../compiler_frontend/logging_v.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/data_types/nsk_vector.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/math/include.h \
   src/backprop/../nsk_cuda/pool/../../../../../src/math/functions.h \
@@ -71,31 +81,21 @@ obj/backprop/cleaners.o: src/backprop/cleaners.cpp \
   src/backprop/../nsk_cuda/pool/pool.h \
   src/backprop/../nsk_cuda/utils/include.h \
   src/backprop/../nsk_cuda/utils/extension_f.h \
-  /usr/local/cuda-12.1/include/cublas_v2.h \
-  /usr/local/cuda-12.1/include/cublas_api.h \
-  /usr/local/cuda-12.1/include/driver_types.h \
-  /usr/local/cuda-12.1/include/cuComplex.h \
-  /usr/local/cuda-12.1/include/vector_types.h \
-  /usr/local/cuda-12.1/include/cuda_bf16.h \
-  /usr/local/cuda-12.1/include/cuda_bf16.hpp \
-  /usr/local/cuda-12.1/include/library_types.h \
+  /nsk/lib/cuda-12.2/include/cublas_v2.h \
+  /nsk/lib/cuda-12.2/include/cublas_api.h \
+  /nsk/lib/cuda-12.2/include/cuComplex.h \
+  /nsk/lib/cuda-12.2/include/cuda_bf16.h \
+  /nsk/lib/cuda-12.2/include/cuda_bf16.hpp \
+  /nsk/lib/cuda-12.2/include/library_types.h \
   src/backprop/../nsk_cuda/utils/logging.h src/backprop/cleaners.h \
   src/backprop/include.h src/backprop/../../../../src/nsk_cpp.h \
   src/backprop/../tensor/include.h \
   src/backprop/../tensor/../../../../src/nsk_cpp.h \
   src/backprop/../tensor/print.h src/backprop/../tensor/tensor_struct.h \
-  /usr/local/cuda-12.1/include/cuda_runtime.h \
-  /usr/local/cuda-12.1/include/crt/host_config.h \
-  /usr/local/cuda-12.1/include/builtin_types.h \
-  /usr/local/cuda-12.1/include/device_types.h \
-  /usr/local/cuda-12.1/include/surface_types.h \
-  /usr/local/cuda-12.1/include/texture_types.h \
-  /usr/local/cuda-12.1/include/channel_descriptor.h \
-  /usr/local/cuda-12.1/include/cuda_runtime_api.h \
-  /usr/local/cuda-12.1/include/driver_functions.h \
-  /usr/local/cuda-12.1/include/crt/host_defines.h \
-  /usr/local/cuda-12.1/include/vector_functions.h \
-  /usr/local/cuda-12.1/include/vector_functions.hpp \
+  /nsk/lib/cuda-12.2/include/cuda_runtime.h \
+  /nsk/lib/cuda-12.2/include/crt/host_config.h \
+  /nsk/lib/cuda-12.2/include/channel_descriptor.h \
+  /nsk/lib/cuda-12.2/include/driver_functions.h \
   src/backprop/../tensor/../cuda_threads/include.h \
   src/backprop/../tensor/../cuda_threads/threads.h \
   src/backprop/../tensor/../nsk_cuda/minimal_tensor.h \
@@ -104,11 +104,22 @@ obj/backprop/cleaners.o: src/backprop/cleaners.cpp \
   src/backprop/../tensor/tensor_dim_functions.h src/backprop/backprop.h
 src/backprop/../nsk_cuda/pool/include.h:
 src/backprop/../nsk_cuda/pool/pool_i8.h:
-/usr/local/cuda-12.1/include/cuda_fp16.h:
-/usr/local/cuda-12.1/include/cuda_fp16.hpp:
-/usr/local/cuda-12.1/include/nv/target:
-/usr/local/cuda-12.1/include/nv/detail/__target_macros:
-/usr/local/cuda-12.1/include/nv/detail/__preprocessor:
+/nsk/lib/cuda-12.2/include/cuda_fp16.h:
+/nsk/lib/cuda-12.2/include/vector_types.h:
+/nsk/lib/cuda-12.2/include/crt/host_defines.h:
+/nsk/lib/cuda-12.2/include/vector_functions.h:
+/nsk/lib/cuda-12.2/include/cuda_runtime_api.h:
+/nsk/lib/cuda-12.2/include/builtin_types.h:
+/nsk/lib/cuda-12.2/include/device_types.h:
+/nsk/lib/cuda-12.2/include/driver_types.h:
+/nsk/lib/cuda-12.2/include/surface_types.h:
+/nsk/lib/cuda-12.2/include/texture_types.h:
+/nsk/lib/cuda-12.2/include/cuda_device_runtime_api.h:
+/nsk/lib/cuda-12.2/include/vector_functions.hpp:
+/nsk/lib/cuda-12.2/include/cuda_fp16.hpp:
+/nsk/lib/cuda-12.2/include/nv/target:
+/nsk/lib/cuda-12.2/include/nv/detail/__target_macros:
+/nsk/lib/cuda-12.2/include/nv/detail/__preprocessor:
 src/backprop/../nsk_cuda/pool/../../../../../src/nsk_cpp.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/include.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/char_pool.h:
@@ -126,11 +137,6 @@ src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_ty
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h:
-src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h:
-src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h:
-src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h:
-src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h:
-src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h:
@@ -140,6 +146,7 @@ src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_ty
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/codegen_notes.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/nsk_vector.h:
+src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/../data_types/int_vec.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/lock.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/char_pool/../threads/utils.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/clean_up/include.h:
@@ -150,8 +157,11 @@ src/backprop/../nsk_cuda/pool/../../../../../src/compiler_frontend/logging_execu
 src/backprop/../nsk_cuda/pool/../../../../../src/compiler_frontend/logging_v.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/compiler_frontend/global_vars.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/data_types/codegen_notes.h:
+src/backprop/../nsk_cuda/pool/../../../../../src/data_types/array.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/data_types/float_vec.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/data_types/../mangler/scope_struct.h:
+src/backprop/../nsk_cuda/pool/../../../../../src/data_types/map.h:
+src/backprop/../nsk_cuda/pool/../../../../../src/data_types/../compiler_frontend/logging_v.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/data_types/nsk_vector.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/math/include.h:
 src/backprop/../nsk_cuda/pool/../../../../../src/math/functions.h:
@@ -174,14 +184,12 @@ src/backprop/../nsk_cuda/pool/pool_i32.h:
 src/backprop/../nsk_cuda/pool/pool.h:
 src/backprop/../nsk_cuda/utils/include.h:
 src/backprop/../nsk_cuda/utils/extension_f.h:
-/usr/local/cuda-12.1/include/cublas_v2.h:
-/usr/local/cuda-12.1/include/cublas_api.h:
-/usr/local/cuda-12.1/include/driver_types.h:
-/usr/local/cuda-12.1/include/cuComplex.h:
-/usr/local/cuda-12.1/include/vector_types.h:
-/usr/local/cuda-12.1/include/cuda_bf16.h:
-/usr/local/cuda-12.1/include/cuda_bf16.hpp:
-/usr/local/cuda-12.1/include/library_types.h:
+/nsk/lib/cuda-12.2/include/cublas_v2.h:
+/nsk/lib/cuda-12.2/include/cublas_api.h:
+/nsk/lib/cuda-12.2/include/cuComplex.h:
+/nsk/lib/cuda-12.2/include/cuda_bf16.h:
+/nsk/lib/cuda-12.2/include/cuda_bf16.hpp:
+/nsk/lib/cuda-12.2/include/library_types.h:
 src/backprop/../nsk_cuda/utils/logging.h:
 src/backprop/cleaners.h:
 src/backprop/include.h:
@@ -190,18 +198,10 @@ src/backprop/../tensor/include.h:
 src/backprop/../tensor/../../../../src/nsk_cpp.h:
 src/backprop/../tensor/print.h:
 src/backprop/../tensor/tensor_struct.h:
-/usr/local/cuda-12.1/include/cuda_runtime.h:
-/usr/local/cuda-12.1/include/crt/host_config.h:
-/usr/local/cuda-12.1/include/builtin_types.h:
-/usr/local/cuda-12.1/include/device_types.h:
-/usr/local/cuda-12.1/include/surface_types.h:
-/usr/local/cuda-12.1/include/texture_types.h:
-/usr/local/cuda-12.1/include/channel_descriptor.h:
-/usr/local/cuda-12.1/include/cuda_runtime_api.h:
-/usr/local/cuda-12.1/include/driver_functions.h:
-/usr/local/cuda-12.1/include/crt/host_defines.h:
-/usr/local/cuda-12.1/include/vector_functions.h:
-/usr/local/cuda-12.1/include/vector_functions.hpp:
+/nsk/lib/cuda-12.2/include/cuda_runtime.h:
+/nsk/lib/cuda-12.2/include/crt/host_config.h:
+/nsk/lib/cuda-12.2/include/channel_descriptor.h:
+/nsk/lib/cuda-12.2/include/driver_functions.h:
 src/backprop/../tensor/../cuda_threads/include.h:
 src/backprop/../tensor/../cuda_threads/threads.h:
 src/backprop/../tensor/../nsk_cuda/minimal_tensor.h:

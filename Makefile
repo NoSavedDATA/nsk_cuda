@@ -1,34 +1,31 @@
 CXX := clang++-19
-NXX := nvcc
 CXXFLAGS := -g -O3 -rdynamic -fPIC
-CUDA_PATH := /usr/local/cuda-12.1
+CUDA_PATH := $(abspath ../cuda-12.2)
 CUDA_ARCH := sm_89
 CUDA_ARCH_NVCC := -arch=sm_89
-EIGEN_INCLUDE := /usr/include/eigen3
+#EIGEN_INCLUDE := /usr/include/eigen3
+EIGEN_INCLUDE := $(abspath ../eigen3)
 OPENCV_LIBS := -lopencv_imgcodecs -lopencv_imgproc -lopencv_core
-CUDA_LIBS := -lcudart_static -lcublas -lcublasLt -lcudnn
+CUDA_LIBS := -lcudart -lcublas -lcublasLt -lcudnn
 SYSTEM_LIBS := -ldl -lrt -pthread
 OTHER_FLAGS := -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH -flto -finline-functions -funroll-loops -w
 
 
+
+
 # CUDA flags
 CUDA_CXXFLAGS := -I$(CUDA_PATH)/include --cuda-path=$(CUDA_PATH) --cuda-gpu-arch=$(CUDA_ARCH)
-CUDA_LDFLAGS := -L$(CUDA_PATH)/lib64
+CUDA_LDFLAGS := -L$(CUDA_PATH)/lib64 \
+                -Wl,-rpath,'$$ORIGIN/../cuda-12.2/lib64'
 
 # Combine all flags
 CXXFLAGS += $(CUDA_CXXFLAGS) -I$(EIGEN_INCLUDE) -mavx -w
 LDFLAGS := $(CUDA_LDFLAGS)
 LIBS := $(CUDA_LIBS) $(SYSTEM_LIBS)
 
-NXXFLAGS := $(CUDA_ARCH_NVCC) -I$(EIGEN_INCLUDE) -Xptxas=-v
 
-NVCCFLAGS := -g -lineinfo \
-             -Xcompiler -fPIC \
-             -Xcompiler -rdynamic \
-             -arch=$(CUDA_ARCH) \
-             -I$(SRC_DIR) -I$(EIGEN_INCLUDE) \
-             -I$(CUDA_PATH)/include \
-             $(OTHER_FLAGS)
+
+#CUDA_LDFLAGS := -L$(CUDA_PATH)/lib64
 
 # Directories
 OBJ_DIR = obj
@@ -90,7 +87,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 
 $(SO_FILE): $(CU_OBJ) $(CXX_OBJ)
-	$(CXX) -shared $(CXXFLAGS) $(LDFLAGS) $(CU_OBJ) $(CXX_OBJ) $(LIBS) $(OTHER_FLAGS) -MMD -MP -o $(SO_FILE) -lcudart
+	$(CXX) -shared $(CXXFLAGS) $(LDFLAGS) $(CU_OBJ) $(CXX_OBJ) $(LIBS) $(OTHER_FLAGS) -MMD -MP -o $(SO_FILE)
 	@echo "\033[1;32m\nBuild completed [✓]\n\033[0m"
 	@touch $(BUILD_FLAG)
 

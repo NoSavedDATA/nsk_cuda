@@ -16,7 +16,9 @@
 #include "include.h"
 
 
-
+extern "C" int DT_tensor_size() {
+    return sizeof(DT_tensor);
+}
 
 extern "C" DT_tensor *float_vec_to_tensor(Scope_Struct *scope_struct, DT_float_vec *vec) {
   int tid = scope_struct->thread_id;
@@ -37,110 +39,88 @@ extern "C" DT_tensor *float_vec_to_tensor(Scope_Struct *scope_struct, DT_float_v
 
 
 
-extern "C" DT_tensor *tensor_Create(Scope_Struct *scope_struct, char *tensor_name, char *scopeless_name, DT_tensor *init_val, DT_list *notes_vector)
+extern "C" DT_tensor *tensor_Create(Scope_Struct *scope_struct, char *init, int first_dim, ...)
 {
-  // if (notes_vector->data->size()>0)
-  // {
     int thread_id = scope_struct->thread_id;
-    // std::cout << "CREATING TENSOR " << tensor_name << " AT THREAD: " << thread_id << "\n";
 
-    DT_tensor *tensor;
-
-
-    std::vector<int> dims;
-    char *init = "xavu";
+    // todo: handle is_weight argument
     bool is_weight = false;
-    for (int i=0; i<notes_vector->size; i++)
-    {
-      if(notes_vector->data_types->at(i)=="int")
-        dims.push_back(notes_vector->get<int>(i));
-      if(notes_vector->data_types->at(i)=="str")
-      {
-        std::cout << "get char" << ".\n";
-        char *note = notes_vector->get<char *>(i);
-        if (std::strcmp(note,"param") == 0)
-          is_weight = true;
-        else
-          init = note; 
-        std::cout << "got char" << ".\n";
-      }
-    }
+
+    // Get dimensions
+    std::vector<int> dims;
+    va_list args;
+    va_start(args, first_dim);
+    int dim = first_dim; 
+    int i=0;
+    do {
+        dims.push_back(dim);
+        dim = va_arg(args, int);
+        ++i;
+    } while (dim!=TERMINATE_VARARG&&i<10);
+    va_end(args);
 
     
+    DT_tensor *tensor;
+
     int product = DimsProd(dims);
 
     float *tensor_ptr;
     float *tensor_cpu;
 
-    if (init_val==nullptr)
+
+    if(product>0)
     {
-
-      if(product>0)
-      {
-        if (std::strcmp(init, "randu") == 0)
-          tensor_cpu = make_random_float_uniform(product);
-        if (std::strcmp(init, "zeros") == 0)
-          tensor_cpu = make_zeros_float(product);
-        if (std::strcmp(init, "ones") == 0)
-          tensor_cpu = make_ones_float(product);
-        if (std::strcmp(init, "normal") == 0)
-          tensor_cpu = make_normal(product);
-        if (std::strcmp(init, "xavu") == 0)
-          tensor_cpu = make_xavier_uniform_float(product, dims[dims.size()-1], dims[dims.size()-2]);
-        if (std::strcmp(init, "fixed8i") == 0)
-          tensor_cpu = make_xavier_uniform_float_fixed(product, dims[dims.size()-1], dims[dims.size()-2], 8);
-        if (std::strcmp(init, "fixed42i") == 0)
-          tensor_cpu = make_xavier_uniform_float_fixed(product, dims[dims.size()-1], dims[dims.size()-2], 42);
-        if (std::strcmp(init, "xavu_relu") == 0)
-          tensor_cpu = make_xavier_uniform_float_relu(product, dims[dims.size()-1], dims[dims.size()-2]);
-        if (std::strcmp(init, "xavu_tanh") == 0)
-          tensor_cpu = make_xavier_uniform_float_tanh(product, dims[dims.size()-1], dims[dims.size()-2]);
-        if (std::strcmp(init, "he_normal_relu") == 0)
-          tensor_cpu = make_he_normal_float_relu(product, dims[dims.size()-1]);
-        if (std::strcmp(init, "init_gpt") == 0)
-          tensor_cpu = make_gpt_init(product);
-        if (std::strcmp(init, "ints") == 0)
-          tensor_cpu = make_random_int(product, 10);
-        if (std::strcmp(init, "bernoulli") == 0)
-          tensor_cpu = make_random_int(product, 2);
-        if (std::strcmp(init, "arange") == 0)
-          tensor_cpu = make_arange(product);
-        if (std::strcmp(init, "binary") == 0)
-          tensor_cpu = make_random_int(product, 1);
-
-        cudaCheck(cudaGetLastError());
-        std::string _name = "create tensor ";
-        _name = _name + tensor_name;
-        tensor_ptr = get_from_pool(scope_struct, thread_id, product, _name);
-        //std::cout << "cpy of: " << tensor_name << "\n";
-
-        cudaStream_t stream = ThreadsStream[thread_id];
-        cudaCheck(cudaMemcpyAsync(tensor_ptr, tensor_cpu, product*sizeof(float), cudaMemcpyHostToDevice, stream));
-        //cudaStreamSynchronize(stream);
-        delete[] tensor_cpu;
-      }
-    } else {
-      int grid_size, block_size;
-      CalculateGridAndBlockSizes(product, grid_size, block_size);
+      if (std::strcmp(init, "randu") == 0)
+        tensor_cpu = make_random_float_uniform(product);
+      if (std::strcmp(init, "zeros") == 0)
+        tensor_cpu = make_zeros_float(product);
+      if (std::strcmp(init, "ones") == 0)
+        tensor_cpu = make_ones_float(product);
+      if (std::strcmp(init, "normal") == 0)
+        tensor_cpu = make_normal(product);
+      if (std::strcmp(init, "xavu") == 0)
+        tensor_cpu = make_xavier_uniform_float(product, dims[dims.size()-1], dims[dims.size()-2]);
+      if (std::strcmp(init, "fixed8i") == 0)
+        tensor_cpu = make_xavier_uniform_float_fixed(product, dims[dims.size()-1], dims[dims.size()-2], 8);
+      if (std::strcmp(init, "fixed42i") == 0)
+        tensor_cpu = make_xavier_uniform_float_fixed(product, dims[dims.size()-1], dims[dims.size()-2], 42);
+      if (std::strcmp(init, "xavu_relu") == 0)
+        tensor_cpu = make_xavier_uniform_float_relu(product, dims[dims.size()-1], dims[dims.size()-2]);
+      if (std::strcmp(init, "xavu_tanh") == 0)
+        tensor_cpu = make_xavier_uniform_float_tanh(product, dims[dims.size()-1], dims[dims.size()-2]);
+      if (std::strcmp(init, "he_normal_relu") == 0)
+        tensor_cpu = make_he_normal_float_relu(product, dims[dims.size()-1]);
+      if (std::strcmp(init, "init_gpt") == 0)
+        tensor_cpu = make_gpt_init(product);
+      if (std::strcmp(init, "ints") == 0)
+        tensor_cpu = make_random_int(product, 10);
+      if (std::strcmp(init, "bernoulli") == 0)
+        tensor_cpu = make_random_int(product, 2);
+      if (std::strcmp(init, "arange") == 0)
+        tensor_cpu = make_arange(product);
+      if (std::strcmp(init, "binary") == 0)
+        tensor_cpu = make_random_int(product, 1);
+  
+      cudaCheck(cudaGetLastError());
+      std::string _name = "create tensor ";
+      tensor_ptr = get_from_pool(scope_struct, thread_id, product, "tensor_Create");
+  
       cudaStream_t stream = ThreadsStream[thread_id];
-      copy_tensor_kernel<<<grid_size, block_size, 0, stream>>>(tensor_ptr, init_val->tensor_ptr, product);
-    }
-    
+      cudaCheck(cudaMemcpyAsync(tensor_ptr, tensor_cpu, product*sizeof(float), cudaMemcpyHostToDevice, stream));
+      //cudaStreamSynchronize(stream);
+      delete[] tensor_cpu;
+  }
     
 
-    tensor = createTensor(scope_struct, tensor_ptr, dims, product, true, tensor_name);
-    tensor->scopeless_name = scopeless_name;
+    tensor = createTensor(scope_struct, tensor_ptr, dims, product, true, "tensor_Create");
+    tensor->scopeless_name = "tensor_Create";
     if(is_weight)
       tensor->SetIsWeight();
     tensor->op = create_tensor_op;
 
    
 
-    // }
-
-    
-
-
+  std::cout << "return tensor: " << tensor << "\n";
 
   return tensor;
 }
@@ -216,9 +196,11 @@ inline void create_backward_tensor(Scope_Struct *scope_struct, std::string scope
 
 
 
-extern "C" void *tensor_StoreTrigger(char *tensor_name, DT_tensor *stored_tensor, DT_tensor *tensor, Scope_Struct *scope_struct)
+extern "C" void *tensor_StoreTrigger(Scope_Struct *scope_struct, DT_tensor *stored_tensor, DT_tensor *tensor)
 {
-  // std::cout << "tensor_Store execution for " << tensor_name << ".\n";
+  std::string tensor_name = "old tensor";
+  // std::cout << "tensor_StoreTrigger overwriting: " << stored_tensor << ".\n";
+  // std::cout << "tensor_StoreTrigger new: " << tensor << ".\n";
   std::string scopeless_name = stored_tensor->scopeless_name;
   bool is_grad_candidate = tensor->is_grad_candidate;
 
@@ -625,3 +607,9 @@ extern "C" float tensor_spec(Scope_Struct *scope_struct, DT_tensor *tensor) {
   return 0;
 }
 
+
+extern "C" void tensor_set(Scope_Struct *scope_struct, DT_tensor *tensor, DT_tensor *arg_tensor) {
+    tensor->tensor_ptr = arg_tensor->tensor_ptr;
+    tensor->dims = arg_tensor->dims;
+    tensor->dims_prod = arg_tensor->dims_prod;
+}

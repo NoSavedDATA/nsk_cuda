@@ -28,7 +28,6 @@
 #include <filesystem>
 #include <stdio.h>
 #include <stdlib.h>
-#include <omp.h>
 
 #include <cuda_fp16.h>
 

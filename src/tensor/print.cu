@@ -4,7 +4,6 @@
 #include <iomanip>
 #include <iostream>
 #include <limits>
-#include <numbers> 
 #include <memory> 
 #include <cstring> 
 
@@ -16,7 +15,7 @@
 extern "C" float PrintTensor(Scope_Struct *scope_struct, DT_tensor *tensor){
   int thread_id = scope_struct->thread_id;
   std::string tensorName = tensor->name;
-  std::cout << "Printing tensor " << tensorName << " at stream " << thread_id << "\n";
+  // std::cout << "Printing tensor " << tensorName << " at stream " << thread_id << "\n";
 
 
 
@@ -295,4 +294,15 @@ extern "C" float PrintTensorI8(const int8_t *cuda_tensor, int d1, int d2){
   delete[] tensor;
 
   return 0;
+}
+
+
+extern "C" void array_print_tensor(Scope_Struct *scope_struct, DT_array *array) {
+    int size = array->virtual_size;
+
+    DT_tensor **tensor_array = static_cast<DT_tensor**>(array->data);
+    for (int i=0; i<size; ++i) {
+        DT_tensor *tensor = tensor_array[i];
+        PrintTensor(scope_struct, tensor);
+    }
 }

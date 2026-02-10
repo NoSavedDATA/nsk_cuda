@@ -17,11 +17,6 @@ obj/initialize/initialize.o: src/initialize/initialize.cu \
   src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h \
   src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h \
   src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h \
-  src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h \
-  src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h \
-  src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h \
-  src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h \
-  src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h \
   src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h \
   src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h \
   src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h \
@@ -31,6 +26,7 @@ obj/initialize/initialize.o: src/initialize/initialize.cu \
   src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h \
   src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/codegen_notes.h \
   src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/nsk_vector.h \
+  src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/int_vec.h \
   src/initialize/../backprop/../../../../src/char_pool/../threads/lock.h \
   src/initialize/../backprop/../../../../src/char_pool/../threads/utils.h \
   src/initialize/../backprop/../../../../src/clean_up/include.h \
@@ -41,8 +37,11 @@ obj/initialize/initialize.o: src/initialize/initialize.cu \
   src/initialize/../backprop/../../../../src/compiler_frontend/logging_v.h \
   src/initialize/../backprop/../../../../src/compiler_frontend/global_vars.h \
   src/initialize/../backprop/../../../../src/data_types/codegen_notes.h \
+  src/initialize/../backprop/../../../../src/data_types/array.h \
   src/initialize/../backprop/../../../../src/data_types/float_vec.h \
   src/initialize/../backprop/../../../../src/data_types/../mangler/scope_struct.h \
+  src/initialize/../backprop/../../../../src/data_types/map.h \
+  src/initialize/../backprop/../../../../src/data_types/../compiler_frontend/logging_v.h \
   src/initialize/../backprop/../../../../src/data_types/nsk_vector.h \
   src/initialize/../backprop/../../../../src/math/include.h \
   src/initialize/../backprop/../../../../src/math/functions.h \
@@ -143,11 +142,6 @@ src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/..
 src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h:
 src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h:
 src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h:
-src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h:
-src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h:
-src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h:
-src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h:
-src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h:
 src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h:
 src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h:
 src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h:
@@ -157,6 +151,7 @@ src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/..
 src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h:
 src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/codegen_notes.h:
 src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/nsk_vector.h:
+src/initialize/../backprop/../../../../src/char_pool/../threads/../data_types/int_vec.h:
 src/initialize/../backprop/../../../../src/char_pool/../threads/lock.h:
 src/initialize/../backprop/../../../../src/char_pool/../threads/utils.h:
 src/initialize/../backprop/../../../../src/clean_up/include.h:
@@ -167,8 +162,11 @@ src/initialize/../backprop/../../../../src/compiler_frontend/logging_execution.h
 src/initialize/../backprop/../../../../src/compiler_frontend/logging_v.h:
 src/initialize/../backprop/../../../../src/compiler_frontend/global_vars.h:
 src/initialize/../backprop/../../../../src/data_types/codegen_notes.h:
+src/initialize/../backprop/../../../../src/data_types/array.h:
 src/initialize/../backprop/../../../../src/data_types/float_vec.h:
 src/initialize/../backprop/../../../../src/data_types/../mangler/scope_struct.h:
+src/initialize/../backprop/../../../../src/data_types/map.h:
+src/initialize/../backprop/../../../../src/data_types/../compiler_frontend/logging_v.h:
 src/initialize/../backprop/../../../../src/data_types/nsk_vector.h:
 src/initialize/../backprop/../../../../src/math/include.h:
 src/initialize/../backprop/../../../../src/math/functions.h:

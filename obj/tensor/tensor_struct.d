@@ -16,11 +16,6 @@ obj/tensor/tensor_struct.o: src/tensor/tensor_struct.cu \
   src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h \
   src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h \
   src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h \
-  src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h \
-  src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h \
-  src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h \
-  src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h \
-  src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h \
   src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h \
   src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h \
   src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h \
@@ -30,6 +25,7 @@ obj/tensor/tensor_struct.o: src/tensor/tensor_struct.cu \
   src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h \
   src/tensor/../../../../src/char_pool/../threads/../data_types/codegen_notes.h \
   src/tensor/../../../../src/char_pool/../threads/../data_types/nsk_vector.h \
+  src/tensor/../../../../src/char_pool/../threads/../data_types/int_vec.h \
   src/tensor/../../../../src/char_pool/../threads/lock.h \
   src/tensor/../../../../src/char_pool/../threads/utils.h \
   src/tensor/../../../../src/clean_up/include.h \
@@ -40,8 +36,11 @@ obj/tensor/tensor_struct.o: src/tensor/tensor_struct.cu \
   src/tensor/../../../../src/compiler_frontend/logging_v.h \
   src/tensor/../../../../src/compiler_frontend/global_vars.h \
   src/tensor/../../../../src/data_types/codegen_notes.h \
+  src/tensor/../../../../src/data_types/array.h \
   src/tensor/../../../../src/data_types/float_vec.h \
   src/tensor/../../../../src/data_types/../mangler/scope_struct.h \
+  src/tensor/../../../../src/data_types/map.h \
+  src/tensor/../../../../src/data_types/../compiler_frontend/logging_v.h \
   src/tensor/../../../../src/data_types/nsk_vector.h \
   src/tensor/../../../../src/math/include.h \
   src/tensor/../../../../src/math/functions.h \
@@ -87,11 +86,6 @@ src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark
 src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h:
 src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h:
 src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h:
-src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging.h:
-src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/expressions.h:
-src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h:
-src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/parser_struct.h:
-src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_execution.h:
 src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h:
 src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h:
 src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h:
@@ -101,6 +95,7 @@ src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark
 src/tensor/../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h:
 src/tensor/../../../../src/char_pool/../threads/../data_types/codegen_notes.h:
 src/tensor/../../../../src/char_pool/../threads/../data_types/nsk_vector.h:
+src/tensor/../../../../src/char_pool/../threads/../data_types/int_vec.h:
 src/tensor/../../../../src/char_pool/../threads/lock.h:
 src/tensor/../../../../src/char_pool/../threads/utils.h:
 src/tensor/../../../../src/clean_up/include.h:
@@ -111,8 +106,11 @@ src/tensor/../../../../src/compiler_frontend/logging_execution.h:
 src/tensor/../../../../src/compiler_frontend/logging_v.h:
 src/tensor/../../../../src/compiler_frontend/global_vars.h:
 src/tensor/../../../../src/data_types/codegen_notes.h:
+src/tensor/../../../../src/data_types/array.h:
 src/tensor/../../../../src/data_types/float_vec.h:
 src/tensor/../../../../src/data_types/../mangler/scope_struct.h:
+src/tensor/../../../../src/data_types/map.h:
+src/tensor/../../../../src/data_types/../compiler_frontend/logging_v.h:
 src/tensor/../../../../src/data_types/nsk_vector.h:
 src/tensor/../../../../src/math/include.h:
 src/tensor/../../../../src/math/functions.h:

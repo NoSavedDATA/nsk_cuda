@@ -17,11 +17,21 @@ cudaStream_t main_stream, backward_stream;
 std::map<int, cudaStream_t> ThreadsStream;
 
 
+int FirstNonZero(int *x, int N) {
+
+    for (int i=0; i<N; ++i) {
+        if (x[i]!=0)
+            return i;
+    }
+
+    return -1;
+}
+
 
 
 CudaStreams *AllocateStream(int line)
 {
-  int free_stream = FirstNonzero(open_streams, num_parallel_streams);
+  int free_stream = FirstNonZero(open_streams, num_parallel_streams);
   if (free_stream<0)
     LogErrorC(line, "Failed to allocate a cuda stream. Probably loading too many different tensors.");
   open_streams[free_stream] = 0;
