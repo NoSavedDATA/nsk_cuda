@@ -2,7 +2,7 @@
 
 
 __global__ void mse_kernel(float *dy, const float* y_hat, const float* y,
-                            const float scale, const float dims_prod);
+                            const float dims_prod);
 
                             
 __global__ void online_mse(float *out, const float *y_hat, const float *y_true, int N, int C); 

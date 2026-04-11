@@ -38,65 +38,97 @@ obj/mma/wmma_half_16x16/cpp_call.o: src/mma/wmma_half_16x16/cpp_call.cu \
   src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/call.h \
   src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../minimal_tensor.h \
   src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/nsk_cpp.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/char_pool.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../common/extension_functions.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/barrier.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/channels.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/list.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/scope_struct.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/clean_up.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/mark_sweep.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/allocation.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/pool.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/../mangler/scope_struct.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/codegen_notes.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/nsk_vector.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/int_vec.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/lock.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/utils.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/clean_up/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/clean_up/clean_up.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/codegen/random.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/common/extension_functions.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/compiler_frontend/logging_execution.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/compiler_frontend/logging_v.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/compiler_frontend/global_vars.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/codegen_notes.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/array.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/float_vec.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/../mangler/scope_struct.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/map.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/../compiler_frontend/logging_v.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/nsk_vector.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/math/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/math/functions.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/mangler/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/mangler/scope_struct.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/mark_sweep/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/notators/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/notators/notators.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/os/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/os/dir/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/os/dir/dir.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/../compiler_frontend/global_vars.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/../compiler_frontend/logging_v.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/../mangler/scope_struct.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/../mark_sweep/include.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/pool.h \
-  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/threads/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/char_pool.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../common/extension_functions.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/clean_up.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/allocation.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/address_protection.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../data_types/list.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../data_types/../mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../data_types/codegen_notes.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../data_types/nsk_vector.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../pool/pool.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../pool/../mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/auxiliary_fn.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/mark_sweep.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../compiler_frontend/global_vars.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../compiler_frontend/logging_v.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../clean_up/clean_up.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/array.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/list.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../pool/pool.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/barrier.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/channels.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../data_types/list.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/lock.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/utils.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/clean_up/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/clean_up/clean_up.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/functions.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/print.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/../mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/random.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/string.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/time.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/common/extension_functions.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/global_vars.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/logging_execution.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/logging_v.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/parser_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/any_map.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/array.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/bool.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/charv.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/codegen_notes.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/data_tree.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/float.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/../common/extension_functions.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/../mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/int.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/list.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/map.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/../compiler_frontend/logging_v.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/nsk_vector.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/nullptr.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/str.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/str_view.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/str_vec.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/type_info.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/math/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/math/functions.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/mangler/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/mark_sweep/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/notators/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/notators/notators.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/os/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/os/dir/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/os/dir/dir.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/../compiler_frontend/global_vars.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/../compiler_frontend/logging_v.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/../mangler/scope_struct.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/../mark_sweep/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/pool.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/threads/include.h \
+  src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/prebuild/prebuild.h \
   src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../pool/include.h \
   src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../pool/pool_i8.h \
   src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../pool/../../../../../src/nsk_cpp.h \
@@ -157,11 +189,6 @@ obj/mma/wmma_half_16x16/cpp_call.o: src/mma/wmma_half_16x16/cpp_call.cu \
   src/mma/wmma_half_16x16/../wmma_int8_16x16/wmma_blocking_i8.h \
   src/mma/wmma_half_16x16/../wmma_int8_16x16/../../nsk_cuda/include.h \
   src/mma/wmma_half_16x16/../general.h \
-  src/mma/wmma_half_16x16/../../tensor/tensor_struct.h \
-  src/mma/wmma_half_16x16/../../tensor/../../../../src/nsk_cpp.h \
-  src/mma/wmma_half_16x16/../../tensor/../cuda_threads/include.h \
-  src/mma/wmma_half_16x16/../../tensor/../cuda_threads/threads.h \
-  src/mma/wmma_half_16x16/../../tensor/../nsk_cuda/minimal_tensor.h \
   src/mma/wmma_half_16x16/../../nsk_cuda/include.h \
   src/mma/wmma_half_16x16/../utils.h src/mma/wmma_half_16x16/../wmma.cu \
   src/mma/wmma_half_16x16/../mma_ptx.cu \
@@ -206,65 +233,97 @@ src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/include
 src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/call.h:
 src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../minimal_tensor.h:
 src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/nsk_cpp.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/char_pool.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../common/extension_functions.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/barrier.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/channels.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/list.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/scope_struct.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/clean_up.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/mark_sweep.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/allocation.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/address_protection.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../data_types/list.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/pool.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../../pool/../mangler/scope_struct.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/../include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/../mangler/../mark_sweep/modules/auxiliary_fn.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/codegen_notes.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/nsk_vector.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/../data_types/int_vec.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/lock.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/char_pool/../threads/utils.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/clean_up/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/clean_up/clean_up.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/codegen/random.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/common/extension_functions.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/compiler_frontend/logging_execution.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/compiler_frontend/logging_v.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/compiler_frontend/global_vars.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/codegen_notes.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/array.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/float_vec.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/../mangler/scope_struct.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/map.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/../compiler_frontend/logging_v.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/data_types/nsk_vector.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/math/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/math/functions.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/mangler/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/mangler/scope_struct.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/mark_sweep/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/notators/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/notators/notators.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/os/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/os/dir/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/os/dir/dir.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/../compiler_frontend/global_vars.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/../compiler_frontend/logging_v.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/../mangler/scope_struct.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/../mark_sweep/include.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/pool/pool.h:
-src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/threads/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/char_pool.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../common/extension_functions.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/clean_up.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/allocation.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/address_protection.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../compiler_frontend/global_vars.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../compiler_frontend/../data_types/data_tree.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../compiler_frontend/logging_v.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../clean_up/clean_up.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../data_types/list.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../data_types/../mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../data_types/codegen_notes.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../data_types/nsk_vector.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../pool/pool.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../../pool/../mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/../include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/modules/auxiliary_fn.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/mark_sweep.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../compiler_frontend/global_vars.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../compiler_frontend/logging_v.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../clean_up/clean_up.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/array.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/list.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../pool/pool.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/barrier.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/channels.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../data_types/list.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/lock.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/utils.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/clean_up/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/clean_up/clean_up.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/functions.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/print.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/../mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/random.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/string.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/codegen/time.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/common/extension_functions.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/global_vars.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/logging_execution.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/logging_v.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/parser_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/any_map.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/array.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/bool.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/charv.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/codegen_notes.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/data_tree.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/float.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/../common/extension_functions.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/../mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/int.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/list.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/map.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/../compiler_frontend/logging_v.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/nsk_vector.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/nullptr.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/str.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/str_view.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/str_vec.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/data_types/type_info.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/math/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/math/functions.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/mangler/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/mark_sweep/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/notators/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/notators/notators.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/os/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/os/dir/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/os/dir/dir.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/../compiler_frontend/global_vars.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/../compiler_frontend/logging_v.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/../mangler/scope_struct.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/../mark_sweep/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/pool/pool.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/threads/include.h:
+src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../../../../../src/runtime/prebuild/prebuild.h:
 src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../pool/include.h:
 src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../pool/pool_i8.h:
 src/mma/wmma_half_16x16/../wmma_half_16x16/dx/../../../nsk_cuda/quantize/../pool/../../../../../src/nsk_cpp.h:
@@ -325,11 +384,6 @@ src/mma/wmma_half_16x16/../wmma_int8_16x16/../util.h:
 src/mma/wmma_half_16x16/../wmma_int8_16x16/wmma_blocking_i8.h:
 src/mma/wmma_half_16x16/../wmma_int8_16x16/../../nsk_cuda/include.h:
 src/mma/wmma_half_16x16/../general.h:
-src/mma/wmma_half_16x16/../../tensor/tensor_struct.h:
-src/mma/wmma_half_16x16/../../tensor/../../../../src/nsk_cpp.h:
-src/mma/wmma_half_16x16/../../tensor/../cuda_threads/include.h:
-src/mma/wmma_half_16x16/../../tensor/../cuda_threads/threads.h:
-src/mma/wmma_half_16x16/../../tensor/../nsk_cuda/minimal_tensor.h:
 src/mma/wmma_half_16x16/../../nsk_cuda/include.h:
 src/mma/wmma_half_16x16/../utils.h:
 src/mma/wmma_half_16x16/../wmma.cu:

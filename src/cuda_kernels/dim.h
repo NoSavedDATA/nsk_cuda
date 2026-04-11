@@ -11,14 +11,14 @@
 
 
 
-void mean_over_semilast_dim_backward(Scope_Struct *, float *inp, int size, float *out,
-                     float *dinp, float *dout,
-                     void *, DT_tensor *node);
+// void mean_over_semilast_dim_backward(Scope_Struct *, float *inp, int size, float *out,
+//                      float *dinp, float *dout,
+//                      void *, DT_tensor *node);
 
 
-void gather_last_dim_backward(Scope_Struct *, float *inp, int dims_prod, float *out,
-                     float *dinp, float *dout,
-                     void *, DT_tensor *node);
+// void gather_last_dim_backward(Scope_Struct *, float *inp, int dims_prod, float *out,
+//                      float *dinp, float *dout,
+//                      void *, DT_tensor *node);
 
 
-inline void transpose(Scope_Struct *, DT_tensor *tensor, int thread_id, cudaStream_t stream); 
+// inline void transpose(Scope_Struct *, DT_tensor *tensor, int thread_id, cudaStream_t stream); 

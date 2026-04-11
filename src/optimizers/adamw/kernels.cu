@@ -5,8 +5,10 @@
 
 
 
-__global__ void adamw_kernel(float* params_memory, const float* grads_memory, float* m_memory, float* v_memory, long num_parameters,
-                              float learning_rate, float beta1, float beta2, float beta1_correction, float beta2_correction,
+__global__ void adamw_kernel(float* params_memory, const float* grads_memory, float* m_memory, float* v_memory,
+                              long num_parameters,
+                              float learning_rate, float beta1, float beta2,
+                              float beta1_correction, float beta2_correction,
                               const float eps, const float weight_decay, const float grad_clip) {
 
    int i = blockIdx.x * blockDim.x + threadIdx.x;

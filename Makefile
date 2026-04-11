@@ -1,6 +1,7 @@
 CXX := clang++-19
 CXXFLAGS := -g -O3 -rdynamic -fPIC
-CUDA_PATH := $(abspath ../cuda-12.2)
+# CUDA_PATH := $(abspath ../cuda-12.2)
+CUDA_PATH := /usr/local/cuda-12.3
 CUDA_ARCH := sm_89
 CUDA_ARCH_NVCC := -arch=sm_89
 #EIGEN_INCLUDE := /usr/include/eigen3
@@ -10,8 +11,12 @@ CUDA_LIBS := -lcudart -lcublas -lcublasLt -lcudnn
 SYSTEM_LIBS := -ldl -lrt -pthread
 OTHER_FLAGS := -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH -flto -finline-functions -funroll-loops -w
 
-
-
+LLVM_CONFIG := llvm-config-19 --link-static --libs core orcjit native
+LLVM_CXXFLAGS := $(shell $(LLVM_CONFIG) --cxxflags)
+LLVM_LDFLAGS := $(shell $(LLVM_CONFIG) --ldflags)
+LLVM_SYSTEM_LIBS := $(shell $(LLVM_CONFIG) --system-libs)
+LLVM_LIBS := $(shell $(LLVM_CONFIG) --libs core orcjit native)
+LLVMFLAGS := $(LLVM_LDFLAGS) $(LLVM_CXXFLAGS) $(LLVM_SYSTEM_LIBS) $(LLVM_LIBS) -static-libstdc++ -static-libgcc
 
 # CUDA flags
 CUDA_CXXFLAGS := -I$(CUDA_PATH)/include --cuda-path=$(CUDA_PATH) --cuda-gpu-arch=$(CUDA_ARCH)
@@ -80,10 +85,10 @@ all: $(CU_OBJ) $(CXX_OBJ) $(SO_FILE) check_done
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cu
-	$(CXX) $(CXXFLAGS) -I$(SRC_DIR) -MMD -MP -c -o $@ $<
+	$(CXX) $(LLVMFLAGS) $(CXXFLAGS) -I$(SRC_DIR) -MMD -MP -c -o $@ $<
 	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp 
-	$(CXX) $(CXXFLAGS) -MMD -MP -c -o $@ $<
+	$(CXX) $(LLVMFLAGS) $(CXXFLAGS) -MMD -MP -c -o $@ $<
 
 
 $(SO_FILE): $(CU_OBJ) $(CXX_OBJ)

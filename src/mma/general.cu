@@ -5,6 +5,7 @@
 #include "../cuda_kernels/handles.h"
 #include "../tensor/include.h"
 #include "utils.h"
+#include "general.h"
 
 using namespace nvcuda;
 
@@ -278,37 +279,26 @@ __global__ void mult_kernel(const float *x, const float *w,
 
 
 
-void matmul_backward2(
-  // float *inp,  float *weight,
-  // int B, int C, int OC,
-  DT_tensor *L_tensor, DT_tensor *R_tensor,
-  float *dinp, float *dw,
-  float *dout)
-{
+extern "C" float matmul_backward(Scope_Struct *scope_struct, void *inp, void *weight, void *dinp, void *dw, void *dout, int B, int C, int OC) {
 
-  float *inp = L_tensor->tensor_ptr;
-  float *weight = R_tensor->tensor_ptr;
-
-  std::vector<int> BC = format_LinearLayer_Dims(L_tensor->dims);
-  float B  = BC[0];
-  float C  = BC[1];
-  float OC = R_tensor->dims[0]; 
-
-
-  // backward to input
   float one = 1.0f, zero = 0.0f;
+  int tid = scope_struct->thread_id;
+  cudaStream_t stream = ThreadsStream[tid];
+  // std::cout << "matmul backward " << B << ", C " << C << ", OC " << OC << "\n";
 
 
+  // &one - &zero: reset
+  // &one - &one: +=
   // backwad to dx
   cublasCheck(cublasGemmEx(cublas_handle, CUBLAS_OP_N, CUBLAS_OP_N, C, B, OC, &one,
-            weight, CUBLAS_LOWP, C, dout, CUBLAS_LOWP, OC, &zero,
-            dinp, CUBLAS_LOWP, C, cublas_compute, CUBLAS_GEMM_DEFAULT_TENSOR_OP));
+            *(float**)weight, CUBLAS_LOWP, C, *(float**)dout, CUBLAS_LOWP, OC, &one,
+            *(float**)dinp, CUBLAS_LOWP, C, cublas_compute, CUBLAS_GEMM_DEFAULT_TENSOR_OP));
 
 
   // backward to weight, uses += in the backward pass (accumulate the gradient) by setting alpha=one
   cublasCheck(cublasGemmEx(cublas_handle, CUBLAS_OP_N, CUBLAS_OP_T, C, OC, B, &one,
-            inp, CUBLAS_LOWP, C, dout, CUBLAS_LOWP, OC, &one,
-            dw, CUBLAS_LOWP, C, cublas_compute, CUBLAS_GEMM_DEFAULT_TENSOR_OP));
+            *(float**)inp, CUBLAS_LOWP, C, *(float**)dout, CUBLAS_LOWP, OC, &one,
+            *(float**)dw, CUBLAS_LOWP, C, cublas_compute, CUBLAS_GEMM_DEFAULT_TENSOR_OP));
 
 
 
@@ -392,6 +382,7 @@ void matmul_backward2(
   gemm_operator_dw(main_stream);
   gemm_operator_dw(args_dw);
   */
+  return 0;
 }
 
 void matmul_forward(float* out,
@@ -402,55 +393,30 @@ void matmul_forward(float* out,
   const float beta = 0.0f;
   
 
-  //std::cout << "matmul forward. B: " << B << " C: " << C << " OC: " << OC << "\n";
+  int tid = thread_id;
+  cudaStream_t stream = ThreadsStream[tid];
 
 
   if (thread_id==0)
   {
     cublasCheck(cublasSgemm(cublas_handle, CUBLAS_OP_T, CUBLAS_OP_N, OC, B, C, &alpha, W, C, inp, C, &beta, out, OC));
-    
-    cudaStream_t stream = ThreadsStream[thread_id];
-
-
-    
-
-    // dim3 block_size(TILE_SIZE, TILE_SIZE);
-    // dim3 grid_size(std::ceil(OC/(float)TILE_SIZE), std::ceil(B/(float)TILE_SIZE));
-    // int shared_mem_size = 2*TILE_SIZE*TILE_SIZE*sizeof(float);
-    // mult_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(inp, W, out, TILE_SIZE, TILE_SIZE*TILE_SIZE, B, C, OC);
-   
-
     // constexpr int num_warps_x{4};
     // constexpr int num_warps_y{4};
     
-
     // constexpr int WMMA_T{16};
     // dim3 block_size(num_warps_x * WARP_SIZE, num_warps_y);
     // dim3 grid_size(std::ceil((OC + (num_warps_x*WMMA_T - 1)) / (float)(num_warps_x*WMMA_T)), std::ceil((B + (num_warps_y*WMMA_T - 1)) / (float)(num_warps_y*WMMA_T)));
 
     // int shared_mem_size = num_warps_y*WMMA_T*WMMA_T*num_warps_x*sizeof(float);
-
-
-    // // float *bank;
-    // // cudaMalloc(&bank, 32*16*sizeof(float));
-    
-    // // set_to_one_kernel<<<16, 32,0,stream>>>(bank, 16*32);
     
     // wmma_mult_kernel<WMMA_T,num_warps_x,num_warps_y><<<grid_size, block_size, shared_mem_size, stream>>>(inp, W, out, B, C, OC);
 
-
-    //PrintTensorF(bank, 32, 16);
-    
-  }
-  else
-  {
-    cudaStream_t stream = ThreadsStream[thread_id];
-
+  } else {
     dim3 block_size(TILE_SIZE, TILE_SIZE);
     dim3 grid_size(std::ceil(OC/(float)TILE_SIZE), std::ceil(B/(float)TILE_SIZE));
     int shared_mem_size = 2*TILE_SIZE*TILE_SIZE*sizeof(float);
 
-    mult_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(inp, W, out, TILE_SIZE, TILE_SIZE*TILE_SIZE, B, C, OC);
+    mult_kernel<<<grid_size, block_size, shared_mem_size>>>(inp, W, out, TILE_SIZE, TILE_SIZE*TILE_SIZE, B, C, OC);
   }
   
   

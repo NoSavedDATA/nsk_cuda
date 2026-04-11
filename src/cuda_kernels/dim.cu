@@ -7,7 +7,6 @@
 
 
 #include "../../../src/nsk_cpp.h"
-#include "../backprop/include.h"
 #include "../common/cu_commons.h"
 #include "../nsk_cuda/pool/include.h"
 #include "../tensor/include.h"
@@ -21,698 +20,698 @@
 
 
 
-extern "C" DT_tensor *repeat_interleave(Scope_Struct *scope_struct, DT_tensor tensor, float repeats, float dim)
-{
-  int thread_id = scope_struct->thread_id;
-  //std::cout << "REPEAT_interleave OF " << tensor.name << " with " << repeats << " repeats.\n";
+//extern "C" DT_tensor *repeat_interleave(Scope_Struct *scope_struct, DT_tensor tensor, float repeats, float dim)
+//{
+//  int thread_id = scope_struct->thread_id;
+//  //std::cout << "REPEAT_interleave OF " << tensor.name << " with " << repeats << " repeats.\n";
 
-  float *tensor_ptr = tensor.tensor_ptr;
-  std::vector<int> dims, new_dims;
-  dims = tensor.dims;
-  if (dim<0)
-    dim = dims.size()+dim;
-  new_dims = tensor.dims;
-  new_dims[dim] = new_dims[dim]*repeats;
+//  float *tensor_ptr = tensor.tensor_ptr;
+//  std::vector<int> dims, new_dims;
+//  dims = tensor.dims;
+//  if (dim<0)
+//    dim = dims.size()+dim;
+//  new_dims = tensor.dims;
+//  new_dims[dim] = new_dims[dim]*repeats;
   
-  int B = DimsProd(dims);
-  int C = (int)repeats;
+//  int B = DimsProd(dims);
+//  int C = (int)repeats;
 
-  float *probs;
+//  float *probs;
 
-  probs = get_from_pool(scope_struct, thread_id, B*C, "repeat_interleave");
-  cudaMemset(probs, 0, B*C*sizeof(float));
+//  probs = get_from_pool(scope_struct, thread_id, B*C, "repeat_interleave");
+//  cudaMemset(probs, 0, B*C*sizeof(float));
   
 
 
-  int grid_size = B;
-  int block_size = 32;
-  size_t shared_mem_size = 2 * block_size / 32 * sizeof(float);
+//  int grid_size = B;
+//  int block_size = 32;
+//  size_t shared_mem_size = 2 * block_size / 32 * sizeof(float);
 
-  cudaStream_t stream = ThreadsStream[thread_id];
-  if (dim==(dims.size()-1))
-    repeat_interleave_kernel_last_dim<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, probs, B, C);
-  //grid_size = ceil_div(B*C, block_size);
-  //onehot_kernel<<<grid_size, block_size>>>(tensor, probs, B, C);
-
-
-  DT_tensor *new_tensor = createTensor(scope_struct, probs, new_dims, DimsProd(new_dims), false, "");
-  return new_tensor;
-}
+//  cudaStream_t stream = ThreadsStream[thread_id];
+//  if (dim==(dims.size()-1))
+//    repeat_interleave_kernel_last_dim<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, probs, B, C);
+//  //grid_size = ceil_div(B*C, block_size);
+//  //onehot_kernel<<<grid_size, block_size>>>(tensor, probs, B, C);
 
 
-extern "C" DT_tensor *mean_tensor(Scope_Struct *scope_struct, DT_tensor *tensor, int first_dim, ...)
-{
-  int thread_id = scope_struct->thread_id;
-  // std::cout << "MEAN OF " << tensor->name << "\n";
+//  DT_tensor *new_tensor = createTensor(scope_struct, probs, new_dims, DimsProd(new_dims), false, "");
+//  return new_tensor;
+//}
 
 
-  float *tensor_ptr = tensor->tensor_ptr;
-  std::vector<int> dims = tensor->dims;
-  float *summed;
+//extern "C" DT_tensor *mean_tensor(Scope_Struct *scope_struct, DT_tensor *tensor, int first_dim, ...)
+//{
+//  int thread_id = scope_struct->thread_id;
+//  // std::cout << "MEAN OF " << tensor->name << "\n";
 
-  cudaStream_t stream = ThreadsStream[thread_id];
 
-  va_list args;
-  va_start(args, first_dim);
+//  float *tensor_ptr = tensor->tensor_ptr;
+//  std::vector<int> dims = tensor->dims;
+//  float *summed;
 
-  if (first_dim==TERMINATE_VARARG)
-  { 
-    va_end(args);
-    float *ret;
-    int dims_prod = DimsProd(dims);
+//  cudaStream_t stream = ThreadsStream[thread_id];
 
-    summed = new float[dims_prod];
-    cudaCheck(cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream));
+//  va_list args;
+//  va_start(args, first_dim);
 
-    cudaCheck(cudaMalloc(&ret, round_to_nearest_pow2(1)*sizeof(float)));
+//  if (first_dim==TERMINATE_VARARG)
+//  { 
+//    va_end(args);
+//    float *ret;
+//    int dims_prod = DimsProd(dims);
+
+//    summed = new float[dims_prod];
+//    cudaCheck(cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream));
+
+//    cudaCheck(cudaMalloc(&ret, round_to_nearest_pow2(1)*sizeof(float)));
   
-    float tensor_sum=0;
-    for(int i=0; i<dims_prod; i++)
-      tensor_sum += summed[i];
-    tensor_sum = tensor_sum/tensor->dims_prod;
+//    float tensor_sum=0;
+//    for(int i=0; i<dims_prod; i++)
+//      tensor_sum += summed[i];
+//    tensor_sum = tensor_sum/tensor->dims_prod;
     
-    delete[] summed;
+//    delete[] summed;
   
-    float *aux = new float[1];
-    aux[0] = tensor_sum;
-    cudaCheck(cudaMemcpyAsync(ret, aux, 1*sizeof(float), cudaMemcpyHostToDevice, stream));
-    delete[] aux;
+//    float *aux = new float[1];
+//    aux[0] = tensor_sum;
+//    cudaCheck(cudaMemcpyAsync(ret, aux, 1*sizeof(float), cudaMemcpyHostToDevice, stream));
+//    delete[] aux;
   
-    std::vector<int> new_dims;
-    new_dims.push_back(1.0f);
+//    std::vector<int> new_dims;
+//    new_dims.push_back(1.0f);
   
-    DT_tensor *new_tensor = createTensor(scope_struct, ret, new_dims, 1.0f, false, "");
-    new_tensor->op=mean_op;
-    new_tensor->AttrLNode(tensor, mean_op);
-    return new_tensor;
-  }
+//    DT_tensor *new_tensor = createTensor(scope_struct, ret, new_dims, 1.0f, false, "");
+//    new_tensor->op=mean_op;
+//    new_tensor->AttrLNode(tensor, mean_op);
+//    return new_tensor;
+//  }
 
 
-  std::vector<int> sum_dims, new_dims;
-  if (first_dim<0)
-    first_dim = dims.size()+first_dim;
-  sum_dims.push_back(first_dim);
+//  std::vector<int> sum_dims, new_dims;
+//  if (first_dim<0)
+//    first_dim = dims.size()+first_dim;
+//  sum_dims.push_back(first_dim);
 
-  for (int i=0; i<10; i++)
-  {
-    if (i==9)
-    {
-      LogErrorC(scope_struct->code_line, "A tensor with 10 dimensions??? (mean)");
-      std::cout << "Input tensor dims:" << "\n";
-      PrintDims(tensor->dims);
-      std::cout << "Mean dims:" << "\n";
-      PrintDims(sum_dims);
-      return nullptr;
-    }
+//  for (int i=0; i<10; i++)
+//  {
+//    if (i==9)
+//    {
+//      LogErrorC(scope_struct->code_line, "A tensor with 10 dimensions??? (mean)");
+//      std::cout << "Input tensor dims:" << "\n";
+//      PrintDims(tensor->dims);
+//      std::cout << "Mean dims:" << "\n";
+//      PrintDims(sum_dims);
+//      return nullptr;
+//    }
 
-    int dim = va_arg(args, int);
+//    int dim = va_arg(args, int);
     
-    if (dim==TERMINATE_VARARG)
-      break;
-    if (in_int(dim, sum_dims))  
-    {
-      std::string _error = "Dim "+std::to_string(dim) + " duplicated at tensor.mean() operation.";
-      LogErrorC(scope_struct->code_line, _error);
-      return nullptr;
-    }
-    if (dim<0)
-      dim = dims.size()+dim;
-    sum_dims.push_back(dim);
-  }
-  va_end(args);
+//    if (dim==TERMINATE_VARARG)
+//      break;
+//    if (in_int(dim, sum_dims))  
+//    {
+//      std::string _error = "Dim "+std::to_string(dim) + " duplicated at tensor.mean() operation.";
+//      LogErrorC(scope_struct->code_line, _error);
+//      return nullptr;
+//    }
+//    if (dim<0)
+//      dim = dims.size()+dim;
+//    sum_dims.push_back(dim);
+//  }
+//  va_end(args);
   
   
-  float summed_dim;
-  for (int i=0; i<dims.size(); i++)
-    if (!in_int(i, sum_dims))
-      new_dims.push_back(dims[i]);
-    else
-      summed_dim=dims[i];
+//  float summed_dim;
+//  for (int i=0; i<dims.size(); i++)
+//    if (!in_int(i, sum_dims))
+//      new_dims.push_back(dims[i]);
+//    else
+//      summed_dim=dims[i];
 
 
-  int dims_prod = DimsProd(dims);
-  int new_dims_prod = DimsProd(new_dims);
-
-  
-  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "mean");
-  cudaMemset(summed, 0, new_dims_prod * sizeof(float));
-
+//  int dims_prod = DimsProd(dims);
+//  int new_dims_prod = DimsProd(new_dims);
 
   
+//  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "mean");
+//  cudaMemset(summed, 0, new_dims_prod * sizeof(float));
+
+
+  
   
   
 
-  if (sum_dims[0]==(dims.size()-2))
-  {
-    std::vector<int> _dims = RemoveLastDim(RemoveLastDim(dims));
-    dims_prod = DimsProd(_dims);
+//  if (sum_dims[0]==(dims.size()-2))
+//  {
+//    std::vector<int> _dims = RemoveLastDim(RemoveLastDim(dims));
+//    dims_prod = DimsProd(_dims);
 
-    int warps_per_block = THREADS_PER_BLOCK/WARP_SIZE;
-    //warps_per_block = fminf(warps_per_block, dims[dims.size()-2]);
+//    int warps_per_block = THREADS_PER_BLOCK/WARP_SIZE;
+//    //warps_per_block = fminf(warps_per_block, dims[dims.size()-2]);
     
-    // TODO: is this kernel grid_size correct?
-    mean_over_semilast_dim_kernel<<<dims_prod, warps_per_block*WARP_SIZE, 0, stream>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-2], dims[dims.size()-1], warps_per_block);
+//    // TODO: is this kernel grid_size correct?
+//    mean_over_semilast_dim_kernel<<<dims_prod, warps_per_block*WARP_SIZE, 0, stream>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-2], dims[dims.size()-1], warps_per_block);
 
-    bool has_grad = tensor->is_grad_candidate;
-    return customOpTensor(scope_struct, summed, new_dims, new_dims_prod, "mean_over_semilast_dim_backward", nullptr, tensor, has_grad);
-  }
+//    bool has_grad = tensor->is_grad_candidate;
+//    return customOpTensor(scope_struct, summed, new_dims, new_dims_prod, "mean_over_semilast_dim_backward", nullptr, tensor, has_grad);
+//  }
 
-  /*
-  if (dims.size()==1)
-  {
-    sum_single_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod);
-    new_dims = {1.0f};
-  }
-  else if (sum_dims[0]==(dims.size()-1))
-    sum_over_last_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod, summed_dim);
-  if (sum_dims[0]==(dims.size()-2))
-    sum_over_semilast_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-1], dims[dims.size()-2]);
-
-
-  DT_tensor *new_tensor = createTensor(scope_struct, summed, new_dims, DimsProd(new_dims), false, "");
-  return new_tensor;
-  */
-  LogErrorC(scope_struct->code_line, "Mean of specific dim is not implemented yet.");
-  return nullptr;
-}
+//  /*
+//  if (dims.size()==1)
+//  {
+//    sum_single_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod);
+//    new_dims = {1.0f};
+//  }
+//  else if (sum_dims[0]==(dims.size()-1))
+//    sum_over_last_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod, summed_dim);
+//  if (sum_dims[0]==(dims.size()-2))
+//    sum_over_semilast_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-1], dims[dims.size()-2]);
 
 
-//TODO: mean over axis
-extern "C" DT_tensor *tensor_mean(Scope_Struct *scope_struct, DT_tensor *tensor, int first_dim, ...)
-{
-  int thread_id = scope_struct->thread_id;
-  // std::cout << "tensor_mean MEAN OF " << tensor->name << "\n";
+//  DT_tensor *new_tensor = createTensor(scope_struct, summed, new_dims, DimsProd(new_dims), false, "");
+//  return new_tensor;
+//  */
+//  LogErrorC(scope_struct->code_line, "Mean of specific dim is not implemented yet.");
+//  return nullptr;
+//}
 
 
-  float *tensor_ptr = tensor->tensor_ptr;
-  std::vector<int> dims = tensor->dims;
-  float *summed;
+////TODO: mean over axis
+//extern "C" DT_tensor *tensor_mean(Scope_Struct *scope_struct, DT_tensor *tensor, int first_dim, ...)
+//{
+//  int thread_id = scope_struct->thread_id;
+//  // std::cout << "tensor_mean MEAN OF " << tensor->name << "\n";
 
-  cudaStream_t stream = ThreadsStream[thread_id];
 
-  va_list args;
-  va_start(args, first_dim);
+//  float *tensor_ptr = tensor->tensor_ptr;
+//  std::vector<int> dims = tensor->dims;
+//  float *summed;
 
-  if (first_dim==TERMINATE_VARARG)
-  { 
-    va_end(args);
-    float *ret;
-    int dims_prod = DimsProd(dims);
+//  cudaStream_t stream = ThreadsStream[thread_id];
 
-    summed = new float[dims_prod];
-    cudaCheck(cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream));
+//  va_list args;
+//  va_start(args, first_dim);
 
-    cudaCheck(cudaMalloc(&ret, round_to_nearest_pow2(1)*sizeof(float)));
+//  if (first_dim==TERMINATE_VARARG)
+//  { 
+//    va_end(args);
+//    float *ret;
+//    int dims_prod = DimsProd(dims);
+
+//    summed = new float[dims_prod];
+//    cudaCheck(cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream));
+
+//    cudaCheck(cudaMalloc(&ret, round_to_nearest_pow2(1)*sizeof(float)));
   
-    float tensor_sum=0;
-    for(int i=0; i<dims_prod; i++)
-      tensor_sum += summed[i];
-    tensor_sum = tensor_sum/tensor->dims_prod;
+//    float tensor_sum=0;
+//    for(int i=0; i<dims_prod; i++)
+//      tensor_sum += summed[i];
+//    tensor_sum = tensor_sum/tensor->dims_prod;
     
-    delete[] summed;
+//    delete[] summed;
   
-    float *aux = new float[1];
-    aux[0] = tensor_sum;
-    cudaCheck(cudaMemcpyAsync(ret, aux, 1*sizeof(float), cudaMemcpyHostToDevice, stream));
-    delete[] aux;
+//    float *aux = new float[1];
+//    aux[0] = tensor_sum;
+//    cudaCheck(cudaMemcpyAsync(ret, aux, 1*sizeof(float), cudaMemcpyHostToDevice, stream));
+//    delete[] aux;
   
-    std::vector<int> new_dims;
-    new_dims.push_back(1.0f);
+//    std::vector<int> new_dims;
+//    new_dims.push_back(1.0f);
   
-    DT_tensor *new_tensor = createTensor(scope_struct, ret, new_dims, 1.0f, false, "");
-    new_tensor->op=mean_op;
-    new_tensor->AttrLNode(tensor, mean_op);
-    return new_tensor;
-  }
+//    DT_tensor *new_tensor = createTensor(scope_struct, ret, new_dims, 1.0f, false, "");
+//    new_tensor->op=mean_op;
+//    new_tensor->AttrLNode(tensor, mean_op);
+//    return new_tensor;
+//  }
 
 
-  std::vector<int> sum_dims, new_dims;
-  if (first_dim<0)
-    first_dim = dims.size()+first_dim;
-  sum_dims.push_back(first_dim);
+//  std::vector<int> sum_dims, new_dims;
+//  if (first_dim<0)
+//    first_dim = dims.size()+first_dim;
+//  sum_dims.push_back(first_dim);
 
-  for (int i=0; i<10; i++)
-  {
-    if (i==9)
-    {
-      LogErrorC(scope_struct->code_line, "A tensor with 10 dimensions??? (mean)");
-      std::cout << "Input tensor dims:" << "\n";
-      PrintDims(tensor->dims);
-      std::cout << "Mean dims:" << "\n";
-      PrintDims(sum_dims);
-      return nullptr;
-    }
+//  for (int i=0; i<10; i++)
+//  {
+//    if (i==9)
+//    {
+//      LogErrorC(scope_struct->code_line, "A tensor with 10 dimensions??? (mean)");
+//      std::cout << "Input tensor dims:" << "\n";
+//      PrintDims(tensor->dims);
+//      std::cout << "Mean dims:" << "\n";
+//      PrintDims(sum_dims);
+//      return nullptr;
+//    }
 
-    int dim = va_arg(args, int);
+//    int dim = va_arg(args, int);
     
-    if (dim==TERMINATE_VARARG)
-      break;
-    if (in_int(dim, sum_dims))  
-    {
-      std::string _error = "Dim "+std::to_string(dim) + " duplicated at tensor.mean() operation.";
-      LogErrorC(scope_struct->code_line, _error);
-      return nullptr;
-    }
-    if (dim<0)
-      dim = dims.size()+dim;
-    sum_dims.push_back(dim);
-  }
-  va_end(args);
+//    if (dim==TERMINATE_VARARG)
+//      break;
+//    if (in_int(dim, sum_dims))  
+//    {
+//      std::string _error = "Dim "+std::to_string(dim) + " duplicated at tensor.mean() operation.";
+//      LogErrorC(scope_struct->code_line, _error);
+//      return nullptr;
+//    }
+//    if (dim<0)
+//      dim = dims.size()+dim;
+//    sum_dims.push_back(dim);
+//  }
+//  va_end(args);
   
   
-  float summed_dim;
-  for (int i=0; i<dims.size(); i++)
-    if (!in_int(i, sum_dims))
-      new_dims.push_back(dims[i]);
-    else
-      summed_dim=dims[i];
+//  float summed_dim;
+//  for (int i=0; i<dims.size(); i++)
+//    if (!in_int(i, sum_dims))
+//      new_dims.push_back(dims[i]);
+//    else
+//      summed_dim=dims[i];
 
 
-  int dims_prod = DimsProd(dims);
-  int new_dims_prod = DimsProd(new_dims);
-
-  
-  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "mean");
-  cudaMemset(summed, 0, new_dims_prod * sizeof(float));
-
+//  int dims_prod = DimsProd(dims);
+//  int new_dims_prod = DimsProd(new_dims);
 
   
+//  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "mean");
+//  cudaMemset(summed, 0, new_dims_prod * sizeof(float));
+
+
+  
   
   
 
-  if (sum_dims[0]==(dims.size()-2))
-  {
-    std::vector<int> _dims = RemoveLastDim(RemoveLastDim(dims));
-    dims_prod = DimsProd(_dims);
+//  if (sum_dims[0]==(dims.size()-2))
+//  {
+//    std::vector<int> _dims = RemoveLastDim(RemoveLastDim(dims));
+//    dims_prod = DimsProd(_dims);
 
-    int warps_per_block = THREADS_PER_BLOCK/WARP_SIZE;
-    //warps_per_block = fminf(warps_per_block, dims[dims.size()-2]);
+//    int warps_per_block = THREADS_PER_BLOCK/WARP_SIZE;
+//    //warps_per_block = fminf(warps_per_block, dims[dims.size()-2]);
     
-    // TODO: is this kernel grid_size correct?
-    mean_over_semilast_dim_kernel<<<dims_prod, warps_per_block*WARP_SIZE, 0, stream>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-2], dims[dims.size()-1], warps_per_block);
+//    // TODO: is this kernel grid_size correct?
+//    mean_over_semilast_dim_kernel<<<dims_prod, warps_per_block*WARP_SIZE, 0, stream>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-2], dims[dims.size()-1], warps_per_block);
 
-    bool has_grad = tensor->is_grad_candidate;
-    return customOpTensor(scope_struct, summed, new_dims, new_dims_prod, "mean_over_semilast_dim_backward", nullptr, tensor, has_grad);
-  }
+//    bool has_grad = tensor->is_grad_candidate;
+//    return customOpTensor(scope_struct, summed, new_dims, new_dims_prod, "mean_over_semilast_dim_backward", nullptr, tensor, has_grad);
+//  }
 
-  /*
-  if (dims.size()==1)
-  {
-    sum_single_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod);
-    new_dims = {1.0f};
-  }
-  else if (sum_dims[0]==(dims.size()-1))
-    sum_over_last_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod, summed_dim);
-  if (sum_dims[0]==(dims.size()-2))
-    sum_over_semilast_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-1], dims[dims.size()-2]);
-
-
-  DT_tensor *new_tensor = createTensor(scope_struct, summed, new_dims, DimsProd(new_dims), false, "");
-  return new_tensor;
-  */
-  LogErrorC(scope_struct->code_line, "Mean of specific dim is not implemented yet.");
-  return nullptr;
-}
+//  /*
+//  if (dims.size()==1)
+//  {
+//    sum_single_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod);
+//    new_dims = {1.0f};
+//  }
+//  else if (sum_dims[0]==(dims.size()-1))
+//    sum_over_last_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod, summed_dim);
+//  if (sum_dims[0]==(dims.size()-2))
+//    sum_over_semilast_dim_kernel<<<grid_size, block_size, shared_mem_size>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-1], dims[dims.size()-2]);
 
 
-void mean_over_semilast_dim_backward(Scope_Struct *scope_struct, float *inp, int size, float *out,
-                     float *dinp, float *dout,
-                     void *network_module, DT_tensor *node)
-{
-  std::vector<int> dims = node->L_Node->dims;
-  int x_dims_prod = node->L_Node->dims_prod;
-  int y_dims_prod = node->dims_prod;
+//  DT_tensor *new_tensor = createTensor(scope_struct, summed, new_dims, DimsProd(new_dims), false, "");
+//  return new_tensor;
+//  */
+//  LogErrorC(scope_struct->code_line, "Mean of specific dim is not implemented yet.");
+//  return nullptr;
+//}
 
 
-  mean_over_semilast_dim_backward_kernel<<<std::ceil((float)x_dims_prod/(float)THREADS_PER_BLOCK), THREADS_PER_BLOCK, 0, main_stream>>>(dinp, dout,  x_dims_prod, dims[dims.size()-2], dims[dims.size()-1]);
-}
+//void mean_over_semilast_dim_backward(Scope_Struct *scope_struct, float *inp, int size, float *out,
+//                     float *dinp, float *dout,
+//                     void *network_module, DT_tensor *node)
+//{
+//  std::vector<int> dims = node->L_Node->dims;
+//  int x_dims_prod = node->L_Node->dims_prod;
+//  int y_dims_prod = node->dims_prod;
 
-extern "C" DT_tensor *sum(Scope_Struct *scope_struct, DT_tensor tensor, int first_dim, ...)
-{
-  //std::cout << "SUM OF " << tensor.name << "\n";
 
-  int thread_id = scope_struct->thread_id;
+//  mean_over_semilast_dim_backward_kernel<<<std::ceil((float)x_dims_prod/(float)THREADS_PER_BLOCK), THREADS_PER_BLOCK, 0, main_stream>>>(dinp, dout,  x_dims_prod, dims[dims.size()-2], dims[dims.size()-1]);
+//}
 
-  float *tensor_ptr = tensor.tensor_ptr;
-  std::vector<int> dims = tensor.dims;
-  float *summed;
+//extern "C" DT_tensor *sum(Scope_Struct *scope_struct, DT_tensor tensor, int first_dim, ...)
+//{
+//  //std::cout << "SUM OF " << tensor.name << "\n";
 
-  cudaStream_t stream = ThreadsStream[thread_id];
+//  int thread_id = scope_struct->thread_id;
 
-  va_list args;
-  va_start(args, first_dim);
+//  float *tensor_ptr = tensor.tensor_ptr;
+//  std::vector<int> dims = tensor.dims;
+//  float *summed;
 
-  if (first_dim==TERMINATE_VARARG)
-  {
-    va_end(args);
-    float *ret;
-    int dims_prod = DimsProd(dims);
+//  cudaStream_t stream = ThreadsStream[thread_id];
 
-    summed = new float[dims_prod];
-    cudaCheck(cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream));
+//  va_list args;
+//  va_start(args, first_dim);
 
-    cudaCheck(cudaMalloc(&ret, round_to_nearest_pow2(1)*sizeof(float)));
+//  if (first_dim==TERMINATE_VARARG)
+//  {
+//    va_end(args);
+//    float *ret;
+//    int dims_prod = DimsProd(dims);
+
+//    summed = new float[dims_prod];
+//    cudaCheck(cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream));
+
+//    cudaCheck(cudaMalloc(&ret, round_to_nearest_pow2(1)*sizeof(float)));
   
-    float tensor_sum=0;
-    for(int i=0; i<dims_prod; i++)
-      tensor_sum += summed[i];
+//    float tensor_sum=0;
+//    for(int i=0; i<dims_prod; i++)
+//      tensor_sum += summed[i];
     
-    delete[] summed;
+//    delete[] summed;
   
-    float *aux = new float[1];
-    aux[0] = tensor_sum;
-    cudaCheck(cudaMemcpy(ret, aux, 1*sizeof(float), cudaMemcpyHostToDevice));  
-    delete[] aux;
+//    float *aux = new float[1];
+//    aux[0] = tensor_sum;
+//    cudaCheck(cudaMemcpy(ret, aux, 1*sizeof(float), cudaMemcpyHostToDevice));  
+//    delete[] aux;
   
-    std::vector<int> new_dims;
-    new_dims.push_back(1.0f);
+//    std::vector<int> new_dims;
+//    new_dims.push_back(1.0f);
   
-    DT_tensor *new_tensor = createTensor(scope_struct, ret, new_dims, 1.0f, false, "");
-    new_tensor->op=sum_op;
-    return new_tensor;
-  }
+//    DT_tensor *new_tensor = createTensor(scope_struct, ret, new_dims, 1.0f, false, "");
+//    new_tensor->op=sum_op;
+//    return new_tensor;
+//  }
 
 
-  std::vector<int> sum_dims, new_dims;
-  if (first_dim<0)
-    first_dim = dims.size()+first_dim;
-  sum_dims.push_back(first_dim);
+//  std::vector<int> sum_dims, new_dims;
+//  if (first_dim<0)
+//    first_dim = dims.size()+first_dim;
+//  sum_dims.push_back(first_dim);
 
-  for (int i=0; i<10; i++)
-  {
-    if (i==9)
-    {
-      LogErrorC(scope_struct->code_line, "A tensor with 10 dimensions??? (sum)");
-      return nullptr;
-    }
+//  for (int i=0; i<10; i++)
+//  {
+//    if (i==9)
+//    {
+//      LogErrorC(scope_struct->code_line, "A tensor with 10 dimensions??? (sum)");
+//      return nullptr;
+//    }
 
-    int dim = va_arg(args, int);
+//    int dim = va_arg(args, int);
     
-    if (dim==TERMINATE_VARARG)
-      break;
-    if (in_int(dim, sum_dims))  
-    {
-      std::string _error = "Dim "+std::to_string(dim) + " duplicated at tensor.sum() operation.";
-      LogErrorC(scope_struct->code_line, _error);
-      return nullptr;
-    }
-    if (dim<0)
-      dim = dims.size()+dim;
-    sum_dims.push_back(dim);
-  }
-  va_end(args);
+//    if (dim==TERMINATE_VARARG)
+//      break;
+//    if (in_int(dim, sum_dims))  
+//    {
+//      std::string _error = "Dim "+std::to_string(dim) + " duplicated at tensor.sum() operation.";
+//      LogErrorC(scope_struct->code_line, _error);
+//      return nullptr;
+//    }
+//    if (dim<0)
+//      dim = dims.size()+dim;
+//    sum_dims.push_back(dim);
+//  }
+//  va_end(args);
   
   
-  float summed_dim;
-  for (int i=0; i<dims.size(); i++)
-    if (!in_int(i, sum_dims))
-      new_dims.push_back(dims[i]);
-    else
-      summed_dim=dims[i];
+//  float summed_dim;
+//  for (int i=0; i<dims.size(); i++)
+//    if (!in_int(i, sum_dims))
+//      new_dims.push_back(dims[i]);
+//    else
+//      summed_dim=dims[i];
 
 
-  int dims_prod = DimsProd(dims);
-  int new_dims_prod = DimsProd(new_dims);
-
-  
-  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "summed");
-  cudaMemset(summed, 0, new_dims_prod * sizeof(float));
-
-  //std::cout << "\n\nDims prod: " << dims_prod << "\nNew dims prod: " << new_dims_prod << "\nSummed dim size: " << summed_dim << "\n\n";
+//  int dims_prod = DimsProd(dims);
+//  int new_dims_prod = DimsProd(new_dims);
 
   
-  int grid_size = dims_prod;
-  int block_size = 32;
-  size_t shared_mem_size = 2 * block_size / 32 * sizeof(float);
+//  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "summed");
+//  cudaMemset(summed, 0, new_dims_prod * sizeof(float));
+
+//  //std::cout << "\n\nDims prod: " << dims_prod << "\nNew dims prod: " << new_dims_prod << "\nSummed dim size: " << summed_dim << "\n\n";
 
   
-  if (dims.size()==1)
-  {
-    sum_single_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod);
-    new_dims = {1};
-  }
-  else if (sum_dims[0]==(dims.size()-1))
-    sum_over_last_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod, summed_dim);
-  if (sum_dims[0]==(dims.size()-2))
-    sum_over_semilast_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-1], dims[dims.size()-2]);
+//  int grid_size = dims_prod;
+//  int block_size = 32;
+//  size_t shared_mem_size = 2 * block_size / 32 * sizeof(float);
+
+  
+//  if (dims.size()==1)
+//  {
+//    sum_single_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod);
+//    new_dims = {1};
+//  }
+//  else if (sum_dims[0]==(dims.size()-1))
+//    sum_over_last_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod, summed_dim);
+//  if (sum_dims[0]==(dims.size()-2))
+//    sum_over_semilast_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-1], dims[dims.size()-2]);
 
 
-  DT_tensor *new_tensor = createTensor(scope_struct, summed, new_dims, DimsProd(new_dims), false, "");
-  new_tensor->op=sum_op;
-  return new_tensor;
-}
+//  DT_tensor *new_tensor = createTensor(scope_struct, summed, new_dims, DimsProd(new_dims), false, "");
+//  new_tensor->op=sum_op;
+//  return new_tensor;
+//}
 
 
 
-extern "C" DT_tensor *prod(Scope_Struct *scope_struct, DT_tensor tensor, int first_dim, ...)
-{
-  //std::cout << "PROD OF " << tensor.name << "\n";
+//extern "C" DT_tensor *prod(Scope_Struct *scope_struct, DT_tensor tensor, int first_dim, ...)
+//{
+//  //std::cout << "PROD OF " << tensor.name << "\n";
 
-  int thread_id = thread_id;
+//  int thread_id = thread_id;
 
-  float *tensor_ptr = tensor.tensor_ptr;
-  std::vector<int> dims = tensor.dims;
-  float *summed;
+//  float *tensor_ptr = tensor.tensor_ptr;
+//  std::vector<int> dims = tensor.dims;
+//  float *summed;
 
-  cudaStream_t stream = ThreadsStream[thread_id];
+//  cudaStream_t stream = ThreadsStream[thread_id];
 
-  va_list args;
-  va_start(args, first_dim);
+//  va_list args;
+//  va_start(args, first_dim);
 
-  if (first_dim==TERMINATE_VARARG)
-  {
-    // va_end(args);
-    // int dims_prod = DimsProd(dims);
+//  if (first_dim==TERMINATE_VARARG)
+//  {
+//    // va_end(args);
+//    // int dims_prod = DimsProd(dims);
 
-    // summed = get_from_pool(scope_struct, thread_id, dims_prod, "prod all dims");
-    // cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream);
+//    // summed = get_from_pool(scope_struct, thread_id, dims_prod, "prod all dims");
+//    // cudaMemcpyAsync(summed, tensor_ptr, dims_prod*sizeof(float), cudaMemcpyDeviceToHost, stream);
     
-    // float tensor_sum=0;
-    // for(int i=0; i<dims_prod; i++)
-    //   tensor_sum += summed[i];
-    // tensor_sum = tensor_sum;
+//    // float tensor_sum=0;
+//    // for(int i=0; i<dims_prod; i++)
+//    //   tensor_sum += summed[i];
+//    // tensor_sum = tensor_sum;
 
-    // std::cout << "prod: " << tensor_sum << "\n";
+//    // std::cout << "prod: " << tensor_sum << "\n";
 
-    // return summed;
-    LogErrorC(scope_struct->code_line, "MUST REIMPLEMENT PROD WITH NO DIMS AS INPUT");
-    return nullptr;
-  }
+//    // return summed;
+//    LogErrorC(scope_struct->code_line, "MUST REIMPLEMENT PROD WITH NO DIMS AS INPUT");
+//    return nullptr;
+//  }
 
 
-  std::vector<int> sum_dims, new_dims;
-  if (first_dim<0)
-    first_dim = dims.size()+first_dim;
-  sum_dims.push_back(first_dim);
+//  std::vector<int> sum_dims, new_dims;
+//  if (first_dim<0)
+//    first_dim = dims.size()+first_dim;
+//  sum_dims.push_back(first_dim);
 
-  for (int i=0; i<10; i++)
-  {
-    if (i==9)
-    {
-      LogErrorC(scope_struct->code_line, "A tensor with 10 dimensions??? (prod)");
-      return nullptr;
-    }
+//  for (int i=0; i<10; i++)
+//  {
+//    if (i==9)
+//    {
+//      LogErrorC(scope_struct->code_line, "A tensor with 10 dimensions??? (prod)");
+//      return nullptr;
+//    }
 
-    int dim = va_arg(args, int);
+//    int dim = va_arg(args, int);
     
-    if (dim==TERMINATE_VARARG)
-      break;
-    if (in_int(dim, sum_dims))  
-    {
-      std::string _error = "Dim "+std::to_string(dim) + " duplicated at tensor.sum() operation.";
-      LogErrorC(scope_struct->code_line, _error);
-      return nullptr;
-    }
-    if (dim<0)
-      dim = dims.size()+dim;
-    sum_dims.push_back(dim);
-  }
-  va_end(args);
+//    if (dim==TERMINATE_VARARG)
+//      break;
+//    if (in_int(dim, sum_dims))  
+//    {
+//      std::string _error = "Dim "+std::to_string(dim) + " duplicated at tensor.sum() operation.";
+//      LogErrorC(scope_struct->code_line, _error);
+//      return nullptr;
+//    }
+//    if (dim<0)
+//      dim = dims.size()+dim;
+//    sum_dims.push_back(dim);
+//  }
+//  va_end(args);
   
   
-  float summed_dim;
-  for (int i=0; i<dims.size(); i++)
-    if (!in_int(i, sum_dims))
-      new_dims.push_back(dims[i]);
-    else
-      summed_dim=dims[i];
+//  float summed_dim;
+//  for (int i=0; i<dims.size(); i++)
+//    if (!in_int(i, sum_dims))
+//      new_dims.push_back(dims[i]);
+//    else
+//      summed_dim=dims[i];
 
 
-  int dims_prod = DimsProd(dims);
-  int new_dims_prod = DimsProd(new_dims);
-
-  
-  float *init_prod = new float[new_dims_prod];
-  init_prod = make_ones_float(new_dims_prod);
-  
-  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "prod");
-  cudaMemcpyAsync(summed, init_prod, new_dims_prod * sizeof(float), cudaMemcpyHostToDevice, stream);
-  delete[] init_prod;
-
-  //PrintTensorF(summed, new_dims_prod,1);
-
-  //std::cout << "\n\nDims prod: " << dims_prod << "\nNew dims prod: " << new_dims_prod << "\nSummed dim size: " << summed_dim << "\n\n";
+//  int dims_prod = DimsProd(dims);
+//  int new_dims_prod = DimsProd(new_dims);
 
   
-  int grid_size = dims_prod;
-  int block_size = 32;
-  size_t shared_mem_size = 2 * block_size / 32 * sizeof(float);
+//  float *init_prod = new float[new_dims_prod];
+//  init_prod = make_ones_float(new_dims_prod);
+  
+//  summed = get_from_pool(scope_struct, thread_id, new_dims_prod, "prod");
+//  cudaMemcpyAsync(summed, init_prod, new_dims_prod * sizeof(float), cudaMemcpyHostToDevice, stream);
+//  delete[] init_prod;
+
+//  //PrintTensorF(summed, new_dims_prod,1);
+
+//  //std::cout << "\n\nDims prod: " << dims_prod << "\nNew dims prod: " << new_dims_prod << "\nSummed dim size: " << summed_dim << "\n\n";
 
   
-  if (dims.size()==1)
-  {
-    prod_single_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod);
-    new_dims = {1};
-  }
-  else if (sum_dims[0]==(dims.size()-1))
-  {
-    prod_over_last_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod, summed_dim);
-    //std::cout << "prod_over_last_dim_kernel" << "\n";
-  }
-  if (sum_dims[0]==(dims.size()-2))
-    prod_over_semilast_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-1], dims[dims.size()-2]);
+//  int grid_size = dims_prod;
+//  int block_size = 32;
+//  size_t shared_mem_size = 2 * block_size / 32 * sizeof(float);
+
+  
+//  if (dims.size()==1)
+//  {
+//    prod_single_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod);
+//    new_dims = {1};
+//  }
+//  else if (sum_dims[0]==(dims.size()-1))
+//  {
+//    prod_over_last_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod, summed_dim);
+//    //std::cout << "prod_over_last_dim_kernel" << "\n";
+//  }
+//  if (sum_dims[0]==(dims.size()-2))
+//    prod_over_semilast_dim_kernel<<<grid_size, block_size, shared_mem_size, stream>>>(tensor_ptr, summed, dims_prod, dims[dims.size()-1], dims[dims.size()-2]);
 
 
-  DT_tensor *new_tensor = createTensor(scope_struct, summed, new_dims, DimsProd(new_dims), false, "");
-  return new_tensor;
-}
+//  DT_tensor *new_tensor = createTensor(scope_struct, summed, new_dims, DimsProd(new_dims), false, "");
+//  return new_tensor;
+//}
 
 
 
-extern "C" DT_tensor *gather(Scope_Struct *scope_struct, DT_tensor *tensor, DT_tensor *idx_tensor, float dim)
-{
-  int thread_id = scope_struct->thread_id;
-  //std::cout << "Gather THREAD IS: " << thread_id << "\n";
+//extern "C" DT_tensor *gather(Scope_Struct *scope_struct, DT_tensor *tensor, DT_tensor *idx_tensor, float dim)
+//{
+//  int thread_id = scope_struct->thread_id;
+//  //std::cout << "Gather THREAD IS: " << thread_id << "\n";
 
 
-  if(dim<0)
-    dim = tensor->dims.size()+dim;
+//  if(dim<0)
+//    dim = tensor->dims.size()+dim;
 
-  if(dim == tensor->dims.size()-1)
-  {
-    //std::cout << "Gather over last dim"  << "\n";
+//  if(dim == tensor->dims.size()-1)
+//  {
+//    //std::cout << "Gather over last dim"  << "\n";
 
-    float *tensor_ptr = tensor->tensor_ptr;
-    std::vector<int> dims, new_dims;
-    dims = tensor->dims;
-    new_dims = RemoveLastDim(dims);
-    float leading_dim = dims[dim];
+//    float *tensor_ptr = tensor->tensor_ptr;
+//    std::vector<int> dims, new_dims;
+//    dims = tensor->dims;
+//    new_dims = RemoveLastDim(dims);
+//    float leading_dim = dims[dim];
 
-    //PrintDims(dims);
-    //PrintDims(new_dims);
-
-    
-    float dims_prod = tensor->dims_prod;
-    float new_dims_prod = DimsProd(new_dims);
-
-    int grid_size, block_size, shared_mem_size; 
-    std::vector<int> grid_block_mem_sizes = CalculateGridAndBlockSizes(new_dims_prod);
-    grid_size = grid_block_mem_sizes[0];
-    block_size = grid_block_mem_sizes[1];
-    
-
-    float *y = get_from_pool(scope_struct, thread_id, new_dims_prod, "gather");
-    //float *y;
-    
-
-    tensor->Sync();
-    cudaStream_t stream = ThreadsStream[thread_id];
-    gather_last_dim_kernel<<<grid_size, block_size, 0, stream>>>(y, tensor->tensor_ptr, idx_tensor->tensor_ptr, leading_dim, new_dims_prod);
-
-
+//    //PrintDims(dims);
+//    //PrintDims(new_dims);
 
     
+//    float dims_prod = tensor->dims_prod;
+//    float new_dims_prod = DimsProd(new_dims);
 
-    DT_tensor *new_tensor = createTensor(scope_struct, y, new_dims, new_dims_prod, false, "");
-    //idx_tensor->op = detach_op;
-    new_tensor->AttrNodes(tensor, wrapTensorWithDetached(scope_struct, idx_tensor), gather_last_dim_op);
-    //new_tensor->AttrLNode(idx_tensor, gather_last_dim_op);
-    todo_backward_tensors.push_back(new_tensor);
-    return new_tensor;
-  }
-}
+//    int grid_size, block_size, shared_mem_size; 
+//    std::vector<int> grid_block_mem_sizes = CalculateGridAndBlockSizes(new_dims_prod);
+//    grid_size = grid_block_mem_sizes[0];
+//    block_size = grid_block_mem_sizes[1];
+    
+
+//    float *y = get_from_pool(scope_struct, thread_id, new_dims_prod, "gather");
+//    //float *y;
+    
+
+//    tensor->Sync();
+//    cudaStream_t stream = ThreadsStream[thread_id];
+//    gather_last_dim_kernel<<<grid_size, block_size, 0, stream>>>(y, tensor->tensor_ptr, idx_tensor->tensor_ptr, leading_dim, new_dims_prod);
 
 
 
-void gather_last_dim_backward(Scope_Struct *scope_struct, float *inp, int size, float *out,
-                     float *dinp, float *dout,
-                     void *network_module, DT_tensor *node)
-{
-  // consider dx was set to zero already
+    
+
+//    DT_tensor *new_tensor = createTensor(scope_struct, y, new_dims, new_dims_prod, false, "");
+//    //idx_tensor->op = detach_op;
+//    new_tensor->AttrNodes(tensor, wrapTensorWithDetached(scope_struct, idx_tensor), gather_last_dim_op);
+//    //new_tensor->AttrLNode(idx_tensor, gather_last_dim_op);
+//    todo_backward_tensors.push_back(new_tensor);
+//    return new_tensor;
+//  }
+//}
+
+
+
+//void gather_last_dim_backward(Scope_Struct *scope_struct, float *inp, int size, float *out,
+//                     float *dinp, float *dout,
+//                     void *network_module, DT_tensor *node)
+//{
+//  // consider dx was set to zero already
   
 
-  float *idx = node->R_Node->tensor_ptr;
+//  float *idx = node->R_Node->tensor_ptr;
 
-  std::vector<int> dims = node->L_Node->dims;
-  int leading_dim = dims[dims.size()-1];
+//  std::vector<int> dims = node->L_Node->dims;
+//  int leading_dim = dims[dims.size()-1];
 
-  float dims_prod = node->dims_prod;
-
-
-  int grid_size, block_size; 
-  CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
+//  float dims_prod = node->dims_prod;
 
 
-  gather_last_dim_backward_kernel<<<grid_size, block_size, 0, main_stream>>>(dinp, dout, idx, leading_dim, dims_prod);
-
-  //PrintTensorF(idx, 1, node->R_Node->dims_prod);
-  //PrintTensorF(dx, dims[0], dims[1]);
-
-}
+//  int grid_size, block_size; 
+//  CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
 
 
-inline void transpose(Scope_Struct *scope_struct, DT_tensor *tensor, int thread_id, cudaStream_t stream)
-{
+//  gather_last_dim_backward_kernel<<<grid_size, block_size, 0, main_stream>>>(dinp, dout, idx, leading_dim, dims_prod);
 
-  float *transposed = get_from_pool(scope_struct, thread_id, tensor->dims_prod, "transpose");
+//  //PrintTensorF(idx, 1, node->R_Node->dims_prod);
+//  //PrintTensorF(dx, dims[0], dims[1]);
 
-
-  constexpr int tile_size{32}; // todo
-
-  dim3 grid_size(std::ceil(tensor->dims[0]/(float)tile_size), std::ceil(tensor->dims[1]/(float)tile_size));
-  dim3 block_size(tile_size, 8);
-
-  transpose_kernel<tile_size, 8><<<grid_size, block_size, 0, stream>>>(tensor->tensor_ptr, transposed);
-
-  // move_to_pool(thread_id, tensor->dims_prod, tensor->tensor_ptr, "transpose");
-  tensor->tensor_ptr = transposed;
-}
+//}
 
 
-extern "C" DT_tensor *tensor_Idx(Scope_Struct *scope_struct, DT_tensor *tensor, int idx) {
-  int tid = scope_struct->thread_id;
+//inline void transpose(Scope_Struct *scope_struct, DT_tensor *tensor, int thread_id, cudaStream_t stream)
+//{
 
-  std::vector<int> new_dims = BatchLessDims(tensor->dims);
-  int idx_size = DimsProd(new_dims);
+//  float *transposed = get_from_pool(scope_struct, thread_id, tensor->dims_prod, "transpose");
+
+
+//  constexpr int tile_size{32}; // todo
+
+//  dim3 grid_size(std::ceil(tensor->dims[0]/(float)tile_size), std::ceil(tensor->dims[1]/(float)tile_size));
+//  dim3 block_size(tile_size, 8);
+
+//  transpose_kernel<tile_size, 8><<<grid_size, block_size, 0, stream>>>(tensor->tensor_ptr, transposed);
+
+//  // move_to_pool(thread_id, tensor->dims_prod, tensor->tensor_ptr, "transpose");
+//  tensor->tensor_ptr = transposed;
+//}
+
+
+//extern "C" DT_tensor *tensor_Idx(Scope_Struct *scope_struct, DT_tensor *tensor, int idx) {
+//  int tid = scope_struct->thread_id;
+
+//  std::vector<int> new_dims = BatchLessDims(tensor->dims);
+//  int idx_size = DimsProd(new_dims);
   
-  float *y = get_from_pool(scope_struct, tid, idx_size, "tensor Idx");
-  copy_tensor_kernel<<<ceilf(idx_size/1024.0f), 1024, 0, main_stream>>>(y, tensor->tensor_ptr+idx*idx_size, idx_size);
+//  float *y = get_from_pool(scope_struct, tid, idx_size, "tensor Idx");
+//  copy_tensor_kernel<<<ceilf(idx_size/1024.0f), 1024, 0, main_stream>>>(y, tensor->tensor_ptr+idx*idx_size, idx_size);
 
-  bool has_grad = tensor->is_grad_candidate;    
-  return customOpTensor(scope_struct, y, new_dims, idx_size, "relu_backward", nullptr, tensor, has_grad);
-}
-
-
-extern "C" int tensor_CalculateIdx(DT_tensor *tensor, int first_idx, ...) {
-  int idx = first_idx;
-  int idx_pre = idx;
-
-  //return
-  return first_idx;
+//  bool has_grad = tensor->is_grad_candidate;    
+//  return customOpTensor(scope_struct, y, new_dims, idx_size, "relu_backward", nullptr, tensor, has_grad);
+//}
 
 
-  va_list args;
-  va_start(args, first_idx);
+//extern "C" int tensor_CalculateIdx(DT_tensor *tensor, int first_idx, ...) {
+//  int idx = first_idx;
+//  int idx_pre = idx;
 
-  while(idx!=TERMINATE_VARARG) {
-    idx_pre = idx;
-    idx = va_arg(args, int);
-  }
+//  //return
+//  return first_idx;
 
-  va_end(args);
 
-  if (idx_pre>tensor->dims_prod)
-    LogErrorC(-1, "Tensor index out of bounds");
-  std::cout << "Return index: " << idx_pre << ".\n";
-  return idx_pre;
-}
+//  va_list args;
+//  va_start(args, first_idx);
+
+//  while(idx!=TERMINATE_VARARG) {
+//    idx_pre = idx;
+//    idx = va_arg(args, int);
+//  }
+
+//  va_end(args);
+
+//  if (idx_pre>tensor->dims_prod)
+//    LogErrorC(-1, "Tensor index out of bounds");
+//  std::cout << "Return index: " << idx_pre << ".\n";
+//  return idx_pre;
+//}

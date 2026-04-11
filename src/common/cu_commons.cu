@@ -51,14 +51,11 @@ std::mt19937 WEIGHT_PRNG(rd()^get_millisecond_time()); // initialize the Mersenn
 //std::mt19937 WEIGHT_PRNG(0);
 
 float* make_random_float_uniform(size_t N) {
-    
     std::uniform_real_distribution<float> dist(0.0f, 1.0f); // range -1..1
-    
     float* arr = (float*)malloc(N * sizeof(float));
     for (size_t i = 0; i < N; i++)
         arr[i] = dist(WEIGHT_PRNG);
         //arr[i] = ((float)rand() / RAND_MAX); // range 0..1
-    
     return arr;
 }
 

@@ -9,5 +9,6 @@
 #include "mma/include.h"
 #include "nsk_cuda/include.h"
 #include "optimizers/include.h"
+#include "pool/include.h"
 #include "processing/include.h"
 #include "tensor/include.h"

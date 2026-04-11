@@ -3,7 +3,6 @@
 
 __global__ void add_forward(float *y, const float *x,
                             const float *w, int dims_prod) {
-
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     if (i < dims_prod)
         y[i] = x[i] + w[i];

@@ -1,10 +1,20 @@
 #include <cuda_runtime.h>
 
-#include "../backprop/backprop.h"
+#include "../pool/include.h"
 #include "../cuda_kernels/include.h"
 #include "../cuda_threads/include.h"
+// #include "../data_types/include.h"
 #include "../common/include.h"
-#include "../tensor/tensor_struct.h"
+
+#include "../../../src/nsk_cpp_llvm.h"
+
+
+llvm::Type *float_pp_llvm(std::unique_ptr<LLVMContext> &ctx) {
+    return Type::getFloatTy(*ctx)->getPointerTo();
+}
+llvm::Type *float_cpu_llvm(std::unique_ptr<LLVMContext> &ctx) {
+    return Type::getFloatTy(*ctx)->getPointerTo();
+}
 
 
 extern "C" void initialize__nsk_cuda() {
@@ -25,6 +35,10 @@ extern "C" void initialize__nsk_cuda() {
 
   std::cout << "Shared-Memory per thread-block size: " << deviceProp.sharedMemPerBlock << ".\n";
   
+  for (int i=0; i<TSPANS; ++i) {
+      tarena.cur_span[i] = nullptr;
+      tarena.first_span[i] = nullptr;
+  }
 
     
   cudaDeviceGetAttribute(&WARP_SIZE, cudaDevAttrWarpSize, 0); 
@@ -49,33 +63,15 @@ extern "C" void initialize__nsk_cuda() {
   main_stream = createCudaStream();
 
 
-  tensor_inits = {"binary", "arange", "ints", "randu", "zeros", "ones", "xavu", "xavu_relu", "xavu_tanh", "he_normal_relu", "init_gpt", "xavn", "normal", "fixed8i", "fixed42i"};
 
 
-  leaf_ops = {leaf, tensor_leaf, weight_leaf, bias_leaf};
-  activation_ops = {relu_op, gelu_op, softmax_op, tanh_op, sigmoid_op, cudnn_relu_op};
-  loss_ops = {cross_entropy_op, cross_entropy_idx_op, mse_op, mse_is_w_op};
-
-  custom_ops = {sigmoid_add2weights_op, embedding_op};
-
-  tensor_scalar_ops = {scalar_add_op, scalar_sub_op, scalar_mult_op, scalar_div_op};
-
-  weightless_ops = {add_op, lgrad_op, dropout_op};
-  weightless_ops = concat_int_vec(weightless_ops, tensor_scalar_ops);
-
-  preprocessing_ops = {gpu_op, crop_op, random_horizontal_flip_op, normalize_img_op, jitter_op};
-  gradless_ops = {randu_like_op, onehot_op, max_op, argmax_op, equal_op,
-                  create_tensor_from_brackets_op, detach_op};
-  gradless_ops = concat_int_vec(gradless_ops, preprocessing_ops);
-
-
-
-
-  backward_functions["scalarmult_backward"] = scalarmult_backward;
-	backward_functions["relu_backward"] = relu_backward;
-	backward_functions["gelu_backward"] = gelu_backward;
-	backward_functions["sigmoid_backward"] = sigmoid_backward;
-	backward_functions["tanh_backward"] = tanh_backward;
-	backward_functions["mean_over_semilast_dim_backward"] = mean_over_semilast_dim_backward;
-	backward_functions["gather_last_dim_backward"] = gather_last_dim_backward;
+  // backward_functions["scalarmult_backward"] = scalarmult_backward;
+  // backward_functions["relu_backward"] = relu_backward;
+  // backward_functions["gelu_backward"] = gelu_backward;
+  // backward_functions["sigmoid_backward"] = sigmoid_backward;
+  // backward_functions["tanh_backward"] = tanh_backward;
+  // backward_functions["mean_over_semilast_dim_backward"] = mean_over_semilast_dim_backward;
+  // backward_functions["gather_last_dim_backward"] = gather_last_dim_backward;
+  data_register_fn["float_pp"] = float_pp_llvm;
+  data_register_fn["float_cpu"] = float_cpu_llvm;
 }

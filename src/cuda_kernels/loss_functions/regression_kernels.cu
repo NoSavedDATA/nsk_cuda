@@ -2,13 +2,11 @@
 
 
 __global__ void mse_kernel(float *dy, const float* y_hat, const float* y,
-                            const float scale, const float dims_prod) {
+                            const float dims_prod) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
-    if (idx < dims_prod) {
+    if (idx < dims_prod)
         dy[idx] = 2 * (y_hat[idx] - y[idx]);
-        // dy[idx] = 2 * (y_hat[idx] - y[idx]) * scale;
-    }
 }
 
 

@@ -5,7 +5,6 @@
 #include <cuda_fp16.h>
 #include <mma.h>
 
-#include "../../tensor/tensor_struct.h"
 
 __global__ void relu_forward(float* Z, float* A,
     const float dims_prod); 

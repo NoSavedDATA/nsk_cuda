@@ -6,12 +6,29 @@
 
 #include "../../common/cu_commons.h"
 #include "../../cuda_kernels/calculate_grids.h"
+#include "../../cuda_threads/include.h"
 #include "../../nsk_cuda/pool/include.h"
 #include "../../tensor/tensor_dim_functions.h"
 
 #include "../common.h"
 #include "class.h"
 #include "kernels.h"
+
+
+
+extern "C" float sgd_k(Scope_Struct *scope_struct, void *param, void *grad, float lr, int dims_prod) {
+  int tid = scope_struct->thread_id;
+  cudaStream_t stream = ThreadsStream[tid];
+
+  int grid_size, block_size; 
+  CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
+
+  sgd_kernel<<<grid_size, block_size, 0, stream>>>(*(float**)param, *(float**)grad, 
+                                           lr, dims_prod);
+  return 0;
+}
+
+
 
 SGD_optim::SGD_optim(float lr, float momentum, float weight_decay, float grad_clip)
   : lr(lr), momentum(momentum), weight_decay(weight_decay), grad_clip(grad_clip) {}
@@ -49,7 +66,7 @@ void SGD_optim::step(float *param, float *grad, std::vector<int> dims, std::stri
   int grid_size, block_size; 
   CalculateGridAndBlockSizes(params_count, grid_size, block_size);
 
-  sgd_kernel<<<grid_size, block_size, 0, stream>>>(param, grad, m, params_count,
+  sgd_kernel_momentum<<<grid_size, block_size, 0, stream>>>(param, grad, m, params_count,
                                            lr, momentum, weight_decay, grad_clip);
 }
 

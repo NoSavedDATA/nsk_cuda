@@ -5,5 +5,3 @@
 #include <cuda_fp16.h>
 #include <mma.h>
 
-#include "../tensor/tensor_struct.h"
-

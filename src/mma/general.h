@@ -4,7 +4,6 @@
 #include <cuda_fp16.h>
 #include <mma.h>
 
-#include "../tensor/tensor_struct.h"
 #include "../nsk_cuda/include.h"
 #include "utils.h"
 
@@ -1129,16 +1128,6 @@ __global__ void wmma_mult_kernel_(const float *x, const float *w,
   }
 }
 
-
-
-
-
-
-
-
-void matmul_backward2(DT_tensor *, DT_tensor *,
-                    float *dinp, float *dw,
-                    float *dout);
 
 
 void matmul_forward(float* out,
