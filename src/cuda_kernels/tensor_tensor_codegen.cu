@@ -12,6 +12,7 @@
 #include "../mma/general.h"
 #include "../nsk_cuda/pool/include.h"
 #include "../tensor/include.h"
+#include "activation_functions/activation_kernels.h"
 #include "include.h"
 
 extern "C" void *add_tensors(Scope_Struct *scope_struct, void *x, void *y, int dims) {
@@ -40,15 +41,164 @@ extern "C" void *mma_tensors(Scope_Struct *scope_struct, void *x, void *y, int m
     void **z = allocate<void*>(scope_struct, 1, "float_pp");
     float *tensor_ptr = tarena.Allocate<float>(m*p);
     *z = tensor_ptr;
-    // cudaMalloc(z, m*p*4);
 
-    // std::cout << "x " << x << ", y " << y << ", z " << z << "\n";
-    // std::cout << "m " << m << ", n " << n << ", p " << p << "\n";
     matmul_forward(*(float**)z, *(float**)x, *(float**)y,
                   m, n, p, tid);
 
     return (void*)z;
 }
+
+
+extern "C" void *relu_k(Scope_Struct *scope_struct, void *x, int dims_prod) {
+  int tid = scope_struct->thread_id;
+  cudaStream_t stream = ThreadsStream[tid];
+
+  int grid_size, block_size;
+  CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
+  float *out = tarena.Allocate<float>(dims_prod);
+  
+  relu_forward<<<grid_size, block_size, 0, stream>>>(*(float**)x, out, dims_prod);
+
+  void **z = allocate<void*>(scope_struct, 1, "float_pp");
+  *z = out;
+  return (void*)z;
+}
+extern "C" int relu_backward_k(Scope_Struct *scope_struct, void *dout, void *x, void *y, int dims_prod) {
+  int tid = scope_struct->thread_id;
+  cudaStream_t stream = ThreadsStream[tid];
+
+  int grid_size, block_size;
+  CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
+  
+  relu_backward1<<<grid_size, block_size, 0, stream>>>(*(float**)y, *(float**)dout, *(float**)x, dims_prod);
+
+  return 0;
+}
+
+extern "C" void *softmax_k(Scope_Struct *scope_struct, void *x, int M, int N) {
+  int tid = scope_struct->thread_id;
+  cudaStream_t stream = ThreadsStream[tid];
+  int dims_prod = M*N;
+
+  std::vector<int> grid_block_mem_sizes;
+  grid_block_mem_sizes = CalculateGridAndBlockSizes(dims_prod);
+  int grid_size  = M;
+  int block_size = grid_block_mem_sizes[1];
+  int shared_mem_size = 2 * block_size / 32 * sizeof(float);
+  float *probs = tarena.Allocate<float>(dims_prod);
+  
+  softmax_forward_kernel4<<<grid_size, block_size, shared_mem_size, stream>>>(*(float**)x, probs, M, N);
+
+  void **z = allocate<void*>(scope_struct, 1, "float_pp");
+  *z = probs;
+  return (void*)z;
+
+    // int tid = scope_struct->thread_id;
+    // cudaStream_t stream = ThreadsStream[tid];
+
+    // void **z = allocate<void*>(scope_struct, 1, "float_pp");
+    // float *tensor_ptr = tarena.Allocate<float>(m*p);
+    // *z = tensor_ptr;
+    // // cudaMalloc(z, m*p*4);
+
+    // // std::cout << "x " << x << ", y " << y << ", z " << z << "\n";
+    // // std::cout << "m " << m << ", n " << n << ", p " << p << "\n";
+    // matmul_forward(*(float**)z, *(float**)x, *(float**)y,
+    //               m, n, p, tid);
+
+    // return (void*)z;
+}
+
+
+
+
+extern "C" void neve_gpu_launch(char *fn, char *ptx,
+        int gx, int gy, int gz, int bx, int by, int bz,
+        int smem,
+        void **args) {
+
+    cuInit(0);
+
+    CUcontext ctx;
+    cuCtxGetCurrent(&ctx);
+
+    if (!ctx) {
+        fprintf(stderr, "No active CUDA context\n");
+        abort();
+    }
+    // std::cout << "" << ptx << "";
+
+    CUfunction kernel;
+    CUmodule gpuModule;
+
+    cuModuleLoadDataEx(
+        &gpuModule,
+        ptx,
+        0,
+        nullptr,
+        nullptr
+    );
+
+    CUresult res = cuModuleGetFunction(
+        &kernel,
+        gpuModule,
+        fn
+    );
+
+
+    if (res != CUDA_SUCCESS) {
+        const char *name;
+        const char *str;
+
+        cuGetErrorName(res, &name);
+        cuGetErrorString(res, &str);
+
+        printf("%s: %s\n", name, str);
+        abort();
+    }
+
+
+    // int gx=1, gy=1, gz=1;
+    // int bx=32, by=1, bz=1;
+
+
+    std::cout << "grid (" << gx << ", " << gy << ", " << gz << ")" << "\n";
+    std::cout << "block (" << bx << ", " << by << ", " << bz << ")" << "\n";
+    std::cout << "smem " << smem << "\n";
+
+    res = cuLaunchKernel(
+        kernel,
+        gx, gy, gz,
+        bx, by, bz,
+        smem,
+        0,
+        args,
+        nullptr
+    );
+    // cudaDeviceSynchronize();
+
+    if (res != CUDA_SUCCESS) {
+        std::cout << "--KERNEL ERROR " << res << "\n";
+        const char *name;
+        const char *str;
+
+        cuGetErrorName(res, &name);
+        cuGetErrorString(res, &str);
+
+        printf("%s: %s\n", name, str);
+        abort();
+        std::exit(0);
+    }
+
+}
+
+
+extern "C" int smem_size_fn(Scope_Struct *ctx) {
+  return deviceProp.sharedMemPerBlock;
+  // return deviceProp.sharedMemPerBlockOptin;
+}
+
+
 
 //extern "C" DT_tensor *tensor_tensor_mma(Scope_Struct *scope_struct, DT_tensor *tensor_x, DT_tensor *tensor_w) {
 

@@ -4,7 +4,7 @@
 // Parallelizes over B, C
 __global__ void crossentropy_softmax_backward_kernel1(float* dlogits,
                            const float* probs, const float* targets,
-                           int B, int C, float scale) {
+                           int B, int C) {
 
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     //int i = threadIdx.x;
@@ -26,13 +26,12 @@ __global__ void crossentropy_softmax_backward_kernel1(float* dlogits,
 
         dlogits_b[v] += (p - indicator);
         // dlogits_b[v] += (p - indicator) * scale;
-        
     }
 }
 
 __global__ void crossentropy_idx_backward_kernel(float* dlogits,
     const float* probs, const float* targets,
-    int B, int C, float scale) {
+    int B, int C) {
 
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     //int i = threadIdx.x;

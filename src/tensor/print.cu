@@ -11,14 +11,16 @@
 #include "../common/cu_commons.h"
 #include "include.h"
 
-extern "C" float float_cpu_print(Scope_Struct *scope_struct, void *tensor, DT_array *vec, int arr_size){
-    // std::cout << "print: " << tensor << "\n";
+extern "C" int float_cpu_print(Scope_Struct *scope_struct, void *tensor, DT_array *vec){
+  std::cout << "print: " << tensor << "\n";
   int thread_id = scope_struct->thread_id;
 
   float *tensor_cpu = *((float**)tensor);
+  std::cout << "print float*: " << tensor_cpu << "\n";
 
   
   std::vector<int> dims;
+  std::cout << "vec: " << vec << "\n";
   int *data = (int*)vec->data;
   for (int i=0; i<vec->virtual_size; ++i)
       dims.push_back(data[i]);
@@ -28,11 +30,13 @@ extern "C" float float_cpu_print(Scope_Struct *scope_struct, void *tensor, DT_ar
   std::cout << "\n";
   std::vector<int> ends;
 
-
+  int arr_size = 1;
   for (int i = 0; i < dims.size(); i++) {
+    arr_size *= dims[i];
     int prod=1;
     for (int j = 0; j <= i; j++)
       prod = prod*dims[dims.size()-1-j];
+    
     ends.push_back(prod);
   }
 
@@ -44,14 +48,12 @@ extern "C" float float_cpu_print(Scope_Struct *scope_struct, void *tensor, DT_ar
 
     int to_prints = 0;
 
-    for (int e = 0; e < ends.size(); e++)
-    {
+    for (int e = 0; e < ends.size(); e++) {
       if (fmod((arr_size-i),(int)ends[e]) == 0.0f)
         to_prints+=1;
     }
 
-    if(to_prints>0)
-    {
+    if(to_prints>0) {
       for (int j=0; j<(dims.size()-to_prints); j++)
         std::cout << " ";
         
@@ -96,6 +98,133 @@ extern "C" float float_cpu_print(Scope_Struct *scope_struct, void *tensor, DT_ar
 
   return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+extern "C" int bf16_cpu_print(Scope_Struct *ctx, void *tensor, DT_array *vec){
+  // std::cout << "print: " << tensor << "\n";
+  int thread_id = ctx->thread_id;
+
+  uint16_t *tensor_cpu = *((uint16_t**)tensor);
+  // std::cout << "print bf16*: " << tensor_cpu << "\n";
+
+  
+  std::vector<int> dims;
+  std::cout << "vec: " << vec << "\n";
+  int *data = (int*)vec->data;
+  for (int i=0; i<vec->virtual_size; ++i)
+      dims.push_back(data[i]);
+  
+  cudaDeviceSynchronize();
+
+  std::cout << "\n";
+  std::vector<int> ends;
+
+  int arr_size = 1;
+  for (int i = 0; i < dims.size(); i++) {
+    arr_size *= dims[i];
+    int prod=1;
+    for (int j = 0; j <= i; j++)
+      prod = prod*dims[dims.size()-1-j];
+    
+    ends.push_back(prod);
+  }
+
+  int line = 1;
+  bool line_changed = true;
+  
+
+  for (int i = 0; i < arr_size; i++) {
+
+    int to_prints = 0;
+
+    for (int e = 0; e < ends.size(); e++) {
+      if (fmod((arr_size-i),(int)ends[e]) == 0.0f)
+        to_prints+=1;
+    }
+
+    if(to_prints>0) {
+      for (int j=0; j<(dims.size()-to_prints); j++)
+        std::cout << " ";
+        
+      for (int j=0; j<to_prints; j++)
+        std::cout << "[";
+    }
+    
+
+    //std::cout << "LAST SIZE " << dims[dims.size()-1] << " Mod: " << fmod(i, 1+dims[dims.size()-1]) << "\n";
+    int precision;
+    if (bf16_to_float_inline(tensor_cpu[i]>=0))
+      precision=4;
+    else
+      precision=3;
+    std::cout << std::fixed  << std::setprecision(precision) << bf16_to_float_inline(tensor_cpu[i]);
+
+
+    for (int e = 0; e < ends.size(); e++)
+      if (fmod((i+1), ends[e]) == 0.0f)
+        std::cout << "],";
+    
+
+    if (i!=(arr_size-1))
+    {
+      if (fmod(i+1, dims[dims.size()-1]) == 0.0f)
+      {
+        line+=1;
+        line_changed=true;
+        std::cout << "\n";
+      }
+      else
+        std::cout << ",  ";
+    }
+
+    if(fmod(i+1, ends[1]) == 0.0f)
+      std::cout << "\n";
+
+
+  }
+  
+  std::cout << "\n\n";
+
+  return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //extern "C" float PrintTensor(Scope_Struct *scope_struct, DT_tensor *tensor){
 //  int thread_id = scope_struct->thread_id;

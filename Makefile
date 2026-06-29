@@ -1,17 +1,15 @@
-CXX := clang++-19
+CXX := clang++-21
 CXXFLAGS := -g -O3 -rdynamic -fPIC
-# CUDA_PATH := $(abspath ../cuda-12.2)
 CUDA_PATH := /usr/local/cuda-12.3
 CUDA_ARCH := sm_89
 CUDA_ARCH_NVCC := -arch=sm_89
-#EIGEN_INCLUDE := /usr/include/eigen3
 EIGEN_INCLUDE := $(abspath ../eigen3)
 OPENCV_LIBS := -lopencv_imgcodecs -lopencv_imgproc -lopencv_core
-CUDA_LIBS := -lcudart -lcublas -lcublasLt -lcudnn
+CUDA_LIBS := -lcuda -lcudadevrt  -lcudart -lcublas -lcublasLt -lcudnn
 SYSTEM_LIBS := -ldl -lrt -pthread
 OTHER_FLAGS := -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH -flto -finline-functions -funroll-loops -w
 
-LLVM_CONFIG := llvm-config-19 --link-static --libs core orcjit native
+LLVM_CONFIG := llvm-config-21 --libs core orcjit native
 LLVM_CXXFLAGS := $(shell $(LLVM_CONFIG) --cxxflags)
 LLVM_LDFLAGS := $(shell $(LLVM_CONFIG) --ldflags)
 LLVM_SYSTEM_LIBS := $(shell $(LLVM_CONFIG) --system-libs)

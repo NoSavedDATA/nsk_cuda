@@ -32,12 +32,15 @@ obj/mma/general.o: src/mma/general.cu src/mma/../common/cu_commons.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../clean_up/clean_up.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/array.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../mangler/scope_struct.h \
+  src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/map.h \
+  src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../compiler_frontend/logging_v.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/list.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../mangler/scope_struct.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../pool/pool.h \
+  src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../threads/cas.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/barrier.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/channels.h \
-  src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../data_types/list.h \
+  src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../data_types/array.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/lock.h \
   src/mma/../tensor/../../../../src/runtime/char_pool/../threads/utils.h \
   src/mma/../tensor/../../../../src/runtime/clean_up/include.h \
@@ -47,6 +50,7 @@ obj/mma/general.o: src/mma/general.cu src/mma/../common/cu_commons.h \
   src/mma/../tensor/../../../../src/runtime/codegen/print.h \
   src/mma/../tensor/../../../../src/runtime/codegen/../mangler/scope_struct.h \
   src/mma/../tensor/../../../../src/runtime/codegen/random.h \
+  src/mma/../tensor/../../../../src/runtime/codegen/philox.h \
   src/mma/../tensor/../../../../src/runtime/codegen/string.h \
   src/mma/../tensor/../../../../src/runtime/codegen/time.h \
   src/mma/../tensor/../../../../src/runtime/common/extension_functions.h \
@@ -55,9 +59,13 @@ obj/mma/general.o: src/mma/general.cu src/mma/../common/cu_commons.h \
   src/mma/../tensor/../../../../src/runtime/compiler_frontend/logging_execution.h \
   src/mma/../tensor/../../../../src/runtime/compiler_frontend/logging_v.h \
   src/mma/../tensor/../../../../src/runtime/compiler_frontend/parser_struct.h \
+  src/mma/../tensor/../../../../src/runtime/compiler_frontend/../data_types/data_tree.h \
+  src/mma/../tensor/../../../../src/runtime/cuda/include.h \
+  src/mma/../tensor/../../../../src/runtime/cuda/handles.h \
   src/mma/../tensor/../../../../src/runtime/data_types/include.h \
   src/mma/../tensor/../../../../src/runtime/data_types/any_map.h \
   src/mma/../tensor/../../../../src/runtime/data_types/array.h \
+  src/mma/../tensor/../../../../src/runtime/data_types/bf16.h \
   src/mma/../tensor/../../../../src/runtime/data_types/bool.h \
   src/mma/../tensor/../../../../src/runtime/data_types/charv.h \
   src/mma/../tensor/../../../../src/runtime/data_types/codegen_notes.h \
@@ -68,12 +76,11 @@ obj/mma/general.o: src/mma/general.cu src/mma/../common/cu_commons.h \
   src/mma/../tensor/../../../../src/runtime/data_types/int.h \
   src/mma/../tensor/../../../../src/runtime/data_types/list.h \
   src/mma/../tensor/../../../../src/runtime/data_types/map.h \
-  src/mma/../tensor/../../../../src/runtime/data_types/../compiler_frontend/logging_v.h \
   src/mma/../tensor/../../../../src/runtime/data_types/nsk_vector.h \
   src/mma/../tensor/../../../../src/runtime/data_types/nullptr.h \
   src/mma/../tensor/../../../../src/runtime/data_types/str.h \
   src/mma/../tensor/../../../../src/runtime/data_types/str_view.h \
-  src/mma/../tensor/../../../../src/runtime/data_types/str_vec.h \
+  src/mma/../tensor/../../../../src/runtime/data_types/tensor.h \
   src/mma/../tensor/../../../../src/runtime/data_types/type_info.h \
   src/mma/../tensor/../../../../src/runtime/math/include.h \
   src/mma/../tensor/../../../../src/runtime/math/functions.h \
@@ -91,6 +98,8 @@ obj/mma/general.o: src/mma/general.cu src/mma/../common/cu_commons.h \
   src/mma/../tensor/../../../../src/runtime/pool/../mangler/scope_struct.h \
   src/mma/../tensor/../../../../src/runtime/pool/../mark_sweep/include.h \
   src/mma/../tensor/../../../../src/runtime/pool/pool.h \
+  src/mma/../tensor/../../../../src/runtime/profiler/include.h \
+  src/mma/../tensor/../../../../src/runtime/profiler/profiler.h \
   src/mma/../tensor/../../../../src/runtime/threads/include.h \
   src/mma/../tensor/../../../../src/runtime/prebuild/prebuild.h \
   src/mma/../tensor/print.h src/mma/../tensor/tensor_dim_functions.h \
@@ -203,12 +212,15 @@ src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mar
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../clean_up/clean_up.h:
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/array.h:
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../mangler/scope_struct.h:
+src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/map.h:
+src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../compiler_frontend/logging_v.h:
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/list.h:
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../mangler/scope_struct.h:
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../pool/pool.h:
+src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../threads/cas.h:
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/barrier.h:
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/channels.h:
-src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../data_types/list.h:
+src/mma/../tensor/../../../../src/runtime/char_pool/../threads/../data_types/array.h:
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/lock.h:
 src/mma/../tensor/../../../../src/runtime/char_pool/../threads/utils.h:
 src/mma/../tensor/../../../../src/runtime/clean_up/include.h:
@@ -218,6 +230,7 @@ src/mma/../tensor/../../../../src/runtime/codegen/functions.h:
 src/mma/../tensor/../../../../src/runtime/codegen/print.h:
 src/mma/../tensor/../../../../src/runtime/codegen/../mangler/scope_struct.h:
 src/mma/../tensor/../../../../src/runtime/codegen/random.h:
+src/mma/../tensor/../../../../src/runtime/codegen/philox.h:
 src/mma/../tensor/../../../../src/runtime/codegen/string.h:
 src/mma/../tensor/../../../../src/runtime/codegen/time.h:
 src/mma/../tensor/../../../../src/runtime/common/extension_functions.h:
@@ -226,9 +239,13 @@ src/mma/../tensor/../../../../src/runtime/compiler_frontend/global_vars.h:
 src/mma/../tensor/../../../../src/runtime/compiler_frontend/logging_execution.h:
 src/mma/../tensor/../../../../src/runtime/compiler_frontend/logging_v.h:
 src/mma/../tensor/../../../../src/runtime/compiler_frontend/parser_struct.h:
+src/mma/../tensor/../../../../src/runtime/compiler_frontend/../data_types/data_tree.h:
+src/mma/../tensor/../../../../src/runtime/cuda/include.h:
+src/mma/../tensor/../../../../src/runtime/cuda/handles.h:
 src/mma/../tensor/../../../../src/runtime/data_types/include.h:
 src/mma/../tensor/../../../../src/runtime/data_types/any_map.h:
 src/mma/../tensor/../../../../src/runtime/data_types/array.h:
+src/mma/../tensor/../../../../src/runtime/data_types/bf16.h:
 src/mma/../tensor/../../../../src/runtime/data_types/bool.h:
 src/mma/../tensor/../../../../src/runtime/data_types/charv.h:
 src/mma/../tensor/../../../../src/runtime/data_types/codegen_notes.h:
@@ -239,12 +256,11 @@ src/mma/../tensor/../../../../src/runtime/data_types/../mangler/scope_struct.h:
 src/mma/../tensor/../../../../src/runtime/data_types/int.h:
 src/mma/../tensor/../../../../src/runtime/data_types/list.h:
 src/mma/../tensor/../../../../src/runtime/data_types/map.h:
-src/mma/../tensor/../../../../src/runtime/data_types/../compiler_frontend/logging_v.h:
 src/mma/../tensor/../../../../src/runtime/data_types/nsk_vector.h:
 src/mma/../tensor/../../../../src/runtime/data_types/nullptr.h:
 src/mma/../tensor/../../../../src/runtime/data_types/str.h:
 src/mma/../tensor/../../../../src/runtime/data_types/str_view.h:
-src/mma/../tensor/../../../../src/runtime/data_types/str_vec.h:
+src/mma/../tensor/../../../../src/runtime/data_types/tensor.h:
 src/mma/../tensor/../../../../src/runtime/data_types/type_info.h:
 src/mma/../tensor/../../../../src/runtime/math/include.h:
 src/mma/../tensor/../../../../src/runtime/math/functions.h:
@@ -262,6 +278,8 @@ src/mma/../tensor/../../../../src/runtime/pool/../compiler_frontend/logging_v.h:
 src/mma/../tensor/../../../../src/runtime/pool/../mangler/scope_struct.h:
 src/mma/../tensor/../../../../src/runtime/pool/../mark_sweep/include.h:
 src/mma/../tensor/../../../../src/runtime/pool/pool.h:
+src/mma/../tensor/../../../../src/runtime/profiler/include.h:
+src/mma/../tensor/../../../../src/runtime/profiler/profiler.h:
 src/mma/../tensor/../../../../src/runtime/threads/include.h:
 src/mma/../tensor/../../../../src/runtime/prebuild/prebuild.h:
 src/mma/../tensor/print.h:

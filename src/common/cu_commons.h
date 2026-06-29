@@ -68,6 +68,12 @@ float* make_xavier_uniform_float(size_t N, int fan_in, int fan_out);
 float* make_xavier_uniform_float_fixed(size_t N, int fan_in, int fan_out, int seed);
 
 
+uint16_t* make_random_bf16_uniform(size_t N);
+uint16_t* make_bf16_float(size_t N);
+uint16_t* make_zeros_bf16(size_t N);
+uint16_t* make_ones_bf16(size_t N);
+
+
 float* make_normal(int N); 
 
 float* make_embedding_uniform(int N, float scale=0.05); 

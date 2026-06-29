@@ -1,0 +1,34 @@
+class tensor_cpu
+	array<int> dims, w_flipswitch, w_loadswitch
+	int num_workers,bs,ld
+	float_cpu x
+	array<int> dims
+
+	ctor(array<int> wb_dims, array<int> data_dims)
+		int dims_prod = data_dims.prod()
+		int size = 2*wb_dims.prod()*dims_prod*4
+		self.x = cumalloc_host(size)
+		self.num_workers = wb_dims[0]
+		self.bs = wb_dims[1]
+		self.ld = dims_prod
+
+		self.dims.append(wb_dims[1])
+		for i=0, i<data_dims.size()
+			self.dims.append(data_dims[i])
+
+		self.w_flipswitch = zeros_int(self.num_workers)
+		self.w_loadswitch = zeros_int(self.num_workers)
+
+	def int switch()
+		self.w_flipswitch[tid] = (1-self.w_flipswitch[tid])
+
+	def float_cpu at(int b)
+		return self.x offby ((self.w_flipswitch[tid]*self.num_workers + tid)*self.bs + b)*self.ld
+
+	def gpu_tensor load(int w)
+		float_cpu ret = self.x offby ((self.w_loadswitch[w]*self.num_workers + w)*self.bs)*self.ld
+		var x = ret.cupool(self.bs*self.ld)
+		self.w_loadswitch[w] = (1-self.w_loadswitch[w])
+		gpu_tensor t = new gpu_tensor(self.dims, "none")
+		t.ptr = x
+		return t

@@ -5,63 +5,68 @@
 #include "../../../src/nsk_cpp.h"
 
 #include "../../nsk_cuda/pool/include.h"
+#include "../../cuda_threads/include.h"
+#include "../../pool/include.h"
 #include "../../tensor/include.h"
 #include "../activation_functions/include.h"
 #include "../calculate_grids.h"
 #include "../elementwise_kernels_inline.cu"
 #include "classification_kernels.h"
 
+extern "C" float ce_backward_kernel(Scope_Struct *scope_struct,
+                 void *dloss,
+                 void *y_hat, void *y,
+                 int M, int N) {
+  int tid = scope_struct->thread_id;
+  cudaStream_t stream = ThreadsStream[tid];
+  int dims_prod = M*N;
 
-//void CrossEntropyBackward(Scope_Struct *scope_struct, DT_tensor *L_tensor, DT_tensor *R_tensor,
-//                          float *dloss,
-//                          float scale)
-//{
-  
-//  /*
-//  int grid_size = B;
-//  int block_size = 32;
-//  size_t shared_mem_size = 2 * block_size / 32 * sizeof(float);
-//  */
+  std::vector<int> grid_block_mem_sizes;
+  grid_block_mem_sizes = CalculateGridAndBlockSizes(dims_prod);
+  int grid_size  = M;
+  int block_size = grid_block_mem_sizes[1];
+  int shared_mem_size = 2 * block_size / 32 * sizeof(float);
+  float *probs = tarena.Allocate<float>(dims_prod);
 
-//  float *y_hat = L_tensor->tensor_ptr;
-//  float *y = R_tensor->tensor_ptr;
-//  std::vector<int> BC = format_LinearLayer_Dims(L_tensor->dims);
-//  float B  = BC[0];
-//  float C  = BC[1];
+  softmax_forward_kernel4<<<grid_size, block_size, shared_mem_size, stream>>>(*(float**)y_hat, probs, M, N);
+  CalculateGridAndBlockSizes(dims_prod, grid_size, block_size);
+  crossentropy_idx_backward_kernel<<<grid_size, block_size, 0, stream>>>(*(float**)dloss, probs, *(float**)y, M, N);
+  return 0;
+}
 
-//  float *probs = get_from_pool(scope_struct, 0, B*C,"ce probs");
+// void CrossEntropyBackward(Scope_Struct *scope_struct, DT_tensor *L_tensor, DT_tensor *R_tensor,
+//                           float *dloss,
+//                           float scale) {
+//   float *y_hat = L_tensor->tensor_ptr;
+//   float *y = R_tensor->tensor_ptr;
+//   std::vector<int> BC = format_LinearLayer_Dims(L_tensor->dims);
+//   float B  = BC[0];
+//   float C  = BC[1];
 
-//  //int grid_size, block_size;
-//  //size_t shared_mem_size;
-  
-
-//  int grid_size, block_size, shared_mem_size;
-//  CalculateGridAndBlockSizes(B*C, grid_size, block_size);
-//  set_to_zero_kernel<<<grid_size, block_size, 0, main_stream>>>(probs, B*C);
-  
-//  /*
-//  grid_block_mem_sizes = CalculateGridAndBlockSizes(B*32*C);
-//  grid_size  = B*32;
-//  block_size = grid_block_mem_sizes[1];
-  
-//  online_softmax<<<grid_size, block_size, 0, main_stream>>>(y_hat, probs, B, C);
-//  */
-  
-//  std::vector<int> grid_block_mem_sizes;
-//  grid_block_mem_sizes = CalculateGridAndBlockSizes(B*C);
-//  grid_size  = B;
-//  block_size = grid_block_mem_sizes[1];
-//  shared_mem_size = 2 * block_size / 32 * sizeof(float);
-
-//  softmax_forward_kernel4<<<grid_size, block_size, shared_mem_size, main_stream>>>(y_hat, probs, B, C);
+//   float *probs = get_from_pool(scope_struct, 0, B*C,"ce probs");
 
   
-//  CalculateGridAndBlockSizes(B*C, grid_size, block_size);
+
+//   int grid_size, block_size, shared_mem_size;
+//   CalculateGridAndBlockSizes(B*C, grid_size, block_size);
+//   set_to_zero_kernel<<<grid_size, block_size, 0, main_stream>>>(probs, B*C);
+  
+  
+//   std::vector<int> grid_block_mem_sizes;
+//   grid_block_mem_sizes = CalculateGridAndBlockSizes(B*C);
+//   grid_size  = B;
+//   block_size = grid_block_mem_sizes[1];
+//   shared_mem_size = 2 * block_size / 32 * sizeof(float);
+
+//   softmax_forward_kernel4<<<grid_size, block_size, shared_mem_size, main_stream>>>(y_hat, probs, B, C);
 
   
-//  crossentropy_softmax_backward_kernel1<<<grid_size, block_size, 0, main_stream>>>(dloss, probs, y, B, C, scale);
-//  move_to_pool(0, B*C, probs,"ce probs");
-//}
+//   CalculateGridAndBlockSizes(B*C, grid_size, block_size);
+
+  
+//   crossentropy_softmax_backward_kernel1<<<grid_size, block_size, 0, main_stream>>>(dloss, probs, y, B, C, scale);
+//   move_to_pool(0, B*C, probs,"ce probs");
+// }
 
 
 

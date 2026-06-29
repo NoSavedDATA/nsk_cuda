@@ -1,0 +1,43 @@
+proto int sys cudaMalloc(any,i64)
+proto int sys cudaMallocHost(any,i64)
+proto int sys cudaMemcpy(any,any,i64,int)
+proto float_pp cumalloc(i64)
+proto float_cpu cumalloc_host(i64)
+
+# float
+operation float_cpu float_cpu_int_offby
+operation float[] float_pp_int_offby
+
+proto float_cpu device_to_host(float_pp,i64)
+proto float_cpu float_pp_cpu(float_pp,i64)
+proto int host_to_device(float_cpu,float_pp,i64)
+proto int float_cpu_print(float_cpu, array<int>)
+proto tuple<float_cpu, array<int>> load_image(str)
+
+proto float_pp float_cpu_cuda(float_cpu, int)
+proto float_pp float_cpu_cupool(float_cpu, int)
+
+#bf16
+proto bf16_pp bf16_cpu_cuda(bf16_cpu, int)
+proto bf16_cpu bf16_pp_cpu(bf16_pp,i64)
+proto int bf16_cpu_print(bf16_cpu, array<int>)
+
+operation bf16_cpu bf16_cpu_int_offby
+operation bf16[] bf16_pp_int_offby
+
+import tensor_gpu
+import tensor_cpu
+import backprop
+import optim
+import ops
+import warp
+#import mma
+
+
+def int nsk_cuda_prebuild()
+	$backprop.backs["add"] = add_backward
+	$backprop.backs["mma"] = mma_backward
+	$backprop.backs["relu"] = relu_backward
+	$backprop.loss_backs["mse"] = mse_backward
+	$backprop.loss_backs["ce"] = ce_backward
+	return 0

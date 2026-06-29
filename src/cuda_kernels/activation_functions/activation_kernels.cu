@@ -7,18 +7,16 @@
 #include "../warp_inline.cu"
 
 
-__global__ void relu_forward(float* Z, float* A,
+__global__ void relu_forward(const float* Z, float* A,
                              const float dims_prod) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
-
-    if (idx < dims_prod) {
+    if (idx < dims_prod)
         A[idx] = fmaxf(Z[idx], 0);
-    }
 }
 
 
-__global__ void relu_backward1(float* Z, float* dZ, float* dA,
-                                       float N) {
+__global__ void relu_backward1(const float* Z, float* dZ, const float* dA,
+                                       const int N) {
     int index = blockIdx.x * blockDim.x + threadIdx.x;
 
     

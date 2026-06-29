@@ -60,12 +60,15 @@ obj/mma/mma_ptx.o: src/mma/mma_ptx.cu src/mma/utils.h src/mma/util.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../clean_up/clean_up.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/array.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../mangler/scope_struct.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/map.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../compiler_frontend/logging_v.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/list.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../mangler/scope_struct.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../pool/pool.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../threads/cas.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/barrier.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/channels.h \
-  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../data_types/list.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../data_types/array.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/lock.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/utils.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/clean_up/include.h \
@@ -75,6 +78,7 @@ obj/mma/mma_ptx.o: src/mma/mma_ptx.cu src/mma/utils.h src/mma/util.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/print.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/../mangler/scope_struct.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/random.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/philox.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/string.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/time.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/common/extension_functions.h \
@@ -83,9 +87,13 @@ obj/mma/mma_ptx.o: src/mma/mma_ptx.cu src/mma/utils.h src/mma/util.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/logging_execution.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/logging_v.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/parser_struct.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/../data_types/data_tree.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/cuda/include.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/cuda/handles.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/include.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/any_map.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/array.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/bf16.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/bool.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/charv.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/codegen_notes.h \
@@ -96,12 +104,11 @@ obj/mma/mma_ptx.o: src/mma/mma_ptx.cu src/mma/utils.h src/mma/util.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/int.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/list.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/map.h \
-  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/../compiler_frontend/logging_v.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/nsk_vector.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/nullptr.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/str.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/str_view.h \
-  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/str_vec.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/tensor.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/type_info.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/math/include.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/math/functions.h \
@@ -119,6 +126,8 @@ obj/mma/mma_ptx.o: src/mma/mma_ptx.cu src/mma/utils.h src/mma/util.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/pool/../mangler/scope_struct.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/pool/../mark_sweep/include.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/pool/pool.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/profiler/include.h \
+  src/mma/../nsk_cuda/quantize/../../../../../src/runtime/profiler/profiler.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/threads/include.h \
   src/mma/../nsk_cuda/quantize/../../../../../src/runtime/prebuild/prebuild.h \
   src/mma/../nsk_cuda/quantize/../pool/include.h \
@@ -226,12 +235,15 @@ src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../clean_up/clean_up.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/array.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../mangler/scope_struct.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/map.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../compiler_frontend/logging_v.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/list.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../mangler/scope_struct.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../pool/pool.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../threads/cas.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/barrier.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/channels.h:
-src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../data_types/list.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/../data_types/array.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/lock.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/char_pool/../threads/utils.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/clean_up/include.h:
@@ -241,6 +253,7 @@ src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/functions.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/print.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/../mangler/scope_struct.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/random.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/philox.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/string.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/codegen/time.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/common/extension_functions.h:
@@ -249,9 +262,13 @@ src/mma/../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/global
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/logging_execution.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/logging_v.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/parser_struct.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/compiler_frontend/../data_types/data_tree.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/cuda/include.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/cuda/handles.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/include.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/any_map.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/array.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/bf16.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/bool.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/charv.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/codegen_notes.h:
@@ -262,12 +279,11 @@ src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/../mangler/sc
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/int.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/list.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/map.h:
-src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/../compiler_frontend/logging_v.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/nsk_vector.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/nullptr.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/str.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/str_view.h:
-src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/str_vec.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/tensor.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/data_types/type_info.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/math/include.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/math/functions.h:
@@ -285,6 +301,8 @@ src/mma/../nsk_cuda/quantize/../../../../../src/runtime/pool/../compiler_fronten
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/pool/../mangler/scope_struct.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/pool/../mark_sweep/include.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/pool/pool.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/profiler/include.h:
+src/mma/../nsk_cuda/quantize/../../../../../src/runtime/profiler/profiler.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/threads/include.h:
 src/mma/../nsk_cuda/quantize/../../../../../src/runtime/prebuild/prebuild.h:
 src/mma/../nsk_cuda/quantize/../pool/include.h:

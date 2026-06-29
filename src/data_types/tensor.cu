@@ -36,6 +36,18 @@ extern "C" void *randu_cpu(Scope_Struct *scope_struct, int size){
     *ptr = tensor_cpu;
     return (void*)ptr;
 }
+extern "C" void *xavu_cuda(Scope_Struct *scope_struct, int size, int m, int n){
+    void **ptr = (void**)allocate<char>(scope_struct, 8, "float_pp");
+    float *tensor_cpu = make_xavier_uniform_float(size, m, n);
+
+    float *tensor_ptr;
+    cudaMalloc(&tensor_ptr, size*4);
+    // float *tensor_ptr = tarena.Allocate<float>(size);
+    cudaCheck(cudaMemcpy(tensor_ptr, tensor_cpu, size*4, cudaMemcpyHostToDevice));
+    free(tensor_cpu);
+    *ptr = tensor_ptr;
+    return (void*)ptr;
+}
 extern "C" void *randu_cuda(Scope_Struct *scope_struct, int size){
     void **ptr = (void**)allocate<char>(scope_struct, 8, "float_pp");
     float *tensor_cpu = make_random_float_uniform(size);
@@ -72,6 +84,86 @@ extern "C" void *ones_cuda(Scope_Struct *scope_struct, int size){
 }
 
 
+extern "C" void *randu_bf16_cuda(Scope_Struct *scope_struct, int size){
+    void **ptr = (void**)allocate<char>(scope_struct, 8, "bf16_pp");
+    uint16_t *tensor_cpu = make_random_bf16_uniform(size);
+
+    uint16_t *tensor_ptr;
+    cudaMalloc(&tensor_ptr, size*2);
+    // float *tensor_ptr = tarena.Allocate<float>(size);
+    cudaCheck(cudaMemcpy(tensor_ptr, tensor_cpu, size*2, cudaMemcpyHostToDevice));
+    free(tensor_cpu);
+    *ptr = tensor_ptr;
+    return (void*)ptr;
+}
+extern "C" void *zeros_bf16_cuda(Scope_Struct *scope_struct, int size){
+    void **ptr = (void**)allocate_pool(scope_struct, 8, data_name_to_type()["bf16_pp"]);
+    uint16_t *tensor_cpu = make_zeros_bf16(size);
+
+    uint16_t *tensor_ptr;
+    cudaMalloc(&tensor_ptr, size*2);
+    cudaCheck(cudaMemcpy(tensor_ptr, tensor_cpu, size*2, cudaMemcpyHostToDevice));
+    free(tensor_cpu);
+    *ptr = tensor_ptr;
+    return (void*)ptr;
+}
+
+
+
+
+
+extern "C" void *xavu_conv(Scope_Struct *scope_struct, int m, int n, int ks, int ks2, int dims_prod) {
+    void **ptr = (void**)allocate<char>(scope_struct, 8, "float_pp");
+    float *tensor_cpu = make_xavier_uniform_float(dims_prod, m, n);
+
+    float *tensor_ptr;
+    cudaMalloc(&tensor_ptr, dims_prod*4);
+
+
+    std::vector<float> h_filter;
+    float *filter;
+    for (std::size_t idx = 0; idx < m * n; ++idx) {
+        // if (Init=="xavu_relu")
+         filter = make_xavier_uniform_float_relu(ks*ks, ks*ks*m, ks*ks*n);
+        // if (Init == "xavu_tanh")
+        //  filter = make_xavier_uniform_float_tanh(ks*ks, ks*ks*m, ks*ks*n);
+        // if (Init=="he_normal_relu")
+        //  filter = make_he_normal_float_relu(ks*ks, ks*ks*m);
+        // if (Init == "init_gpt")
+        //  filter = make_gpt_init(ks*ks);
+        // if (Init=="xavu")
+        //  filter = make_xavier_uniform_float(ks*ks, ks*ks*m, ks*ks*n);
+        // if (Init=="zeros")
+        //  filter = make_zeros_float(ks*ks);
+        // if (Init=="ones")
+        //  filter = make_ones_float(ks*ks);
+        // if (Init=="randu")
+        //  filter = make_random_float_uniform(ks*ks);
+
+        for (int i=0; i < ks*ks; i++)
+         h_filter.emplace_back(filter[i]);
+
+        delete[] filter;
+        //for (const auto& val : filter) 
+        //  h_filter.emplace_back(val);
+    }
+
+    cudaCheck(cudaMemcpy(tensor_ptr, h_filter.data(), dims_prod * sizeof(float), cudaMemcpyDefault));
+  
+
+
+
+
+
+
+
+
+    // float *tensor_ptr = tarena.Allocate<float>(size);
+    cudaCheck(cudaMemcpy(tensor_ptr, tensor_cpu, dims_prod*4, cudaMemcpyHostToDevice));
+    free(tensor_cpu);
+    *ptr = tensor_ptr;
+    return (void*)ptr;
+}
 
 extern "C" void float_pp_Clean_Up(void *ptr, int tid) {
     // std::cout << "" << ptr << "\n";
@@ -80,7 +172,7 @@ extern "C" void float_pp_Clean_Up(void *ptr, int tid) {
     //     cudaFree(fptr);
 }
 extern "C" void float_cpu_Clean_Up(void *ptr, int tid) {
-    // std::cout << "" << ptr << "\n";
+    // std::cout << "float cpu" << ptr << "\n";
     float *fptr = *(float**)ptr;
     if (fptr)
         cudaFree(fptr);
@@ -490,89 +582,6 @@ extern "C" void float_cpu_Clean_Up(void *ptr, int tid) {
 
 
 
-//extern "C" DT_tensor *tensor_view(Scope_Struct *scope_struct, DT_tensor *tensor, int first_dim, ...)
-//{
-//  // std::cout << "Executing: " << tensor->name << "." << "view" << "\n";
-//  std::vector<int> new_dims, new_dims_no_minus, current_dims;
-//  bool has_minus = false;
-//  current_dims = tensor->dims;
-  
-//  va_list args;
-//  va_start(args, first_dim);
-
-//  if (first_dim!=-1)
-//    new_dims_no_minus.push_back(first_dim);
-//  else
-//    has_minus=true;
-  
-  
-//  new_dims.push_back(first_dim);
-
-//  for (int i=0; i<10; i++)
-//  {
-//    if (i==9)
-//    {
-//      LogErrorC(scope_struct->code_line, "A tensor with 10 dimensions??? (view)");
-//      return nullptr;
-//    }
-
-//    int dim = va_arg(args, int);
-//    if (dim==TERMINATE_VARARG)
-//      break;
-//    new_dims.push_back(dim);
-
-//    if (dim!=-1)
-//      new_dims_no_minus.push_back(dim);
-//    else
-//      has_minus=true;
-//  }
-//  va_end(args);
-  
-
-
-//  int current_dims_prod = DimsProd(current_dims);
-//  int new_dims_prod = DimsProd(new_dims);
-
-
-//  if (has_minus)
-//  {
-//    float hidden_dim = (float)current_dims_prod / (float)DimsProd(new_dims_no_minus);
-
-//    if ((float)((int)hidden_dim) != hidden_dim)
-//    {
-//      LogErrorC(scope_struct->code_line, "Automatic view dimension calculus resulted on a non-integer dimension.");
-//      PrintDims(current_dims);
-//      std::cout << "Current dims product: " << current_dims_prod  << ".\n";
-//      PrintDims(new_dims);
-//      std::cout << "New dims product: " << std::to_string(DimsProd(new_dims_no_minus))  << ".\n";
-//      return nullptr;
-//    }
-    
-//    for (int i=0; i<new_dims.size(); i++)
-//      if (new_dims[i]==-1)
-//        new_dims[i] = hidden_dim;
-    
-//  } else {
-//    if (current_dims_prod != new_dims_prod)
-//    {
-//      LogErrorC(scope_struct->code_line, "Incompatible view dimensions.");
-//      PrintDims(current_dims);
-//      std::cout << "Current dims product: " << current_dims_prod  << ".\n";
-//      PrintDims(new_dims);
-//      std::cout << "New dims product: " << new_dims_prod  << ".\n";
-//      return nullptr;
-//    }
-//  }
-
-  
-
-//  DT_tensor *new_tensor = createTensor(scope_struct, tensor->tensor_ptr, new_dims, DimsProd(new_dims), false, "");
-//  new_tensor->view_of = tensor->name;
-//  new_tensor->op=view_op;
-
-
-//  return new_tensor;
-//}
 
 
 

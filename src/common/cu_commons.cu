@@ -13,6 +13,7 @@
 
 #include <Eigen/Dense>
 #include "cu_commons.h"
+#include "../../../src/nsk_cpp.h"
 
 // ----------------------------------------------------------------------------
 // checking utils
@@ -48,21 +49,39 @@ std::random_device rd;  // obtain a random seed
 // std::mt19937 WEIGHT_PRNG(get_millisecond_time()); // initialize the Mersenne Twister generator
 std::mt19937 WEIGHT_PRNG(rd()^get_millisecond_time()); // initialize the Mersenne Twister generator
 
+
+static float randu(float a, float b) {
+    return a + (b - a) * uniform01();
+}
+
+static float randn(float mean, float stddev) {
+    float u1 = uniform01();
+    float u2 = uniform01();
+
+    float r = std::sqrt(-2.0f * std::log(u1 + 1e-20f));
+
+    float theta = 6.283185307179586f * u2;
+
+    float sample = r * std::cos(theta);
+    return sample*stddev + mean;
+}
+
+
 //std::mt19937 WEIGHT_PRNG(0);
 
 float* make_random_float_uniform(size_t N) {
-    std::uniform_real_distribution<float> dist(0.0f, 1.0f); // range -1..1
+    // std::uniform_real_distribution<float> dist(0.0f, 1.0f); // range -1..1
     float* arr = (float*)malloc(N * sizeof(float));
     for (size_t i = 0; i < N; i++)
-        arr[i] = dist(WEIGHT_PRNG);
-        //arr[i] = ((float)rand() / RAND_MAX); // range 0..1
+        arr[i] = randu(0.0,1.0);
     return arr;
 }
 
 float* make_random_float(size_t N) {
     float* arr = (float*)malloc(N * sizeof(float));
     for (size_t i = 0; i < N; i++) {
-        arr[i] = ((float)rand() / RAND_MAX) * 2.0 - 1.0; // range -1..1
+        arr[i] = randn(0.0, 1.0);
+        // arr[i] = ((float)rand() / RAND_MAX) * 2.0 - 1.0; // range -1..1
     }
     return arr;
 }
@@ -96,6 +115,36 @@ float* make_ones_float(size_t N) {
     }
     return arr;
 }
+
+
+
+uint16_t* make_random_bf16_uniform(size_t N) {
+    uint16_t* arr = (uint16_t*)malloc(N * sizeof(uint16_t));
+    for (size_t i = 0; i < N; i++)
+        arr[i] = float_to_bf16_inline(randu(0.0,1.0));
+    return arr;
+}
+
+uint16_t* make_bf16_float(size_t N) {
+    uint16_t* arr = (uint16_t*)malloc(N * sizeof(uint16_t));
+    for (size_t i = 0; i < N; i++) {
+        arr[i] = float_to_bf16_inline(randn(0.0,1.0));
+    }
+    return arr;
+}
+uint16_t* make_zeros_bf16(size_t N) {
+    uint16_t* arr = (uint16_t*)malloc(N * sizeof(uint16_t));
+    memset(arr, 0u, N * sizeof(uint16_t)); // all zero
+    return arr;
+}
+uint16_t* make_ones_bf16(size_t N) {
+    uint16_t* arr = (uint16_t*)malloc(N * sizeof(uint16_t));
+    for (size_t i = 0; i < N; i++) {
+        arr[i] = 1.0f;
+    }
+    return arr;
+}
+
 
 float* make_min_float(size_t N) {
     float* arr = (float*)malloc(N * sizeof(float));

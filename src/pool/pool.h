@@ -2,7 +2,7 @@
 #include "../../../src/nsk_cpp.h"
 
 
-constexpr int TSPANS = 22;
+constexpr int TSPANS = 64;
 
 
 struct TensorSpan {
@@ -34,7 +34,10 @@ struct TensorArena {
         size = size*sizeof(T);
         int exp = round_up_pow2_exp(size);
         int rsize = 1u << exp;
-
+        // std::cout << "alloc size " << size << "\n";
+        // std::cout << "alloc exp " << exp << "\n";
+        // std::cout << "alloc rsize " << rsize << "\n";
+        // std::cout << "\n";
         TensorSpan *span = cur_span[exp], *prev_span=nullptr;
         if (span) {
             T *ptr = span->Allocate<T>();
@@ -42,7 +45,10 @@ struct TensorArena {
             while (span->next) {
                 span = span->next;
                 T *ptr = span->Allocate<T>();
-                if (ptr) return ptr;
+                if (ptr) {
+                    cur_span[exp] = span;
+                    return ptr;
+                }
             }
             prev_span = span;
         }

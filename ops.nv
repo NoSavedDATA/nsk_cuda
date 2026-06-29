@@ -1,0 +1,90 @@
+
+
+def int add_backward(float_pp dout, gpu_tensor x, gpu_tensor y)
+	float_pp dx, dy
+	dx = x.getd()
+	dy = y.getd()
+	acc_tensors(dx, dout, x.dims_prod)
+	acc_tensors(dy, dout, x.dims_prod)
+
+def int mma_backward(float_pp dout, gpu_tensor x, gpu_tensor y)
+	var dx = x.getd()
+	var dy = y.getd()
+	int m=x.dims[0], n=x.dims[1], p=y.dims[0]
+	matmul_backward(x.ptr, y.ptr, dx, dy, dout, m, n, p)
+	0
+
+
+def int relu_backward(float_pp dout, gpu_tensor x, gpu_tensor y)
+	relu_backward_k(dout, x.ptr, y.ptr, x.dims_prod)
+	#dout.cpu(x.dims_prod).print([x.dims_prod])
+
+
+def int mse_backward(float_pp dx, gpu_tensor x, gpu_tensor y)
+	mse_backward_kernel(dx, x.ptr, y.ptr, x.dims_prod)
+	#x.printd()
+
+def int ce_backward(float_pp dx, gpu_tensor x, gpu_tensor y)
+	ce_backward_kernel(dx, x.ptr, y.ptr, x.dims[0], x.dims[1])
+
+def gpu_tensor softmax(gpu_tensor a)
+	gpu_tensor ret = new gpu_tensor(a.dims, "none")
+	float_pp probs = softmax_k(a.ptr, a.dims[0], a.dims[-1])
+	ret.ptr = probs
+	return ret
+
+
+def gpu_tensor relu(gpu_tensor x)
+	gpu_tensor ret = new gpu_tensor(x.dims, "none")
+	float_pp relu_out = relu_k(x.ptr, x.dims_prod)
+	ret.ptr = relu_out
+	if x.shall_prop
+		$backprop.register(x, ret, ret, "relu")
+	return ret
+
+def gpu_tensor gpu_tensor_gpu_tensor_add(gpu_tensor a, gpu_tensor b)
+	gpu_tensor ret = new gpu_tensor(a.dims, "none")
+	ret.ptr = add_tensors(a.ptr, b.ptr, a.dims_prod)
+
+	bool shall_prop = a.shall_prop or b.shall_prop
+	ret.shall_prop = shall_prop
+	if shall_prop
+		$backprop.register(a, b, ret, "add")
+	return ret
+
+
+def gpu_tensor gpu_tensor_gpu_tensor_mma(gpu_tensor a, gpu_tensor b)
+	int m = a.dims[0], n = a.dims[1], p = b.dims[0]
+
+	array<int> new_dims = [m, p]
+	gpu_tensor ret = new gpu_tensor(new_dims, "none")
+	#new_dims.print()
+	ret.ptr = mma_tensors(a.ptr, b.ptr, m, n, p)
+	#new_dims.print()
+
+	bool shall_prop = a.shall_prop or b.shall_prop
+	ret.shall_prop = shall_prop
+	if shall_prop
+		$backprop.register(a, b, ret, "mma")
+	return ret
+
+
+def gpu_tensor mse_loss(gpu_tensor a, gpu_tensor b)
+	gpu_tensor ret = new gpu_tensor(a.dims, "none")
+	ret.ptr = add_tensors(a.ptr, b.ptr, a.dims_prod)
+	bool shall_prop = a.shall_prop or b.shall_prop
+	ret.shall_prop = shall_prop
+	if shall_prop
+		$backprop.register(a, b, ret, "mse")
+	return ret
+
+
+
+def gpu_tensor ce_loss(gpu_tensor a, gpu_tensor b)
+	gpu_tensor ret = new gpu_tensor(a.dims, "none")
+	ret.ptr = add_tensors(a.ptr, b.ptr, a.dims_prod)
+	bool shall_prop = a.shall_prop or b.shall_prop
+	ret.shall_prop = shall_prop
+	if shall_prop
+		$backprop.register(a, b, ret, "ce")
+	return ret

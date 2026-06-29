@@ -1,0 +1,35 @@
+class SGD
+	float lr
+	ctor(float lr)
+		self.lr = lr
+	def float step()
+		for param in $optim_info.params
+			sgd_k(param.ptr, param.d, self.lr, param.dims_prod)
+			param.d=nil
+		$optim_info.params.clear()
+		tarena_reset()
+
+class AdamW
+	float lr, beta1, beta2
+	array<gpu_tensor> m, v
+	int ts
+
+	ctor(float lr, float beta1, float beta2)
+		self.lr = lr
+		self.beta1 = beta1
+		self.beta2 = beta2
+		self.ts = 1
+
+	def float step()
+		int i=0
+		for param in $optim_info.params
+			if i+1>self.v.size()
+				self.m.append(new gpu_tensor(param.dims, "zeros"))
+				self.v.append(new gpu_tensor(param.dims, "zeros"))
+
+			adamw_k(param.ptr, param.d, self.m[i].ptr, self.v[i].ptr, self.lr, param.dims_prod, self.beta1, self.beta2, self.ts)
+			param.d=nil
+			i=i+1
+			self.ts = self.ts+1
+		$optim_info.params.clear()
+		tarena_reset()

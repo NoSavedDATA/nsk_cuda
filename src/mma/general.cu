@@ -397,8 +397,7 @@ void matmul_forward(float* out,
   cudaStream_t stream = ThreadsStream[tid];
 
 
-  if (thread_id==0)
-  {
+  if (thread_id==0) {
     cublasCheck(cublasSgemm(cublas_handle, CUBLAS_OP_T, CUBLAS_OP_N, OC, B, C, &alpha, W, C, inp, C, &beta, out, OC));
     // constexpr int num_warps_x{4};
     // constexpr int num_warps_y{4};

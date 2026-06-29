@@ -1,13 +1,4 @@
-#include <cuda_runtime.h>
-
-#include "../pool/include.h"
-#include "../cuda_kernels/include.h"
-#include "../cuda_threads/include.h"
-// #include "../data_types/include.h"
-#include "../common/include.h"
-
-#include "../../../src/nsk_cpp_llvm.h"
-
+#include "initialize.h"
 
 llvm::Type *float_pp_llvm(std::unique_ptr<LLVMContext> &ctx) {
     return Type::getFloatTy(*ctx)->getPointerTo();
@@ -15,11 +6,16 @@ llvm::Type *float_pp_llvm(std::unique_ptr<LLVMContext> &ctx) {
 llvm::Type *float_cpu_llvm(std::unique_ptr<LLVMContext> &ctx) {
     return Type::getFloatTy(*ctx)->getPointerTo();
 }
+llvm::Type *bf16_pp_llvm(std::unique_ptr<LLVMContext> &ctx) {
+    return Type::getInt16Ty(*ctx)->getPointerTo();
+}
+llvm::Type *bf16_cpu_llvm(std::unique_ptr<LLVMContext> &ctx) {
+    return Type::getInt16Ty(*ctx)->getPointerTo();
+}
 
 
 extern "C" void initialize__nsk_cuda() {
-  for (int i=0;i<10;++i)
-  {
+  for (int i=0;i<10;++i) {
     cudaStream_t thread_stream = createCudaStream();
     ThreadsStream[i] = thread_stream;
   }
@@ -64,7 +60,6 @@ extern "C" void initialize__nsk_cuda() {
 
 
 
-
   // backward_functions["scalarmult_backward"] = scalarmult_backward;
   // backward_functions["relu_backward"] = relu_backward;
   // backward_functions["gelu_backward"] = gelu_backward;
@@ -74,4 +69,6 @@ extern "C" void initialize__nsk_cuda() {
   // backward_functions["gather_last_dim_backward"] = gather_last_dim_backward;
   data_register_fn["float_pp"] = float_pp_llvm;
   data_register_fn["float_cpu"] = float_cpu_llvm;
+  data_register_fn["bf16_pp"] = bf16_pp_llvm;
+  data_register_fn["bf16_cpu"] = bf16_cpu_llvm;
 }

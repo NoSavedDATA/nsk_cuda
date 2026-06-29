@@ -1,0 +1,57 @@
+class BackNode
+	gpu_tensor l, r, out
+	bool solved
+	str op
+	any module
+	ctor(gpu_tensor l, gpu_tensor r, gpu_tensor out, str op)
+		self.l = l
+		self.r = r
+		self.out = out
+		self.op = op
+		self.solved = false
+		if l
+			if l.shall_prop
+				l.reqs.append(self)
+		if !!r and r.shall_prop
+			r.reqs.append(self)
+
+class backprop
+	array<BackNode> ops
+	map<str, Function<int, float_pp, gpu_tensor, gpu_tensor>> backs
+	map<str, Function<int, float_pp, gpu_tensor, gpu_tensor>> loss_backs
+	map<str, Function<int, float_pp, gpu_tensor, any>> module_backs
+	int last_back_op
+	ctor()
+		self.last_back_op = 0
+
+	def float register(gpu_tensor l, gpu_tensor r, gpu_tensor out, str op)
+		self.ops.append(new BackNode(l, r, out, op))
+
+	def float register_module(gpu_tensor inp, any module, gpu_tensor out, str op)
+		#self.ops.append(new BackNode(l, r, out, op))
+		var node = new BackNode(inp, nil, out, op)
+		node.module = module
+		self.ops.append(node)
+		
+
+	def float backward()
+		int op_count=self.ops.size()
+		for i=0, i<op_count
+			var op = self.ops[op_count-1-i]
+			op.solved=true
+			#print("OP: ", op.op)
+			if self.loss_backs.has(op.op)
+				float_pp dinp=op.l.getd()
+				self.loss_backs[op.op](dinp, op.l, op.r)
+			else
+				float_pp dout=op.out.getd()
+				if self.module_backs.has(op.op)
+					self.module_backs[op.op](dout, op.l, op.module)
+				else
+					self.backs[op.op](dout, op.l, op.r)
+			if !!op.l
+				op.l.reqs.clear()
+			if !!op.r
+				op.r.reqs.clear()
+
+		self.ops.clear()

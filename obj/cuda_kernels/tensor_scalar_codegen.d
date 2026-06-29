@@ -31,12 +31,15 @@ obj/cuda_kernels/tensor_scalar_codegen.o: \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../clean_up/clean_up.h \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/array.h \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../mangler/scope_struct.h \
+  src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/map.h \
+  src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../compiler_frontend/logging_v.h \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/list.h \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../mangler/scope_struct.h \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../pool/pool.h \
+  src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../threads/cas.h \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/barrier.h \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/channels.h \
-  src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../data_types/list.h \
+  src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../data_types/array.h \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/lock.h \
   src/cuda_kernels/../../../../src/runtime/char_pool/../threads/utils.h \
   src/cuda_kernels/../../../../src/runtime/clean_up/include.h \
@@ -46,6 +49,7 @@ obj/cuda_kernels/tensor_scalar_codegen.o: \
   src/cuda_kernels/../../../../src/runtime/codegen/print.h \
   src/cuda_kernels/../../../../src/runtime/codegen/../mangler/scope_struct.h \
   src/cuda_kernels/../../../../src/runtime/codegen/random.h \
+  src/cuda_kernels/../../../../src/runtime/codegen/philox.h \
   src/cuda_kernels/../../../../src/runtime/codegen/string.h \
   src/cuda_kernels/../../../../src/runtime/codegen/time.h \
   src/cuda_kernels/../../../../src/runtime/common/extension_functions.h \
@@ -54,9 +58,13 @@ obj/cuda_kernels/tensor_scalar_codegen.o: \
   src/cuda_kernels/../../../../src/runtime/compiler_frontend/logging_execution.h \
   src/cuda_kernels/../../../../src/runtime/compiler_frontend/logging_v.h \
   src/cuda_kernels/../../../../src/runtime/compiler_frontend/parser_struct.h \
+  src/cuda_kernels/../../../../src/runtime/compiler_frontend/../data_types/data_tree.h \
+  src/cuda_kernels/../../../../src/runtime/cuda/include.h \
+  src/cuda_kernels/../../../../src/runtime/cuda/handles.h \
   src/cuda_kernels/../../../../src/runtime/data_types/include.h \
   src/cuda_kernels/../../../../src/runtime/data_types/any_map.h \
   src/cuda_kernels/../../../../src/runtime/data_types/array.h \
+  src/cuda_kernels/../../../../src/runtime/data_types/bf16.h \
   src/cuda_kernels/../../../../src/runtime/data_types/bool.h \
   src/cuda_kernels/../../../../src/runtime/data_types/charv.h \
   src/cuda_kernels/../../../../src/runtime/data_types/codegen_notes.h \
@@ -67,12 +75,11 @@ obj/cuda_kernels/tensor_scalar_codegen.o: \
   src/cuda_kernels/../../../../src/runtime/data_types/int.h \
   src/cuda_kernels/../../../../src/runtime/data_types/list.h \
   src/cuda_kernels/../../../../src/runtime/data_types/map.h \
-  src/cuda_kernels/../../../../src/runtime/data_types/../compiler_frontend/logging_v.h \
   src/cuda_kernels/../../../../src/runtime/data_types/nsk_vector.h \
   src/cuda_kernels/../../../../src/runtime/data_types/nullptr.h \
   src/cuda_kernels/../../../../src/runtime/data_types/str.h \
   src/cuda_kernels/../../../../src/runtime/data_types/str_view.h \
-  src/cuda_kernels/../../../../src/runtime/data_types/str_vec.h \
+  src/cuda_kernels/../../../../src/runtime/data_types/tensor.h \
   src/cuda_kernels/../../../../src/runtime/data_types/type_info.h \
   src/cuda_kernels/../../../../src/runtime/math/include.h \
   src/cuda_kernels/../../../../src/runtime/math/functions.h \
@@ -90,6 +97,8 @@ obj/cuda_kernels/tensor_scalar_codegen.o: \
   src/cuda_kernels/../../../../src/runtime/pool/../mangler/scope_struct.h \
   src/cuda_kernels/../../../../src/runtime/pool/../mark_sweep/include.h \
   src/cuda_kernels/../../../../src/runtime/pool/pool.h \
+  src/cuda_kernels/../../../../src/runtime/profiler/include.h \
+  src/cuda_kernels/../../../../src/runtime/profiler/profiler.h \
   src/cuda_kernels/../../../../src/runtime/threads/include.h \
   src/cuda_kernels/../../../../src/runtime/prebuild/prebuild.h \
   src/cuda_kernels/../cuda_threads/include.h \
@@ -164,12 +173,15 @@ src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../clean_up/clean_up.h:
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/array.h:
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../mangler/scope_struct.h:
+src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/map.h:
+src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/../compiler_frontend/logging_v.h:
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../data_types/list.h:
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../mangler/scope_struct.h:
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../pool/pool.h:
+src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../mangler/../mark_sweep/../threads/cas.h:
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/barrier.h:
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/channels.h:
-src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../data_types/list.h:
+src/cuda_kernels/../../../../src/runtime/char_pool/../threads/../data_types/array.h:
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/lock.h:
 src/cuda_kernels/../../../../src/runtime/char_pool/../threads/utils.h:
 src/cuda_kernels/../../../../src/runtime/clean_up/include.h:
@@ -179,6 +191,7 @@ src/cuda_kernels/../../../../src/runtime/codegen/functions.h:
 src/cuda_kernels/../../../../src/runtime/codegen/print.h:
 src/cuda_kernels/../../../../src/runtime/codegen/../mangler/scope_struct.h:
 src/cuda_kernels/../../../../src/runtime/codegen/random.h:
+src/cuda_kernels/../../../../src/runtime/codegen/philox.h:
 src/cuda_kernels/../../../../src/runtime/codegen/string.h:
 src/cuda_kernels/../../../../src/runtime/codegen/time.h:
 src/cuda_kernels/../../../../src/runtime/common/extension_functions.h:
@@ -187,9 +200,13 @@ src/cuda_kernels/../../../../src/runtime/compiler_frontend/global_vars.h:
 src/cuda_kernels/../../../../src/runtime/compiler_frontend/logging_execution.h:
 src/cuda_kernels/../../../../src/runtime/compiler_frontend/logging_v.h:
 src/cuda_kernels/../../../../src/runtime/compiler_frontend/parser_struct.h:
+src/cuda_kernels/../../../../src/runtime/compiler_frontend/../data_types/data_tree.h:
+src/cuda_kernels/../../../../src/runtime/cuda/include.h:
+src/cuda_kernels/../../../../src/runtime/cuda/handles.h:
 src/cuda_kernels/../../../../src/runtime/data_types/include.h:
 src/cuda_kernels/../../../../src/runtime/data_types/any_map.h:
 src/cuda_kernels/../../../../src/runtime/data_types/array.h:
+src/cuda_kernels/../../../../src/runtime/data_types/bf16.h:
 src/cuda_kernels/../../../../src/runtime/data_types/bool.h:
 src/cuda_kernels/../../../../src/runtime/data_types/charv.h:
 src/cuda_kernels/../../../../src/runtime/data_types/codegen_notes.h:
@@ -200,12 +217,11 @@ src/cuda_kernels/../../../../src/runtime/data_types/../mangler/scope_struct.h:
 src/cuda_kernels/../../../../src/runtime/data_types/int.h:
 src/cuda_kernels/../../../../src/runtime/data_types/list.h:
 src/cuda_kernels/../../../../src/runtime/data_types/map.h:
-src/cuda_kernels/../../../../src/runtime/data_types/../compiler_frontend/logging_v.h:
 src/cuda_kernels/../../../../src/runtime/data_types/nsk_vector.h:
 src/cuda_kernels/../../../../src/runtime/data_types/nullptr.h:
 src/cuda_kernels/../../../../src/runtime/data_types/str.h:
 src/cuda_kernels/../../../../src/runtime/data_types/str_view.h:
-src/cuda_kernels/../../../../src/runtime/data_types/str_vec.h:
+src/cuda_kernels/../../../../src/runtime/data_types/tensor.h:
 src/cuda_kernels/../../../../src/runtime/data_types/type_info.h:
 src/cuda_kernels/../../../../src/runtime/math/include.h:
 src/cuda_kernels/../../../../src/runtime/math/functions.h:
@@ -223,6 +239,8 @@ src/cuda_kernels/../../../../src/runtime/pool/../compiler_frontend/logging_v.h:
 src/cuda_kernels/../../../../src/runtime/pool/../mangler/scope_struct.h:
 src/cuda_kernels/../../../../src/runtime/pool/../mark_sweep/include.h:
 src/cuda_kernels/../../../../src/runtime/pool/pool.h:
+src/cuda_kernels/../../../../src/runtime/profiler/include.h:
+src/cuda_kernels/../../../../src/runtime/profiler/profiler.h:
 src/cuda_kernels/../../../../src/runtime/threads/include.h:
 src/cuda_kernels/../../../../src/runtime/prebuild/prebuild.h:
 src/cuda_kernels/../cuda_threads/include.h:
