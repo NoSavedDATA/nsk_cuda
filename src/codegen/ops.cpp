@@ -2,7 +2,7 @@
 #include "../../src/std/codegen.h"
 
 
-extern "C" Value *float_cpu_int_offby(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *float_cpu_int_offby(Parser_Struct *parser_struct, Function *TheFunction,
            Data_Tree L_dt, Data_Tree R_dt,
            std::unique_ptr<ExprAST>& LHS,
            std::unique_ptr<ExprAST>& RHS,
@@ -16,7 +16,7 @@ extern "C" Value *float_cpu_int_offby(Parser_Struct parser_struct, Function *The
     return ret; 
 }
 
-extern "C" Value *float_pp_int_offby(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *float_pp_int_offby(Parser_Struct *parser_struct, Function *TheFunction,
            Data_Tree L_dt, Data_Tree R_dt,
            std::unique_ptr<ExprAST>& LHS,
            std::unique_ptr<ExprAST>& RHS,
@@ -32,7 +32,7 @@ extern "C" Value *float_pp_int_offby(Parser_Struct parser_struct, Function *TheF
 
 
 
-extern "C" Value *bf16_cpu_int_offby(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *bf16_cpu_int_offby(Parser_Struct *parser_struct, Function *TheFunction,
            Data_Tree L_dt, Data_Tree R_dt,
            std::unique_ptr<ExprAST>& LHS,
            std::unique_ptr<ExprAST>& RHS,
@@ -46,7 +46,7 @@ extern "C" Value *bf16_cpu_int_offby(Parser_Struct parser_struct, Function *TheF
     return ret; 
 }
 
-extern "C" Value *bf16_pp_int_offby(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *bf16_pp_int_offby(Parser_Struct *parser_struct, Function *TheFunction,
            Data_Tree L_dt, Data_Tree R_dt,
            std::unique_ptr<ExprAST>& LHS,
            std::unique_ptr<ExprAST>& RHS,

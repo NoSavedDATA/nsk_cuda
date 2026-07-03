@@ -39,7 +39,7 @@ class backprop
 		for i=0, i<op_count
 			var op = self.ops[op_count-1-i]
 			op.solved=true
-			#print("OP: ", op.op)
+
 			if self.loss_backs.has(op.op)
 				float_pp dinp=op.l.getd()
 				self.loss_backs[op.op](dinp, op.l, op.r)

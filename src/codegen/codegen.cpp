@@ -2,7 +2,7 @@
 #include "../../src/std/codegen.h"
 
 
-extern "C" Value *cumalloc(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *cumalloc(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *ret = callret("allocate_pool", {scope_struct, const_int(8), const_int16(data_name_to_type()["float_pp"])});
@@ -10,7 +10,7 @@ extern "C" Value *cumalloc(Parser_Struct parser_struct, Function *TheFunction,
     return ret;
 }
 
-extern "C" Value *cumalloc_host(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *cumalloc_host(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *ret = callret("allocate_pool", {scope_struct, const_int(8), const_int16(data_name_to_type()["float_cpu"])});
@@ -18,7 +18,7 @@ extern "C" Value *cumalloc_host(Parser_Struct parser_struct, Function *TheFuncti
     return ret;
 }
 
-extern "C" Value *device_to_host(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *device_to_host(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *ret = callret("allocate_pool", {scope_struct, const_int(8), const_int16(data_name_to_type()["float_cpu"])});
@@ -35,7 +35,7 @@ extern "C" Value *device_to_host(Parser_Struct parser_struct, Function *TheFunct
 
 // --------- float32 --------- //
 
-extern "C" Value *float_pp_cpu(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *float_pp_cpu(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *size = Builder->CreateMul(ArgsV[1], const_int(4));
@@ -48,7 +48,7 @@ extern "C" Value *float_pp_cpu(Parser_Struct parser_struct, Function *TheFunctio
     return ret;
 }
 
-extern "C" Value *host_to_device(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *host_to_device(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *dest = Builder->CreateLoad(int8PtrTy, ArgsV[0]);
@@ -57,7 +57,7 @@ extern "C" Value *host_to_device(Parser_Struct parser_struct, Function *TheFunct
     return const_int(0);
 }
 
-extern "C" Value *float_cpu_cuda(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *float_cpu_cuda(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *size = Builder->CreateMul(ArgsV[1], const_int(4));
@@ -70,7 +70,7 @@ extern "C" Value *float_cpu_cuda(Parser_Struct parser_struct, Function *TheFunct
     return ret;
 }
 
-extern "C" Value *float_cpu_cupool(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *float_cpu_cupool(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *size = Builder->CreateMul(ArgsV[1], const_int(4));
@@ -90,7 +90,7 @@ extern "C" Value *float_cpu_cupool(Parser_Struct parser_struct, Function *TheFun
 
 
 // --------- bf16 --------- //
-extern "C" Value *bf16_pp_cpu(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *bf16_pp_cpu(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *size = Builder->CreateMul(ArgsV[1], const_int(2));
@@ -103,7 +103,7 @@ extern "C" Value *bf16_pp_cpu(Parser_Struct parser_struct, Function *TheFunction
     return ret;
 }
 
-extern "C" Value *bf16_cpu_cuda(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *bf16_cpu_cuda(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *size = Builder->CreateMul(ArgsV[1], const_int(2));
@@ -117,7 +117,7 @@ extern "C" Value *bf16_cpu_cuda(Parser_Struct parser_struct, Function *TheFuncti
 }
 
 
-extern "C" Value *bf16_cpu_cupool(Parser_Struct parser_struct, Function *TheFunction,
+extern "C" Value *bf16_cpu_cupool(Parser_Struct *parser_struct, Function *TheFunction,
                  std::string Callee, Data_Tree data_type, std::vector<Data_Tree> &args_type,
                  Value *scope_struct, std::vector<std::unique_ptr<ExprAST>> &Args, std::vector<Value*> &ArgsV) {
     Value *size = Builder->CreateMul(ArgsV[1], const_int(2));
