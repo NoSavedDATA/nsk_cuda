@@ -153,7 +153,9 @@ extern "C" void neve_gpu_launch(char *fn, char *ptx,
         cuGetErrorName(res, &name);
         cuGetErrorString(res, &str);
 
+        std::cout << "LAUNCH ERROR" << "\n";
         printf("%s: %s\n", name, str);
+        std::cout << ptx << "\n";
         abort();
     }
 

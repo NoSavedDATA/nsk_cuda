@@ -109,7 +109,7 @@ obj/cuda_kernels/min_max_sample.o: src/cuda_kernels/min_max_sample.cu \
   src/cuda_kernels/../nsk_cuda/pool/pool.h \
   src/cuda_kernels/../tensor/include.h \
   src/cuda_kernels/../tensor/../../../../src/nsk_cpp.h \
-  src/cuda_kernels/../tensor/print.h \
+  src/cuda_kernels/../tensor/print.h src/cuda_kernels/../tensor/save.h \
   src/cuda_kernels/../tensor/tensor_dim_functions.h \
   src/cuda_kernels/calculate_grids.h \
   src/cuda_kernels/elementwise_kernels_inline.cu \
@@ -226,6 +226,7 @@ src/cuda_kernels/../nsk_cuda/pool/pool.h:
 src/cuda_kernels/../tensor/include.h:
 src/cuda_kernels/../tensor/../../../../src/nsk_cpp.h:
 src/cuda_kernels/../tensor/print.h:
+src/cuda_kernels/../tensor/save.h:
 src/cuda_kernels/../tensor/tensor_dim_functions.h:
 src/cuda_kernels/calculate_grids.h:
 src/cuda_kernels/elementwise_kernels_inline.cu:

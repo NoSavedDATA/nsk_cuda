@@ -175,7 +175,7 @@ obj/cuda_kernels/transpose.o: src/cuda_kernels/transpose.cu \
   src/cuda_kernels/../nsk_cuda/minimal_tensor.h \
   src/cuda_kernels/../tensor/include.h \
   src/cuda_kernels/../tensor/../../../../src/nsk_cpp.h \
-  src/cuda_kernels/../tensor/print.h \
+  src/cuda_kernels/../tensor/print.h src/cuda_kernels/../tensor/save.h \
   src/cuda_kernels/../tensor/tensor_dim_functions.h
 src/../../../src/nsk_cpp.h:
 src/../../../src/runtime/include.h:
@@ -355,4 +355,5 @@ src/cuda_kernels/../nsk_cuda/minimal_tensor.h:
 src/cuda_kernels/../tensor/include.h:
 src/cuda_kernels/../tensor/../../../../src/nsk_cpp.h:
 src/cuda_kernels/../tensor/print.h:
+src/cuda_kernels/../tensor/save.h:
 src/cuda_kernels/../tensor/tensor_dim_functions.h:

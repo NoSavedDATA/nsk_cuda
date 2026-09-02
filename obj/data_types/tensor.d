@@ -110,7 +110,7 @@ obj/data_types/tensor.o: src/data_types/tensor.cu \
   src/data_types/../nsk_cuda/pool/pool.h \
   src/data_types/../tensor/include.h \
   src/data_types/../tensor/../../../../src/nsk_cpp.h \
-  src/data_types/../tensor/print.h \
+  src/data_types/../tensor/print.h src/data_types/../tensor/save.h \
   src/data_types/../tensor/tensor_dim_functions.h \
   /nsk/lib/eigen3/../../src/nsk_cpp.h src/data_types/include.h \
   src/data_types/tensor.h
@@ -228,6 +228,7 @@ src/data_types/../nsk_cuda/pool/pool.h:
 src/data_types/../tensor/include.h:
 src/data_types/../tensor/../../../../src/nsk_cpp.h:
 src/data_types/../tensor/print.h:
+src/data_types/../tensor/save.h:
 src/data_types/../tensor/tensor_dim_functions.h:
 /nsk/lib/eigen3/../../src/nsk_cpp.h:
 src/data_types/include.h:

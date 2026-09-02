@@ -127,6 +127,7 @@ obj/initialize/initialize.o: src/initialize/initialize.cu \
   src/initialize/../cuda_kernels/../tensor/include.h \
   src/initialize/../cuda_kernels/../tensor/../../../../src/nsk_cpp.h \
   src/initialize/../cuda_kernels/../tensor/print.h \
+  src/initialize/../cuda_kernels/../tensor/save.h \
   src/initialize/../cuda_kernels/../tensor/tensor_dim_functions.h \
   src/initialize/../cuda_kernels/dim_kernels.h \
   src/initialize/../cuda_kernels/elementwise_codegen.h \
@@ -570,6 +571,7 @@ src/initialize/../cuda_kernels/dim.h:
 src/initialize/../cuda_kernels/../tensor/include.h:
 src/initialize/../cuda_kernels/../tensor/../../../../src/nsk_cpp.h:
 src/initialize/../cuda_kernels/../tensor/print.h:
+src/initialize/../cuda_kernels/../tensor/save.h:
 src/initialize/../cuda_kernels/../tensor/tensor_dim_functions.h:
 src/initialize/../cuda_kernels/dim_kernels.h:
 src/initialize/../cuda_kernels/elementwise_codegen.h:

@@ -53,20 +53,20 @@ def gpu_tensor gpu_tensor_gpu_tensor_add(gpu_tensor a, gpu_tensor b)
 	return ret
 
 
-def gpu_tensor gpu_tensor_gpu_tensor_mma(gpu_tensor a, gpu_tensor b)
-	int m = a.dims[0], n = a.dims[1], p = b.dims[0]
+#def gpu_tensor gpu_tensor_gpu_tensor_mma(gpu_tensor a, gpu_tensor b)
+#	int m = a.dims[0], n = a.dims[1], p = b.dims[0]
 
-	array<int> new_dims = [m, p]
-	gpu_tensor ret = new gpu_tensor(new_dims, "none")
-	#new_dims.print()
-	ret.ptr = mma_tensors(a.ptr, b.ptr, m, n, p)
-	#new_dims.print()
+#	array<int> new_dims = [m, p]
+#	gpu_tensor ret = new gpu_tensor(new_dims, "none")
+#	ret.ptr = mma_tensors(a.ptr, b.ptr, m, n, p)
 
-	bool shall_prop = a.shall_prop or b.shall_prop
-	ret.shall_prop = shall_prop
-	if shall_prop
-		$backprop.register(a, b, ret, "mma")
-	return ret
+#	bool shall_prop = a.shall_prop or b.shall_prop
+#	ret.shall_prop = shall_prop
+#	if shall_prop
+#		$backprop.register(a, b, ret, "mma")
+#	return ret
+
+
 
 
 def gpu_tensor mse_loss(gpu_tensor a, gpu_tensor b)

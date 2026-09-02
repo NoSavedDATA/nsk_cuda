@@ -83,6 +83,13 @@ class gpu_tensor
 		self.print_dims()
 		print(" ")
 
+	def void save(str path)
+		if self.type==bf16_t
+			#self.ptr_bf16.save(self.dims_prod, path)
+			self.ptr_bf16.cpu(self.dims_prod).save(self.dims_prod, path)
+		else
+			print("Save float")
+
 	def float print_dims()
 		self.dims.print()
 	def float shape()
@@ -121,6 +128,7 @@ class gpu_tensor
 		view_gpu_tensor.d = self.d
 		view_gpu_tensor.shall_prop = self.shall_prop
 		return view_gpu_tensor
+
 
 
 def gpu_tensor image_gpu_tensor(str path)

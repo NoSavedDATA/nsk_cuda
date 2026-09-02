@@ -112,7 +112,8 @@ obj/optimizers/sgd/class.o: src/optimizers/sgd/class.cu \
   src/optimizers/sgd/../../tensor/tensor_dim_functions.h \
   src/optimizers/sgd/../../tensor/include.h \
   src/optimizers/sgd/../../tensor/../../../../src/nsk_cpp.h \
-  src/optimizers/sgd/../../tensor/print.h src/optimizers/sgd/../common.h \
+  src/optimizers/sgd/../../tensor/print.h \
+  src/optimizers/sgd/../../tensor/save.h src/optimizers/sgd/../common.h \
   src/optimizers/sgd/../interface.h src/optimizers/sgd/class.h \
   src/optimizers/sgd/kernels.h
 src/optimizers/sgd/../../../../../src/nsk_cpp.h:
@@ -229,6 +230,7 @@ src/optimizers/sgd/../../tensor/tensor_dim_functions.h:
 src/optimizers/sgd/../../tensor/include.h:
 src/optimizers/sgd/../../tensor/../../../../src/nsk_cpp.h:
 src/optimizers/sgd/../../tensor/print.h:
+src/optimizers/sgd/../../tensor/save.h:
 src/optimizers/sgd/../common.h:
 src/optimizers/sgd/../interface.h:
 src/optimizers/sgd/class.h:

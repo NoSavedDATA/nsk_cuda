@@ -184,7 +184,7 @@ obj/cuda_kernels/tensor_tensor_codegen.o: \
   src/cuda_kernels/../nsk_cuda/pool/include.h \
   src/cuda_kernels/../tensor/include.h \
   src/cuda_kernels/../tensor/../../../../src/nsk_cpp.h \
-  src/cuda_kernels/../tensor/print.h \
+  src/cuda_kernels/../tensor/print.h src/cuda_kernels/../tensor/save.h \
   src/cuda_kernels/../tensor/tensor_dim_functions.h \
   src/cuda_kernels/activation_functions/activation_kernels.h \
   src/cuda_kernels/include.h src/cuda_kernels/../../../../src/nsk_cpp.h \
@@ -404,6 +404,7 @@ src/cuda_kernels/../nsk_cuda/pool/include.h:
 src/cuda_kernels/../tensor/include.h:
 src/cuda_kernels/../tensor/../../../../src/nsk_cpp.h:
 src/cuda_kernels/../tensor/print.h:
+src/cuda_kernels/../tensor/save.h:
 src/cuda_kernels/../tensor/tensor_dim_functions.h:
 src/cuda_kernels/activation_functions/activation_kernels.h:
 src/cuda_kernels/include.h:

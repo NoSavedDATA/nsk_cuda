@@ -108,6 +108,7 @@ obj/cuda_kernels/type_cast/codegen.o: \
   src/cuda_kernels/type_cast/../../tensor/include.h \
   src/cuda_kernels/type_cast/../../tensor/../../../../src/nsk_cpp.h \
   src/cuda_kernels/type_cast/../../tensor/print.h \
+  src/cuda_kernels/type_cast/../../tensor/save.h \
   src/cuda_kernels/type_cast/../../tensor/tensor_dim_functions.h \
   src/cuda_kernels/type_cast/../handles.h \
   src/cuda_kernels/type_cast/kernel.h
@@ -219,6 +220,7 @@ src/cuda_kernels/type_cast/../../nsk_cuda/pool/pool.h:
 src/cuda_kernels/type_cast/../../tensor/include.h:
 src/cuda_kernels/type_cast/../../tensor/../../../../src/nsk_cpp.h:
 src/cuda_kernels/type_cast/../../tensor/print.h:
+src/cuda_kernels/type_cast/../../tensor/save.h:
 src/cuda_kernels/type_cast/../../tensor/tensor_dim_functions.h:
 src/cuda_kernels/type_cast/../handles.h:
 src/cuda_kernels/type_cast/kernel.h:

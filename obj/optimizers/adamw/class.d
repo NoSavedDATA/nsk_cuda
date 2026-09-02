@@ -113,6 +113,7 @@ obj/optimizers/adamw/class.o: src/optimizers/adamw/class.cu \
   src/optimizers/adamw/../../tensor/include.h \
   src/optimizers/adamw/../../tensor/../../../../src/nsk_cpp.h \
   src/optimizers/adamw/../../tensor/print.h \
+  src/optimizers/adamw/../../tensor/save.h \
   src/optimizers/adamw/../common.h src/optimizers/adamw/../interface.h \
   src/optimizers/adamw/class.h src/optimizers/adamw/kernels.h
 src/optimizers/adamw/../../../../../src/nsk_cpp.h:
@@ -229,6 +230,7 @@ src/optimizers/adamw/../../tensor/tensor_dim_functions.h:
 src/optimizers/adamw/../../tensor/include.h:
 src/optimizers/adamw/../../tensor/../../../../src/nsk_cpp.h:
 src/optimizers/adamw/../../tensor/print.h:
+src/optimizers/adamw/../../tensor/save.h:
 src/optimizers/adamw/../common.h:
 src/optimizers/adamw/../interface.h:
 src/optimizers/adamw/class.h:

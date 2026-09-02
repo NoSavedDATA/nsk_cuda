@@ -102,9 +102,10 @@ obj/mma/general.o: src/mma/general.cu src/mma/../common/cu_commons.h \
   src/mma/../tensor/../../../../src/runtime/profiler/profiler.h \
   src/mma/../tensor/../../../../src/runtime/threads/include.h \
   src/mma/../tensor/../../../../src/runtime/prebuild/prebuild.h \
-  src/mma/../tensor/print.h src/mma/../tensor/tensor_dim_functions.h \
-  src/mma/utils.h src/mma/util.h src/mma/util_ptx.cu \
-  src/mma/../nsk_cuda/include.h src/mma/../nsk_cuda/fragments/include.h \
+  src/mma/../tensor/print.h src/mma/../tensor/save.h \
+  src/mma/../tensor/tensor_dim_functions.h src/mma/utils.h \
+  src/mma/util.h src/mma/util_ptx.cu src/mma/../nsk_cuda/include.h \
+  src/mma/../nsk_cuda/fragments/include.h \
   src/mma/../nsk_cuda/fragments/frag_to_smem.h \
   src/mma/../nsk_cuda/fragments/inlines.h \
   src/mma/../nsk_cuda/fragments/../smem/include.h \
@@ -283,6 +284,7 @@ src/mma/../tensor/../../../../src/runtime/profiler/profiler.h:
 src/mma/../tensor/../../../../src/runtime/threads/include.h:
 src/mma/../tensor/../../../../src/runtime/prebuild/prebuild.h:
 src/mma/../tensor/print.h:
+src/mma/../tensor/save.h:
 src/mma/../tensor/tensor_dim_functions.h:
 src/mma/utils.h:
 src/mma/util.h:

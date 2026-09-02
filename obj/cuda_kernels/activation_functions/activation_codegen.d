@@ -108,6 +108,7 @@ obj/cuda_kernels/activation_functions/activation_codegen.o: \
   src/cuda_kernels/activation_functions/../../tensor/include.h \
   src/cuda_kernels/activation_functions/../../tensor/../../../../src/nsk_cpp.h \
   src/cuda_kernels/activation_functions/../../tensor/print.h \
+  src/cuda_kernels/activation_functions/../../tensor/save.h \
   src/cuda_kernels/activation_functions/../../tensor/tensor_dim_functions.h \
   src/cuda_kernels/activation_functions/../elementwise_kernels_inline.cu \
   src/cuda_kernels/activation_functions/../calculate_grids.h \
@@ -221,6 +222,7 @@ src/cuda_kernels/activation_functions/../../nsk_cuda/pool/pool.h:
 src/cuda_kernels/activation_functions/../../tensor/include.h:
 src/cuda_kernels/activation_functions/../../tensor/../../../../src/nsk_cpp.h:
 src/cuda_kernels/activation_functions/../../tensor/print.h:
+src/cuda_kernels/activation_functions/../../tensor/save.h:
 src/cuda_kernels/activation_functions/../../tensor/tensor_dim_functions.h:
 src/cuda_kernels/activation_functions/../elementwise_kernels_inline.cu:
 src/cuda_kernels/activation_functions/../calculate_grids.h:

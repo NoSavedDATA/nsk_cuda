@@ -108,6 +108,7 @@ obj/cuda_kernels/loss_functions/regression.o: \
   src/cuda_kernels/loss_functions/../../tensor/include.h \
   src/cuda_kernels/loss_functions/../../tensor/../../../../src/nsk_cpp.h \
   src/cuda_kernels/loss_functions/../../tensor/print.h \
+  src/cuda_kernels/loss_functions/../../tensor/save.h \
   src/cuda_kernels/loss_functions/../../tensor/tensor_dim_functions.h \
   src/cuda_kernels/loss_functions/../../cuda_threads/include.h \
   src/cuda_kernels/loss_functions/../../cuda_threads/threads.h \
@@ -225,6 +226,7 @@ src/cuda_kernels/loss_functions/../../nsk_cuda/pool/pool.h:
 src/cuda_kernels/loss_functions/../../tensor/include.h:
 src/cuda_kernels/loss_functions/../../tensor/../../../../src/nsk_cpp.h:
 src/cuda_kernels/loss_functions/../../tensor/print.h:
+src/cuda_kernels/loss_functions/../../tensor/save.h:
 src/cuda_kernels/loss_functions/../../tensor/tensor_dim_functions.h:
 src/cuda_kernels/loss_functions/../../cuda_threads/include.h:
 src/cuda_kernels/loss_functions/../../cuda_threads/threads.h:

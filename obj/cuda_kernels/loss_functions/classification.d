@@ -112,6 +112,7 @@ obj/cuda_kernels/loss_functions/classification.o: \
   src/cuda_kernels/loss_functions/../../tensor/include.h \
   src/cuda_kernels/loss_functions/../../tensor/../../../../src/nsk_cpp.h \
   src/cuda_kernels/loss_functions/../../tensor/print.h \
+  src/cuda_kernels/loss_functions/../../tensor/save.h \
   src/cuda_kernels/loss_functions/../../tensor/tensor_dim_functions.h \
   src/cuda_kernels/loss_functions/../activation_functions/include.h \
   src/cuda_kernels/loss_functions/../activation_functions/activation_kernels.h \
@@ -232,6 +233,7 @@ src/cuda_kernels/loss_functions/../../pool/pool.h:
 src/cuda_kernels/loss_functions/../../tensor/include.h:
 src/cuda_kernels/loss_functions/../../tensor/../../../../src/nsk_cpp.h:
 src/cuda_kernels/loss_functions/../../tensor/print.h:
+src/cuda_kernels/loss_functions/../../tensor/save.h:
 src/cuda_kernels/loss_functions/../../tensor/tensor_dim_functions.h:
 src/cuda_kernels/loss_functions/../activation_functions/include.h:
 src/cuda_kernels/loss_functions/../activation_functions/activation_kernels.h:

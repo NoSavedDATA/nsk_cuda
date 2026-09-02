@@ -109,6 +109,7 @@ obj/cuda_kernels/image_processing/codegen.o: \
   src/cuda_kernels/image_processing/../../tensor/include.h \
   src/cuda_kernels/image_processing/../../tensor/../../../../src/nsk_cpp.h \
   src/cuda_kernels/image_processing/../../tensor/print.h \
+  src/cuda_kernels/image_processing/../../tensor/save.h \
   src/cuda_kernels/image_processing/../../tensor/tensor_dim_functions.h \
   src/cuda_kernels/image_processing/../calculate_grids.h \
   src/cuda_kernels/image_processing/../handles.h \
@@ -223,6 +224,7 @@ src/cuda_kernels/image_processing/../../nsk_cuda/pool/pool.h:
 src/cuda_kernels/image_processing/../../tensor/include.h:
 src/cuda_kernels/image_processing/../../tensor/../../../../src/nsk_cpp.h:
 src/cuda_kernels/image_processing/../../tensor/print.h:
+src/cuda_kernels/image_processing/../../tensor/save.h:
 src/cuda_kernels/image_processing/../../tensor/tensor_dim_functions.h:
 src/cuda_kernels/image_processing/../calculate_grids.h:
 src/cuda_kernels/image_processing/../handles.h:

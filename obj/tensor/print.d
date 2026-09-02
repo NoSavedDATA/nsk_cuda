@@ -100,7 +100,7 @@ obj/tensor/print.o: src/tensor/print.cu src/tensor/../common/cu_commons.h \
   src/tensor/../../../../src/runtime/profiler/profiler.h \
   src/tensor/../../../../src/runtime/threads/include.h \
   src/tensor/../../../../src/runtime/prebuild/prebuild.h \
-  src/tensor/print.h src/tensor/tensor_dim_functions.h
+  src/tensor/print.h src/tensor/save.h src/tensor/tensor_dim_functions.h
 src/tensor/../common/cu_commons.h:
 src/tensor/include.h:
 src/tensor/../../../../src/nsk_cpp.h:
@@ -205,4 +205,5 @@ src/tensor/../../../../src/runtime/profiler/profiler.h:
 src/tensor/../../../../src/runtime/threads/include.h:
 src/tensor/../../../../src/runtime/prebuild/prebuild.h:
 src/tensor/print.h:
+src/tensor/save.h:
 src/tensor/tensor_dim_functions.h:

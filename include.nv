@@ -21,6 +21,8 @@ proto float_pp float_cpu_cupool(float_cpu, int)
 proto bf16_pp bf16_cpu_cuda(bf16_cpu, int)
 proto bf16_cpu bf16_pp_cpu(bf16_pp,i64)
 proto int bf16_cpu_print(bf16_cpu, array<int>)
+proto int bf16_pp_save(bf16_pp, int, str)
+proto int bf16_cpu_save(bf16_cpu, int, str)
 
 operation bf16_cpu bf16_cpu_int_offby
 operation bf16[] bf16_pp_int_offby

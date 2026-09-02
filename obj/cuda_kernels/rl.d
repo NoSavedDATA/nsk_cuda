@@ -109,7 +109,7 @@ obj/cuda_kernels/rl.o: src/cuda_kernels/rl.cu src/../../../src/nsk_cpp.h \
   src/cuda_kernels/../nsk_cuda/pool/pool.h \
   src/cuda_kernels/../tensor/include.h \
   src/cuda_kernels/../tensor/../../../../src/nsk_cpp.h \
-  src/cuda_kernels/../tensor/print.h \
+  src/cuda_kernels/../tensor/print.h src/cuda_kernels/../tensor/save.h \
   src/cuda_kernels/../tensor/tensor_dim_functions.h \
   src/cuda_kernels/calculate_grids.h src/cuda_kernels/rl_kernels.h \
   src/cuda_kernels/handles.h
@@ -225,6 +225,7 @@ src/cuda_kernels/../nsk_cuda/pool/pool.h:
 src/cuda_kernels/../tensor/include.h:
 src/cuda_kernels/../tensor/../../../../src/nsk_cpp.h:
 src/cuda_kernels/../tensor/print.h:
+src/cuda_kernels/../tensor/save.h:
 src/cuda_kernels/../tensor/tensor_dim_functions.h:
 src/cuda_kernels/calculate_grids.h:
 src/cuda_kernels/rl_kernels.h:
